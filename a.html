@@ -1,0 +1,416 @@
+<!DOCTYPE html><html><head>
+      <title>a</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\Minh_Hung\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.8.19\crossnote\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<p>Dưới đây là đề của 35 câu hỏi bạn đã cung cấp:</p>
+<p><strong>Question 1. (Java basic)</strong><br>
+What is the default FetchType of @OneToMany mapping in JPA?</p>
+<ul>
+<li>LAZY</li>
+<li>EAGER</li>
+<li>NONE</li>
+</ul>
+<p><strong>Question 2. (Java basic)</strong><br>
+What is the purpose of JPA's PersistenceContext?</p>
+<ul>
+<li>To store managed entities and their state</li>
+<li>To manage database connections</li>
+<li>To define database schemas</li>
+<li>To execute database queries</li>
+</ul>
+<p><strong>Question 3. (Java basic)</strong><br>
+Which annotation is used to map an enumerated type property in JPA?</p>
+<ul>
+<li>@Enumerated</li>
+<li>@Enum</li>
+<li>@EnumType</li>
+<li>@Type</li>
+</ul>
+<p><strong>Question 4. (Java basic)</strong><br>
+What is the purpose of the @JoinColumn annotation in JPA?</p>
+<ul>
+<li>To join multiple tables in the query</li>
+<li>To specify the foreign key column in a relationship</li>
+<li>To define a primary key column</li>
+<li>To create an index on a column</li>
+</ul>
+<p><strong>Question 5. (Java basic)</strong><br>
+When a field is declared static, there will be:</p>
+<ul>
+<li>a copy of the field in each class object</li>
+<li>only one copy of the field in memory</li>
+<li>a copy of the field for each static method in the class</li>
+<li>only two copies of the field in memory</li>
+</ul>
+<p><strong>Question 6. (Java basic)</strong><br>
+Assume the class BankAccount has been created, and the following statement correctly creates an instance of the class:<br>
+<code>BankAccount account = new BankAccount(5000.0);</code><br>
+What is TRUE about the following statement?<br>
+<code>System.out.println(account);</code></p>
+<ul>
+<li>The method will display unreadable binary data on the screen.</li>
+<li>A compiler error will occur.</li>
+<li>The account object's toString method will be implicitly called.</li>
+<li>A runtime error will occur.</li>
+</ul>
+<p><strong>Question 7. (Java basic)</strong><br>
+This is a group of related classes</p>
+<ul>
+<li>archive</li>
+<li>package</li>
+<li>collection</li>
+<li>attachment</li>
+</ul>
+<p><strong>Question 8. (Java basic)</strong><br>
+Overloading means multiple methods in the same class:</p>
+<ul>
+<li>have the same name, but different return types</li>
+<li>have different names, but the same parameter list</li>
+<li>have the same name, but different parameter lists</li>
+<li>perform the same function</li>
+</ul>
+<p><strong>Question 9. (Java basic)</strong><br>
+When an object is passed as an argument to a method, what is passed into the method's parameter variable?</p>
+<ul>
+<li>the class name</li>
+<li>the object's memory address</li>
+<li>the values for each field</li>
+<li>the method names</li>
+</ul>
+<p><strong>Question 10. (Java 8)</strong><br>
+Stream mutable reduction operation ________________ creates a new collection of elements containing the results of the stream's prior operations.</p>
+<ul>
+<li>combine</li>
+<li>accumulate</li>
+<li>gather</li>
+<li>collect</li>
+</ul>
+<p><strong>Question 11. (Java 8)</strong><br>
+Stream reduction operation ________________ uses the elements of a collection to produce a single value using an associative accumulation function (e.g., a lambda that adds two elements).</p>
+<ul>
+<li>reduce</li>
+<li>condense</li>
+<li>combine</li>
+<li>associate</li>
+</ul>
+<p><strong>Question 12. (Java 8)</strong><br>
+Intermediate Stream operation ________________ results in a stream with the specified number of elements from the beginning of the original stream.</p>
+<ul>
+<li>distinct</li>
+<li>map</li>
+<li>filter</li>
+<li>limit</li>
+</ul>
+<p><strong>Question 13. (Java 8)</strong><br>
+The intermediate Stream operation ________________ results in a stream containing only the unique elements.</p>
+<ul>
+<li>distinct</li>
+<li>map</li>
+<li>filter</li>
+<li>limit</li>
+</ul>
+<p><strong>Question 14. (Java 8)</strong><br>
+The intermediate Stream operation ________________ results in a stream containing only the elements that satisfy a condition.</p>
+<ul>
+<li>distinct</li>
+<li>filter</li>
+<li>map</li>
+<li>limit</li>
+</ul>
+<p><strong>Question 15. (Java 8)</strong><br>
+Intermediate operations are ________________; they aren't performed until a terminal operation is invoked. This allows library developers to optimize stream-processing performance.</p>
+<ul>
+<li>eager</li>
+<li>idle</li>
+<li>lazy</li>
+<li>inactive</li>
+</ul>
+<p><strong>Question 16. (Java 8)</strong><br>
+Which of the following statements is false?</p>
+<ul>
+<li>A lambda that receives two ints, x and y, and returns their sum is (int x, int y) -&gt; {return x + y;}</li>
+<li>A lambda's parameter types may be omitted, as in: (x, y) -&gt; {return x + y;} in which case, the parameter and return types are set to the lambda's default type.</li>
+<li>A lambda with a one-expression body can be written as: (x, y) -&gt; x + y In this case, the expression's value is implicitly returned.</li>
+<li>When a lambda's parameter list contains only one parameter, the parentheses may be omitted, as in: value -&gt; System.out.printf("%d ", value)</li>
+</ul>
+<p><strong>Question 17. (Java 8)</strong><br>
+What is the meaning of () in the following lambda?<br>
+<code>() -&gt; System.out.println("Welcome to lambdas!")</code></p>
+<ul>
+<li>The lambdas parameters are inferred</li>
+<li>The lambda has an empty parameter list</li>
+<li>The lambdas parameters are supplied by a method reference</li>
+<li>The given expression is not a valid lambda</li>
+</ul>
+<p><strong>Question 18. (Java 8)</strong><br>
+A lambda expression represents a(n) ______________ method—a shorthand notation for implementing a functional interface.</p>
+<ul>
+<li>functional</li>
+<li>unnamed</li>
+<li>undesignated</li>
+<li>anonymous</li>
+</ul>
+<p><strong>Question 19. (Java 8)</strong><br>
+The basic generic functional interface ______________ in package <code>java.util.function</code> contains a method <code>test</code> that takes a T argument and returns a boolean. Tests whether the T argument satisfies a condition.</p>
+<ul>
+<li>Consumer</li>
+<li>Function</li>
+<li>Supplier</li>
+<li>Predicate</li>
+</ul>
+<p><strong>Question 20. (Java)</strong><br>
+What will be printed to the console output?</p>
+<pre data-role="codeBlock" data-info="java" class="language-java java"><code><span class="token keyword keyword-public">public</span> <span class="token keyword keyword-static">static</span> <span class="token keyword keyword-void">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">Collection</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span> collection <span class="token operator">=</span>
+        <span class="token keyword keyword-new">new</span> <span class="token class-name">HashSet</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span>
+            <span class="token keyword keyword-new">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token keyword keyword-new">new</span> <span class="token class-name">LinkedHashSet</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span>
+                <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>collection<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><ul>
+<li></li>
+<li></li>
+<li></li>
+<li>[]</li>
+<li></li>
+</ul>
+<p><strong>Question 21. (Java)</strong><br>
+What will be printed to the console output?</p>
+<pre data-role="codeBlock" data-info="java" class="language-java java"><code><span class="token keyword keyword-public">public</span> <span class="token keyword keyword-static">static</span> <span class="token keyword keyword-void">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">Predicate</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">&gt;</span></span> predicate <span class="token operator">=</span> <span class="token keyword keyword-var">var</span> <span class="token operator">-&gt;</span> <span class="token keyword keyword-var">var</span> <span class="token operator">%</span> <span class="token number">7</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token class-name">Function</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">&gt;</span></span> transformer <span class="token operator">=</span> <span class="token keyword keyword-var">var</span> <span class="token operator">-&gt;</span> <span class="token keyword keyword-var">var</span> <span class="token operator">+</span> <span class="token number">2017</span><span class="token punctuation">;</span>
+    <span class="token class-name">Stream</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>predicate<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>transformer<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>integer <span class="token operator">-&gt;</span> <span class="token class-name">String</span><span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>integer <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">findAny</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">ifPresent</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token operator">::</span><span class="token function">println</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><ul>
+<li>2017</li>
+<li>Nothing will be printed</li>
+<li>2025</li>
+<li>7</li>
+<li>2018</li>
+</ul>
+<p><strong>Question 22. (Java)</strong><br>
+Consider the following program:</p>
+<pre data-role="codeBlock" data-info="java" class="language-java java"><code><span class="token keyword keyword-import">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token operator">*</span></span><span class="token punctuation">;</span>
+<span class="token keyword keyword-class">class</span> <span class="token class-name">Diamond</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-public">public</span> <span class="token keyword keyword-static">static</span> <span class="token keyword keyword-void">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">List</span> list1 <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"two"</span><span class="token punctuation">,</span> <span class="token number">3.0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ONE</span>
+        <span class="token class-name">List</span> list2 <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">LinkedList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span>
+            <span class="token punctuation">(</span><span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span><span class="token keyword keyword-new">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">Float</span><span class="token punctuation">(</span><span class="token number">2.0F</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">Double</span><span class="token punctuation">(</span><span class="token number">3.0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// TWO</span>
+        list1 <span class="token operator">=</span> list2<span class="token punctuation">;</span> <span class="token comment">// THREE</span>
+        <span class="token keyword keyword-for">for</span><span class="token punctuation">(</span><span class="token class-name">Object</span> element <span class="token operator">:</span> list1<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span>element <span class="token operator">+</span> <span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>Which one of the following describes the expected behavior of this program?</p>
+<ul>
+<li>The program results in compiler error in line marked with comment ONE.</li>
+<li>The program results in compiler error in line marked with comment TWO.</li>
+<li>The program results in compiler error in line marked with comment THREE.</li>
+<li>When executed, the program prints 1 2.0 3.0.</li>
+<li>When executed, this program throws a ClassCastException.</li>
+</ul>
+<p><strong>Question 23. (Java)</strong><br>
+Consider the following program:</p>
+<pre data-role="codeBlock" data-info="java" class="language-java java"><code><span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-class">class</span> <span class="token class-name">AbstractBook</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-public">public</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-interface">interface</span> <span class="token class-name">Sleepy</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-public">public</span> <span class="token class-name">String</span> name <span class="token operator">=</span> <span class="token string">"undefined"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-class">class</span> <span class="token class-name">Book</span> <span class="token keyword keyword-extends">extends</span> <span class="token class-name">AbstractBook</span> <span class="token keyword keyword-implements">implements</span> <span class="token class-name">Sleepy</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-public">public</span> <span class="token class-name">Book</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span> <span class="token comment">// LINE A</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-public">public</span> <span class="token keyword keyword-static">static</span> <span class="token keyword keyword-void">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">AbstractBook</span> philosophyBook <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">Book</span><span class="token punctuation">(</span><span class="token string">"Principia Mathematica"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"The name of the book is "</span> <span class="token operator">+</span> philosophyBook<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// LINE B</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>Which one of the following options correctly describes the behavior of this program?</p>
+<ul>
+<li>The program will print the output "The name of the book is Principia Mathematica".</li>
+<li>The program will print the output "The name of the book is undefined".</li>
+<li>The program will not compile and result in a compiler error "ambiguous reference to name" in line marked with comment LINE A.</li>
+<li>The program will not compile and result in a compiler error "ambiguous reference to name" in line marked with comment LINE B.</li>
+</ul>
+<p><strong>Question 25. (General)</strong><br>
+Which statement is described in following flowchart? (Flowchart shows "Body of Loop" then "Test expression", if true, goes back to "Body of Loop", if false, goes to "Statement just below Loop")</p>
+<ul>
+<li>for loop</li>
+<li>while loop</li>
+<li>do while</li>
+<li>if</li>
+<li>switch statement</li>
+</ul>
+<p><strong>Question 26. (General)</strong><br>
+What does the following function do? (Assume that Swap function will switch the contents of two elements; n is the length of array a)</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp c++"><code><span class="token keyword keyword-void">void</span> <span class="token function">Fun</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> a<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-int">int</span> i<span class="token punctuation">,</span> j<span class="token punctuation">;</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>j <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;</span> a<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                <span class="token function">Swap</span><span class="token punctuation">(</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> a<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><ul>
+<li>It generates an runtime error.</li>
+<li>It sorts the elements of array a in ascending order, according to the value.</li>
+<li>It sorts the elements of array a in descending order, according to the value.</li>
+<li>It does nothing.</li>
+</ul>
+<p><strong>Question 27. (General)</strong><br>
+What value does function mystery return when called with a value of 4?</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp c++"><code><span class="token keyword keyword-int">int</span> <span class="token function">mystery</span> <span class="token punctuation">(</span> <span class="token keyword keyword-int">int</span> number <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span> number <span class="token operator">&lt;=</span> <span class="token number">1</span> <span class="token punctuation">)</span>
+        <span class="token keyword keyword-return">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-else">else</span>
+        <span class="token keyword keyword-return">return</span> number <span class="token operator">*</span> <span class="token function">mystery</span><span class="token punctuation">(</span> number <span class="token operator">-</span> <span class="token number">1</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><ul>
+<li>1</li>
+<li>4</li>
+<li>12</li>
+<li>24</li>
+</ul>
+<p><strong>Question 28. (General)</strong><br>
+Which is list of characteristics describes best the object oriented programming?</p>
+<ul>
+<li>Class, object, interface</li>
+<li>Data driven, layered architecture, persistence</li>
+<li>Inheritance, encapsulation, polymorphism</li>
+<li>Variable, method, object</li>
+</ul>
+<p><strong>Question 29. (General)</strong><br>
+Look at the following code. Which line will cause a compiler error?</p>
+<pre data-role="codeBlock" data-info="java" class="language-java java"><code><span class="token class-name">Line</span> <span class="token number">1</span>  <span class="token keyword keyword-public">public</span> <span class="token keyword keyword-class">class</span> <span class="token class-name">ClassA</span> <span class="token punctuation">{</span>
+<span class="token class-name">Line</span> <span class="token number">2</span>      <span class="token punctuation">{</span>
+<span class="token class-name">Line</span> <span class="token number">3</span>          <span class="token keyword keyword-public">public</span> <span class="token class-name">ClassA</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token class-name">Line</span> <span class="token number">4</span>          <span class="token keyword keyword-public">public</span> <span class="token keyword keyword-final">final</span> <span class="token keyword keyword-int">int</span> method1 <span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> a<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token class-name">Line</span> <span class="token number">5</span>          <span class="token keyword keyword-public">public</span> <span class="token keyword keyword-double">double</span> <span class="token function">method2</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> b<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token class-name">Line</span> <span class="token number">6</span>      <span class="token punctuation">}</span>
+<span class="token class-name">Line</span> <span class="token number">7</span>  <span class="token keyword keyword-public">public</span> <span class="token keyword keyword-class">class</span> <span class="token class-name">ClassB</span> <span class="token keyword keyword-extends">extends</span> <span class="token class-name">ClassA</span>
+<span class="token class-name">Line</span> <span class="token number">8</span>      <span class="token punctuation">{</span>
+<span class="token class-name">Line</span> <span class="token number">9</span>          <span class="token keyword keyword-public">public</span> <span class="token class-name">ClassB</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token class-name">Line</span> <span class="token number">10</span>         <span class="token keyword keyword-public">public</span> <span class="token keyword keyword-int">int</span> <span class="token function">method1</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> b<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token class-name">Line</span> <span class="token number">11</span>         <span class="token keyword keyword-public">public</span> <span class="token keyword keyword-double">double</span> <span class="token function">method2</span><span class="token punctuation">(</span><span class="token keyword keyword-double">double</span> c<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token class-name">Line</span> <span class="token number">12</span>     <span class="token punctuation">}</span>
+</code></pre><ul>
+<li>4</li>
+<li>5</li>
+<li>10</li>
+<li>11</li>
+</ul>
+<p><strong>Question 30. (General)</strong><br>
+In OOP concept, Which of the following class members should usually be private?</p>
+<ul>
+<li>Methods</li>
+<li>Constructors</li>
+<li>Variables (or fields)</li>
+<li>All of the above</li>
+</ul>
+<p><strong>Question 31. (General)</strong><br>
+How many Book objects are created by the following statement?<br>
+<code>Book[] books = new Book[10];</code></p>
+<ul>
+<li>10</li>
+<li>0</li>
+<li>5</li>
+<li>None of the above</li>
+</ul>
+<p><strong>Question 32. (General)</strong><br>
+Using a binary search, what is the maximum number of comparisons required to find a search key in a 31-element sorted array?</p>
+<ul>
+<li>4</li>
+<li>5</li>
+<li>6</li>
+<li>31</li>
+<li>32</li>
+</ul>
+<p><strong>Question 33. (General)</strong><br>
+Static class variables:</p>
+<ul>
+<li>are final.</li>
+<li>are public.</li>
+<li>are private.</li>
+<li>are shared by all objects of a class.</li>
+</ul>
+<p><strong>Question 34. (General)</strong><br>
+Consider the code segment below.</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp c++"><code><span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>gender <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>age <span class="token operator">&gt;=</span> <span class="token number">65</span><span class="token punctuation">)</span>
+        <span class="token operator">++</span>seniorFemales<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>This segment is equivalent to which of the following?<br>
+a. <code>if (gender == 1 || age &gt;= 65) ++seniorFemales;</code><br>
+b. <code>if (gender == 1 &amp;&amp; age &gt;= 65) ++seniorFemales;</code><br>
+c. <code>if (gender == 1 AND age &gt; 65) ++seniorFemales;</code><br>
+d. <code>if (gender == 1 OR age &gt;= 65) ++seniorFemales;</code></p>
+<ul>
+<li>a</li>
+<li>b</li>
+<li>c</li>
+<li>d</li>
+</ul>
+<p><strong>Question 35. (General)</strong><br>
+In general, linked lists allow:</p>
+<ul>
+<li>Insertions and removals anywhere.</li>
+<li>Insertions and removals only at one end.</li>
+<li>Insertions at the back and removals from the front.</li>
+<li>None of the above.</li>
+</ul>
+<p><strong>Bonus Question (from an image without a number):</strong><br>
+What is the result if we call <code>mystery(8, 2)</code>?</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp c++"><code><span class="token keyword keyword-long">long</span> <span class="token function">mystery</span><span class="token punctuation">(</span><span class="token keyword keyword-long">long</span> n<span class="token punctuation">,</span> <span class="token keyword keyword-long">long</span> k<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-long">long</span> something <span class="token operator">=</span> n<span class="token punctuation">;</span>
+    <span class="token keyword keyword-long">long</span> count <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span>something <span class="token operator">&gt;=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        something <span class="token operator">/=</span> k<span class="token punctuation">;</span>
+        count <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-return">return</span> count<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

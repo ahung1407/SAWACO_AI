@@ -1,0 +1,66 @@
+@startuml
+skinparam handwritten true
+skinparam shadowing false
+skinparam sequenceMessageAlign left
+skinparam responseMessageBelowArrow true
+skinparam shadowing false
+skinparam handwritten false
+skinparam sequenceMessageAlign center
+actor "Người dùng" as User
+participant "Ứng dụng Web\n(Service Provider)" as App
+participant "CAS Server\n(Identity Provider)" as CAS
+
+title Luồng xác thực CAS (SSO)
+
+User -> App: 1. Yêu cầu truy cập tài nguyên
+activate App
+App -> User: 2. Chuyển hướng đến CAS (kèm service URL)
+deactivate App
+
+User -> CAS: 3. Truy cập CAS Server
+
+alt Nếu Người dùng chưa đăng nhập (không có TGT)
+    activate CAS
+    CAS -> User: 4a. Hiển thị form đăng nhập
+    User -> CAS: 4b. Nhập Username/Password & Gửi
+    CAS -> CAS: Xác thực thông tin đăng nhập
+    note right of CAS: CAS cấp Ticket-Granting Ticket (TGT)\n(Lưu trong cookie trình duyệt người dùng)
+else Nếu Người dùng đã có TGT hợp lệ
+    note right of CAS: CAS sử dụng TGT hiện có
+end
+
+CAS -> User: 5. Cấp Service Ticket (ST) & Chuyển hướng về Ứng dụng\n(URL: app_url?ticket=ST-XXXX)
+deactivate CAS
+
+activate App
+User -> App: 6. Gửi yêu cầu kèm ST
+App -> CAS: 7. Xác nhận ST (back-channel)
+activate CAS
+CAS -> App: 8. Trả về thông tin người dùng (ST hợp lệ)
+deactivate CAS
+App -> User: 9. Cấp quyền truy cập & Hiển thị tài nguyên
+deactivate App
+
+note over User, CAS: Luồng Single Sign-On (SSO) với Ứng dụng B ----
+
+User -> App: 10. Yêu cầu truy cập tài nguyên (Ứng dụng B)
+activate App
+App -> User: 11. Chuyển hướng đến CAS (kèm service B URL)
+deactivate App
+
+User -> CAS: 12. Truy cập CAS Server (TGT vẫn còn hiệu lực)
+activate CAS
+note right of CAS: CAS sử dụng TGT để cấp ST mới cho Ứng dụng B\n(Không cần đăng nhập lại)
+CAS -> User: 13. Cấp Service Ticket (ST-B) & Chuyển hướng về Ứng dụng B\n(URL: app_b_url?ticket=ST-YYYY)
+deactivate CAS
+
+activate App
+User -> App: 14. Gửi yêu cầu kèm ST-B
+App -> CAS: 15. Xác nhận ST-B (back-channel)
+activate CAS
+CAS -> App: 16. Trả về thông tin người dùng (ST-B hợp lệ)
+deactivate CAS
+App -> User: 17. Cấp quyền truy cập & Hiển thị tài nguyên (Ứng dụng B)
+deactivate App
+
+@enduml
