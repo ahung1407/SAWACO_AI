@@ -3,6 +3,7 @@ import pytesseract
 import numpy as np
 import os
 
+import clear_images
 def find_and_read_meter(image_path, debug_folder=None, expected_len=5):
     image = cv2.imread(image_path)
     if image is None:
@@ -150,5 +151,5 @@ expected_readings = {
     "h.png": "01456",
     "water_meter.png": "99988"
 }
-
+clear_images.clear_folders()
 process_images("images", test_cases=expected_readings)
