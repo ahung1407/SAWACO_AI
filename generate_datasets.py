@@ -52,8 +52,10 @@ def create_synthetic_image(digit, save_path, augmentation_level='train'):
         img.fill(random.randint(10, 40))
         text_color = (random.randint(200, 255), random.randint(200, 255), random.randint(200, 255))
         
-    scale = np.random.uniform(2.2, 2.8)
-    thickness = np.random.randint(3, 6)
+    # [NEW] Giữ lại dải scale rộng và thickness từ rất mỏng (2) đến rất dày (12)
+    # để AI có thể đọc được CẢ font mỏng (như image.png) VÀ font béo (như test_1.jpg)
+    scale = np.random.uniform(2.2, 3.8)
+    thickness = np.random.randint(2, 12)
     
     # --- MÔ PHỎNG SỐ LĂN (ROLLING DIGITS) ---
     # Khoảng 30% ảnh sẽ bị hiệu ứng cuộn số (số trên bị đẩy lên, số dưới chui lên)
@@ -132,7 +134,7 @@ def create_synthetic_image(digit, save_path, augmentation_level='train'):
 def generate_datasets():
     base_dir = "datasets"
     
-    print(f"Bắt đầu tạo dữ liệu huấn luyện nâng cao tại '{base_dir}'...")
+    print(f"Bat dau tao du lieu huan luyen nang cao tai '{base_dir}'...")
     
     # Số lượng dữ liệu
     TRAIN_SAMPLES_PER_DIGIT = 800  # Total 8000 train images
@@ -145,14 +147,14 @@ def generate_datasets():
             ensure_dir(path)
 
     # Generate Train
-    print("Đang tạo tập Training (Có mô phỏng số lăn, số đỏ, bóng râm)...")
+    print("Dang tao tap Training (Co mo phong so lan, so do, bong ram)...")
     for digit in range(10):
         save_dir = os.path.join(base_dir, 'train', str(digit))
         for i in range(TRAIN_SAMPLES_PER_DIGIT):
             create_synthetic_image(digit, os.path.join(save_dir, f"{digit}_{i}.jpg"), 'train')
             
     # Generate Test
-    print("Đang tạo tập Testing (Độ khó cao hơn)...")
+    print("Dang tao tap Testing (Do kho cao hon)...")
     for digit in range(10):
         save_dir = os.path.join(base_dir, 'test', str(digit))
         for i in range(TEST_SAMPLES_PER_DIGIT):

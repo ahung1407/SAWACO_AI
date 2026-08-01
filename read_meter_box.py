@@ -38,8 +38,8 @@ def read_full_meter(image_path, num_digits=5, model_path='water_meter_modern.ker
     print("\nChi tiet du doan tung o:")
     
     for i, digit_img in enumerate(digits_images):
-        # Lưu ra để debug nếu cần
-        # cv2.imwrite(f"debug_digit_{i}.jpg", digit_img)
+        # Lưu ra để debug
+        cv2.imwrite(f"debug_digit_{i}.jpg", digit_img)
         
         try:
             # reader.predict nhận numpy array

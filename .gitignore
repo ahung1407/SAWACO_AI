@@ -1,0 +1,6 @@
+datasets/
+__pycache__/
+*.h5
+*.keras
+debug_*.jpg
+*.log

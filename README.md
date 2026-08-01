@@ -5,14 +5,16 @@ Phiên bản mới nhất đã được nâng cấp mạnh mẽ từ LeNet-5 c�
 
 ## 1. Điểm Nổi Bật (Tính năng chính)
 
-- **Kiến trúc Modern CNN:** Sử dụng 3 khối Conv2D (32, 64, 128 filters) tích hợp `BatchNormalization` và `Dropout (0.5)` chống nhiễu và chống học vẹt (Overfitting) cực tốt, thay thế hoàn toàn LeNet-5. Độ chính xác đạt 100% trên ảnh test khắc nghiệt.
-- **Xử lý "Số Lăn":** Tự động phát hiện khi 2 bánh răng kẹt giữa 2 số, kết hợp với bộ cắt ảnh cắt lẹm 8% ở mép để bắt chuẩn số hiện tại. Cùng với logic "Smart Read" làm tròn xuống (Floor Rounding).
+- **Kiến trúc Modern CNN:** Sử dụng 3 khối Conv2D (32, 64, 128 filters) tích hợp `BatchNormalization` và `Dropout (0.5)` chống nhiễu cực tốt, thay thế hoàn toàn LeNet-5. Độ chính xác cao kể cả với font chữ siêu béo (Thick Fonts).
+- **Phân tách thông minh (Grid Inference):** Tự động dò tìm tâm của các chữ số và nội suy ra lưới toạ độ hoàn hảo kể cả khi ảnh bị mờ nét viền (Grid Inference Segmentation). Không còn phụ thuộc vào viền nhựa trắng.
+- **Tiền xử lý ánh sáng (Global Normalization):** Sử dụng Cân bằng dải sáng toàn cục thay thế cho CLAHE, giúp triệt tiêu hoàn toàn bóng râm mà không gây nhiễu đen.
+- **Xử lý "Số Lăn":** Tự động phát hiện khi 2 bánh răng kẹt giữa 2 số, kết hợp với bộ cắt ảnh cắt lẹm 8% ở mép để bắt chuẩn số hiện tại.
 - **Trị "Số Đỏ":** Tự động áp dụng `np.min()` triệt tiêu các kênh sáng, ép chữ số màu đỏ nổi bật thành màu đen đậm, giúp hệ thống không bao giờ bị "mù màu".
-- **Phân tách thông minh (Segmentation):** Áp dụng kỹ thuật Adaptive Thresholding + Contours để bóc tách từng khung viền chữ số, bỏ đi phương pháp cắt ảnh cứng nhắc.
 
 ## 2. Cấu trúc Dự án
 
-- `generate_datasets.py`: Kịch bản sinh dữ liệu huấn luyện ảo (Sinh 8000 ảnh). Hỗ trợ mô phỏng bóng đổ gradient, số lăn lấp lửng và chữ số màu đỏ.
+- `generate_datasets.py`: Kịch bản sinh dữ liệu huấn luyện ảo siêu cấp (Sinh 8000 ảnh). Tự động mô phỏng font chữ nét siêu béo (Thickness lên tới 14), số lăn lấp lửng và chữ số màu đỏ.
+- `augment_real_tests.py`: Script chuyên dụng để trích xuất ảnh chụp thực tế và tự động nhân bản (Augment) xoay, mờ, nhiễu để tăng cường tập huấn luyện.
 - `water_meter_pipeline.py`: Kịch bản chính dùng để huấn luyện mô hình (Training).
 - `segmentation.py`: Bộ xử lý tiền kỳ, chịu trách nhiệm cắt ảnh đồng hồ lớn ra thành các ô số lẻ.
 - `inference_lib.py`: Thư viện lõi chứa class `WaterMeterReader` dùng để dự đoán.
@@ -37,9 +39,9 @@ python water_meter_pipeline.py
 *Model sẽ được lưu tự động thành `water_meter_modern.keras`.*
 
 ### Bước 3: Test Đọc Ảnh Đồng Hồ Nguyên Bản
-Chạy CLI Tool để đọc thử một ảnh thực tế (ví dụ: `test_meter.jpg`):
+Chạy CLI Tool để đọc thử một ảnh thực tế (ví dụ: `test_images/test_meter.jpg`):
 ```bash
-python read_meter_box.py test_meter.jpg
+python read_meter_box.py test_images/test_meter.jpg
 ```
 
 ## 4. Triển Khai Thực Tế (Deployment & API)
@@ -56,7 +58,7 @@ Bạn có thể post một bức ảnh vào endpoint `/api/ai/ocr`. Dưới đâ
 curl -X POST "http://localhost:8000/api/ai/ocr" \
      -H "accept: application/json" \
      -H "Content-Type: multipart/form-data" \
-     -F "file=@test_meter.jpg"
+     -F "file=@test_images/test_meter.jpg"
 ```
 Server sẽ trả về chuỗi JSON chứa con số đã được đọc chính xác tuyệt đối.
 

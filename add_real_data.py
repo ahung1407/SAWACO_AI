@@ -44,7 +44,7 @@ if __name__ == "__main__":
     
     # Giả định file debug_images/0_anh_goc_tu_java.jpg là tấm ảnh 66667 mà user gửi
     # Nếu user lưu với tên khác, vui lòng đổi tên ở đây
-    image_name = os.path.join("debug_images", "0_anh_goc_tu_java.jpg")
-    sequence = "66667"
+    image_name = "image5_6_7_8_9.png"
+    sequence = "97865"
     
     add_real_image_to_train(image_name, sequence)

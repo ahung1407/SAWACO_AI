@@ -56,12 +56,8 @@ class WaterMeterReader:
         # Resize to 28x28
         resized = cv2.resize(gray, (28, 28), interpolation=cv2.INTER_AREA)
 
-        # CLAHE (Contrast Enhancement)
-        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
-        enhanced = clahe.apply(resized)
-
-        # Normalize to [0, 1]
-        processed = enhanced.astype('float32') / 255.0
+        # Normalize
+        processed = resized.astype('float32') / 255.0
         
         # Reshape to (1, 28, 28, 1) for batch prediction
         input_tensor = np.expand_dims(processed, axis=-1)
