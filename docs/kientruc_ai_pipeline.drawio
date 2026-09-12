@@ -1,0 +1,49 @@
+<mxfile host="Electron" agent="Antigravity">
+  <diagram id="vertical_ai_pipeline" name="Vertical AI Pipeline">
+    <mxGraphModel dx="973" dy="853" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="light-dark(#ffffff, #121212)" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#0F172A;" value="QUY TRÌNH XỬ LÝ ẢNH VÀ SUY LUẬN AI" vertex="1">
+          <mxGeometry height="30" width="600" x="114" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#64748B;fontStyle=2;" value="(End-to-End Pipeline từ Thiết bị biên đến Máy chủ trung tâm)" vertex="1">
+          <mxGeometry height="20" width="600" x="114" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="step1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#0284C7;strokeWidth=2;align=left;spacingLeft=12;spacingRight=12;" value="&lt;table style=&quot;width:100%;&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;b style=&quot;font-size:13px; color:#0369A1;&quot;&gt;BƯỚC 1: THU THẬP &amp;amp; TRÍCH XUẤT ROI&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;text-align:right;&quot;&gt;&lt;span style=&quot;background:#E0F2FE; color:#0369A1; font-size:10px; padding:2px 6px; border-radius:4px; font-weight:bold;&quot;&gt;EDGE DEVICE&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;hr style=&quot;border:0; border-top:1px solid #BAE6FD;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot; color=&quot;#334155&quot;&gt;• &lt;b&gt;Camera OV2640:&lt;/b&gt; Chụp ảnh màu RGB độ phân giải cao&lt;br&gt;• &lt;b&gt;Ngàm cơ khí chuẩn hóa:&lt;/b&gt; Cố định toạ độ ROI &lt;i&gt;R = [x, y, w, h]&lt;/i&gt; (Sai số &amp;lt; 2mm)&lt;br&gt;• &lt;b&gt;Truyền thông:&lt;/b&gt; Nén JPEG và gửi về Server qua Wi-Fi / MQTT&lt;/font&gt;" vertex="1">
+          <mxGeometry height="105" width="460" x="184" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="step2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#16A34A;strokeWidth=2;align=left;spacingLeft=12;spacingRight=12;" value="&lt;table style=&quot;width:100%;&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;b style=&quot;font-size:13px; color:#15803D;&quot;&gt;BƯỚC 2: TIỀN XỬ LÝ &amp;amp; CHUYỂN ĐỔI SỐ ĐỎ&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;text-align:right;&quot;&gt;&lt;span style=&quot;background:#DCFCE7; color:#15803D; font-size:10px; padding:2px 6px; border-radius:4px; font-weight:bold;&quot;&gt;OPENCV&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;hr style=&quot;border:0; border-top:1px solid #BBF7D0;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot; color=&quot;#334155&quot;&gt;• &lt;b&gt;Giải mã trên RAM:&lt;/b&gt; Tiếp nhận ảnh qua REST API &lt;i&gt;POST /api/ai/ocr&lt;/i&gt;&lt;br&gt;• &lt;b&gt;Phép lọc Min-RGB:&lt;/b&gt; &lt;i&gt;I_gray = min(R, G, B)&lt;/i&gt; ép nét số đỏ thành màu đen đậm&lt;br&gt;• &lt;b&gt;Cân bằng sáng CLAHE:&lt;/b&gt; Triệt tiêu bóng râm và chóa sáng cục bộ&lt;/font&gt;" vertex="1">
+          <mxGeometry height="105" width="460" x="184" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="step3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#D97706;strokeWidth=2;align=left;spacingLeft=12;spacingRight=12;" value="&lt;table style=&quot;width:100%;&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;b style=&quot;font-size:13px; color:#B45309;&quot;&gt;BƯỚC 3: PHÂN ĐOẠN LƯỚI SỐ LAI (HYBRID)&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;text-align:right;&quot;&gt;&lt;span style=&quot;background:#FEF3C7; color:#B45309; font-size:10px; padding:2px 6px; border-radius:4px; font-weight:bold;&quot;&gt;SEGMENTATION&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;hr style=&quot;border:0; border-top:1px solid #FDE68A;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot; color=&quot;#334155&quot;&gt;• &lt;b&gt;Dò viền Contours:&lt;/b&gt; Khử nhiễu và tìm đường bao khung của từng ô số&lt;br&gt;• &lt;b&gt;Lưới nội suy (Grid Inference):&lt;/b&gt; Tự động bù tọa độ khi có ô mờ viền&lt;br&gt;• &lt;b&gt;Cắt lẹm thích ứng 22%: &lt;/b&gt;Loại bỏ hoàn toàn gờ nhựa cơ học giữa các bánh răng&lt;br&gt;• Chuẩn hóa kích thước từng ô số về dạng &lt;b&gt;28 x 28 pixel&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="115" width="460" x="184" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="step4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#9333EA;strokeWidth=2;align=left;spacingLeft=12;spacingRight=12;" value="&lt;table style=&quot;width:100%;&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;b style=&quot;font-size:13px; color:#7E22CE;&quot;&gt;BƯỚC 4: NHẬN DIỆN KÝ SỐ (MODERN CNN)&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;text-align:right;&quot;&gt;&lt;span style=&quot;background:#F3E8FF; color:#7E22CE; font-size:10px; padding:2px 6px; border-radius:4px; font-weight:bold;&quot;&gt;DEEP LEARNING&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;hr style=&quot;border:0; border-top:1px solid #E9D5FF;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot; color=&quot;#334155&quot;&gt;• &lt;b&gt;Kiến trúc 3 khối Conv2D:&lt;/b&gt; 32 - 64 - 128 filters kết hợp hàm kích hoạt ReLU&lt;br&gt;• &lt;b&gt;Chống quá khớp:&lt;/b&gt; Tích hợp BatchNormalization và Dropout (0.5)&lt;br&gt;• &lt;b&gt;Phân loại Softmax:&lt;/b&gt; Xuất vector phân phối xác suất cho 10 chữ số (0 - 9)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="105" width="460" x="184" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="step5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#DC2626;strokeWidth=2;align=left;spacingLeft=12;spacingRight=12;" value="&lt;table style=&quot;width:100%;&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;b style=&quot;font-size:13px; color:#B91C1C;&quot;&gt;BƯỚC 5: HẬU XỬ LÝ &amp;amp; XUẤT CHỈ SỐ M³&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;text-align:right;&quot;&gt;&lt;span style=&quot;background:#FEE2E2; color:#B91C1C; font-size:10px; padding:2px 6px; border-radius:4px; font-weight:bold;&quot;&gt;BUSINESS LOGIC&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;hr style=&quot;border:0; border-top:1px solid #FECACA;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot; color=&quot;#334155&quot;&gt;• &lt;b&gt;Luật Bánh Răng Cơ Học:&lt;/b&gt; Xử lý số lăn lấp lửng và chu kỳ quay 9 &amp;rarr; 0&lt;br&gt;• &lt;b&gt;Cảnh báo dị vật (NaN):&lt;/b&gt; Phát hiện lá cây / bùn đất che khuất để báo chụp lại&lt;br&gt;• &lt;b&gt;Tổng hợp số đo:&lt;/b&gt; Ghép 4 số đen (nguyên) + 1 số đỏ (thập phân) &amp;rarr; &lt;b&gt;JSON m³&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="105" width="460" x="184" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow1" edge="1" parent="1" source="step1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2.5;strokeColor=#0284C7;fontColor=#0369A1;fontSize=10;fontStyle=1;align=center;" target="step2" value="Ảnh dải số ROI (RGB)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow2" edge="1" parent="1" source="step2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2.5;strokeColor=#16A34A;fontColor=#15803D;fontSize=10;fontStyle=1;align=center;" target="step3" value="Ảnh xám đã làm sạch &amp;amp; cân bằng sáng">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow3" edge="1" parent="1" source="step3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2.5;strokeColor=#D97706;fontColor=#B45309;fontSize=10;fontStyle=1;align=center;" target="step4" value="5 ảnh chữ số đơn lẻ chuẩn hoá (28 x 28)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow4" edge="1" parent="1" source="step4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2.5;strokeColor=#9333EA;fontColor=#7E22CE;fontSize=10;fontStyle=1;align=center;" target="step5" value="Dãy ký số thô &amp;amp; xác suất dự đoán">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="out_node" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;strokeWidth=1.5;fontColor=#065F46;fontSize=11;" value="&lt;b&gt;KẾT QUẢ ĐẦU RA: JSON RESPONSE CHO BACKEND SERVICE&lt;/b&gt;&lt;br&gt;&lt;code style=&quot;font-size:11px;&quot;&gt;{&quot;status&quot;: &quot;success&quot;, &quot;water_reading&quot;: 558.0, &quot;raw_string&quot;: &quot;05580&quot;}&lt;/code&gt;" vertex="1">
+          <mxGeometry height="50" width="460" x="184" y="900" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow5" edge="1" parent="1" source="step5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2.5;strokeColor=#059669;" target="out_node">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

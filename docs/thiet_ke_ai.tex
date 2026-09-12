@@ -1,0 +1,42 @@
+\subsubsection{Huấn luyện và triển khai mô hình AI CNN}
+
+Để xây dựng một mô hình nhận dạng ký số có độ chính xác cao trong điều kiện thiếu hụt dữ liệu ảnh chụp thực tế ban đầu, hệ thống áp dụng chiến lược kết hợp giữa sinh dữ liệu tổng hợp quy mô lớn, tăng cường dữ liệu và tinh chỉnh mô hình mạng nơ-ron tích chập cải tiến (Modern CNN).
+
+\begin{enumerate}
+    \item Sinh dữ liệu tổng hợp (Synthetic Data Generation) \\
+    Do mặt đồng hồ cơ khí thực tế có sự biến thiên rất lớn về phông chữ, độ mòn cơ học và điều kiện chiếu sáng, kịch bản sinh dữ liệu (generate\_datasets.py) được lập trình để mô phỏng chính xác các đặc trưng vật lý của đồng hồ nước, tạo ra hơn 8.000 ảnh mẫu cho 10 lớp ký số (từ 0 đến 9):
+    \begin{itemize}
+        \item Biến thiên nét chữ: Sử dụng các phông chữ kỹ thuật với kích thước tỷ lệ scale từ 2.2 đến 3.8 và độ dày nét thickness biến thiên rộng từ 2 (nét mỏng) đến 12 (nét siêu đậm), giúp mô hình nhận diện tốt cả các đồng hồ mới lẫn đồng hồ cũ bị nhòe mực.
+        \item Mô phỏng chữ số màu đỏ: Thiết lập tỷ lệ 25\% số mẫu sinh ra là chữ số màu đỏ trên nền trắng, kết hợp màu chữ đỏ ngẫu nhiên với kênh Red cao và kênh Green, Blue thấp nhằm kiểm thử thuật toán lọc Min-RGB.
+        \item Mô phỏng số đang lăn (Rolling Digits): Khoảng 30\% dữ liệu được mô phỏng hiện tượng bánh răng chuyển tiếp lấp lửng bằng cách ghép nửa trên của chữ số hiện tại với nửa dưới của chữ số kế tiếp theo độ dời offset ngẫu nhiên từ 10 đến 90 pixel.
+        \item Giả lập khiếm khuyết quang học: Áp dụng xoay nghiêng ngẫu nhiên (-8 đến 8 độ), đổ bóng râm gradient mô phỏng góc chiếu sáng xiên của nắp hộp, bổ sung nhiễu Gauss (sigma từ 5 đến 20) và làm mờ Gaussian blur (kích thước kernel 3x3 và 5x5) để mô phỏng ống kính camera bị bám bụi hoặc hơi nước.
+    \end{itemize}
+
+    \item Tăng cường dữ liệu và Tinh chỉnh với dữ liệu thực tế (Data Augmentation \& Fine-tuning) \\
+    Để thu hẹp khoảng cách giữa ảnh mô phỏng máy tính và ảnh thực tế ngoài hiện trường, nhóm trích xuất trực tiếp các ô số từ những bức ảnh chụp thực tế của camera OV2640 (thông qua add\_real\_data.py). Mỗi mẫu số thực tế được nhân bản thành hàng chục biến thể bằng kỹ thuật tăng cường dữ liệu (thay đổi độ sáng, xoay góc nhẹ, thêm nhiễu hạt) rồi trộn trực tiếp vào tập huấn luyện. Quá trình tinh chỉnh (fine-tuning) này giúp mô hình thích ứng nhanh với chất liệu nhựa xỉn màu và góc chụp thực địa, nâng độ chính xác thực nghiệm từ 88\% lên trên 93\%.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\linewidth]{figures/synthetic_data_samples.png}
+        \caption{Các dạng mẫu dữ liệu số tổng hợp và ảnh thực tế mô phỏng điều kiện cơ học và quang học: (a) Nét chuẩn, (b) Nét mảnh, (c) Nét đậm nhòe, (d) Ký số đỏ, (e) Bánh răng đang lăn giữa hai số, (f) Đổ bóng râm và xoay góc, (g) Nhiễu hạt và mờ ống kính, (h) Ảnh cắt thực tế từ camera OV2640.}
+        \label{fig:synthetic_samples}
+    \end{figure}
+
+    \item Kiến trúc Modern CNN và Siêu tham số Huấn luyện \\
+    Thay vì sử dụng kiến trúc LeNet-5 cổ điển vốn dễ bị bão hòa khi nét số quá dày hoặc nhiễu, mô hình được nâng cấp lên kiến trúc Modern CNN gồm 3 khối tích chập nối tiếp:
+    \begin{itemize}
+        \item Mỗi khối tích chập gồm một tầng Conv2D với số lượng bộ lọc tăng dần (lần lượt là 32, 64 và 128 filters kích thước 3x3, đệm same), đi kèm lớp Batch Normalization giúp ổn định phân phối dữ liệu, hàm kích hoạt phi tuyến ReLU và tầng lấy mẫu cực đại MaxPooling2D (kích thước 2x2).
+        \item Tầng kết nối đầy đủ (Dense 128 units) tích hợp lớp Dropout với hệ số 0.5 nhằm triệt tiêu hiện tượng học vẹt (overfitting), đảm bảo khả năng tổng quát hóa cao. Tầng đầu ra sử dụng hàm kích hoạt Softmax với 10 nút phân loại ký số từ 0 đến 9.
+        \item Quá trình huấn luyện sử dụng bộ tối ưu hóa Adam, hàm mất mát Categorical Crossentropy, kích thước lô batch size 32, huấn luyện trong 15 epoch trên tập ảnh xám chuẩn hóa kích thước 28x28 pixel.
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.98\linewidth]{figures/quy_trinh_huan_luyen_trien_khai.png}
+        \caption{Sơ đồ quy trình tổng thể phát triển và triển khai phân hệ AI nhận dạng chỉ số nước.}
+        \label{fig:highlevel_ai_pipeline}
+    \end{figure}
+
+    \item Triển khai mô hình trên môi trường vận hành (Production Deployment) \\
+    Sau khi hoàn tất huấn luyện, mô hình được xuất và lưu trữ dưới định dạng Keras v3 tiêu chuẩn (water\_meter\_modern.keras). Trên máy chủ AI (FastAPI), mô hình được nạp sẵn vào bộ nhớ RAM ngay khi khởi động dịch vụ, loại bỏ hoàn toàn độ trễ khởi tạo cho từng yêu cầu. Khi có ảnh gửi sang từ Backend Java Spring Boot, hệ thống thực hiện suy luận song song trên toàn bộ 5 ô số và trả về kết quả dự đoán cùng vector xác suất chỉ trong khoảng 20 đến 50 mili-giây.
+\end{enumerate}

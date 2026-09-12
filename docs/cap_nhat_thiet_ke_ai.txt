@@ -1,0 +1,70 @@
+\subsection{Thiết kế hệ thống xử lý ảnh và AI}
+
+Đây là phân hệ cốt lõi của hệ thống, chịu trách nhiệm chuyển đổi dữ liệu hình ảnh thô từ camera thành chỉ số nước dạng số học (Digital Data) để phục vụ công tác tính cước và giám sát tiêu thụ. 
+Thay vì áp dụng các mô hình Object Detection nặng nề (như YOLO hay SSD) để dò tìm đối tượng trong không gian tự do, hệ thống kết hợp giải pháp "Phần cứng định vị cơ khí" và "Thị giác máy tính thông minh". Thiết kế vỏ hộp khớp chính xác với mặt đồng hồ tiêu chuẩn GB/T778 giúp chuyển bài toán từ "dò tìm đối tượng ngẫu nhiên" sang bài toán "trích xuất và hiệu chỉnh vùng quan tâm (ROI)". Cách tiếp cận này giúp giảm tới 90\% tải tính toán cho Server, đảm bảo tốc độ phản hồi tính bằng mili-giây và loại bỏ rủi ro nhận diện sai vùng số.
+
+\subsubsection{Thiết kế Cơ khí hỗ trợ Thị giác máy}
+Mục tiêu hàng đầu của thiết kế cơ khí là đảm bảo tính nhất quán của dữ liệu đầu vào. Vỏ thiết bị được chế tạo với ngàm kẹp ôm sát vành đồng hồ, kiểm soát sai số cơ khí $\Delta$ ở mức dưới 2mm.
+
+Hệ quả của thiết kế này là Camera OV2640 luôn giữ toạ độ quang học $(X_c, Y_c, Z_c)$ cố định so với mặt số. Nhờ đó, Vùng chứa số (Region of Interest - ROI) trên ảnh luôn nằm tại toạ độ pixel xác định $R = [x_{start}, y_{start}, w, h]$, cho phép thiết bị trích xuất chính xác dải chữ số mà không đòi hỏi phần cứng biên phải xử lý tính toán phức tạp.
+
+\subsubsection{Luồng thuật toán xử lý}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\linewidth]{Images/kientruc_ai_pipeline.png}
+    \caption{Luồng xử lý dữ liệu và suy luận chi tiết trên AI Inference Service}
+    \label{fig:ai_pipeline}
+\end{figure}
+
+Quy trình xử lý ảnh được tối ưu hóa thành 4 giai đoạn rõ ràng:
+
+\textbf{Giai đoạn 1: Thu thập và trích xuất tại biên (Edge Device)} \\
+Tại thiết bị IoT biên, để tối ưu băng thông truyền tải và thời lượng pin, vi điều khiển thực hiện cắt trực tiếp vùng ROI màu (RGB) theo toạ độ cơ khí cố định. Thay vì gửi toàn bộ khung hình ảnh lớn, thiết bị chỉ nén vùng ảnh ROI này thành định dạng JPEG và gửi về Backend Server. Việc giữ lại thông tin đa kênh màu sắc (RGB) là tối quan trọng để phục vụ việc phân biệt chữ số đen (phần nguyên) và chữ số đỏ (phần thập phân).
+
+\textbf{Giai đoạn 2: Tiền xử lý nâng cao và kỹ thuật triệt tiêu số đỏ (Preprocessing)} \\
+Khi Backend Service chuyển giao ảnh sang AI Inference Service thông qua giao diện REST API, hệ thống thực hiện giải mã trực tiếp vào bộ nhớ RAM và tiền xử lý bằng OpenCV:
+\begin{itemize}
+    \item \textbf{Kỹ thuật chuyển đổi xám tối ưu cho số đỏ:} Chữ số màu đỏ trên nền trắng có giá trị kênh Red rất cao; nếu áp dụng công thức Grayscale tiêu chuẩn, số đỏ sẽ bị chuyển thành màu xám rất nhạt hoặc trắng bệch, khiến mô hình CNN mất dấu ký tự. Hệ thống áp dụng phép toán lấy giá trị nhỏ nhất đa kênh:
+    \begin{equation}
+        I_{gray}(x, y) = \min \big( R(x, y), G(x, y), B(x, y) \big)
+    \end{equation}
+    Do chữ số đỏ có $R$ lớn nhưng $G, B \approx 0$, phép lấy giá trị cực tiểu sẽ ép toàn bộ nét chữ màu đỏ thành màu đen đậm tương phản hoàn hảo trên nền sáng, đưa toàn bộ 5 chữ số về cùng một dạng biểu diễn chuẩn.
+    \item \textbf{Cân bằng sáng thích ứng (CLAHE):} Áp dụng thuật toán cân bằng biểu đồ tần suất cục bộ với tham số cắt ngưỡng ($clipLimit = 3.0$) và lưới ô ($4 \times 4$), giúp triệt tiêu hoàn toàn hiện tượng bóng râm, chóa sáng bề mặt kính do đèn flash hoặc ánh sáng môi trường.
+\end{itemize}
+
+\textbf{Giai đoạn 3: Phân đoạn số thích ứng (Contours kết hợp Grid Inference)} \\
+Thay vì chỉ chia đều cố định $W_{digit} = W_{ROI} / 5$ (vốn dễ bị lệch nét khi có rung lắc cơ khí hoặc méo quang học ở rìa thấu kính), hệ thống sử dụng thuật toán phân đoạn lai (Hybrid Segmentation):
+\begin{enumerate}
+    \item Dùng kỹ thuật lọc nhiễu không cục bộ (\textit{fastNlMeansDenoising}) kết hợp phân ngưỡng nhị phân động (\textit{Adaptive Threshold}) và phép toán hình thái học (\textit{Morphology Close}) để tìm đường bao bao quanh các ô số (\textit{Contours}).
+    \item \textbf{Cơ chế dự phòng bằng lưới nội suy (Grid Inference):} Nếu đường viền các ô bị mờ hoặc bóng nước che khuất khiến số lượng viền tìm được không đủ 5 ô, hệ thống tự động nội suy tọa độ tâm dựa trên các ô rõ nhất để tái lập lưới chia đều chính xác.
+    \item \textbf{Cắt lẹm viền thích ứng (Adaptive Margin Removal):} Cắt bỏ biên $22\%$ ở các cạnh nhằm loại bỏ hoàn toàn các gờ nhựa cơ học giữa các bánh răng, cô lập phần ký số ở tâm trước khi đưa về kích thước chuẩn $28 \times 28$ pixel.
+\end{enumerate}
+
+\textbf{Giai đoạn 4: Nhận diện bằng Mô hình Modern CNN} \\
+Các ô số sau khi chuẩn hóa được đưa vào mô hình Deep Learning tùy biến (\textit{Modern CNN}). Kiến trúc được thiết kế tối ưu cho bài toán nhận dạng ký tự quang học tốc độ cao:
+\begin{itemize}
+    \item \textbf{Cấu trúc tầng:} Gồm 3 khối tích chập nối tiếp với số lượng bộ lọc tăng dần (32, 64, 128 filters, kích thước $3 \times 3$), mỗi khối đều tích hợp lớp chuẩn hóa theo lô (\textit{Batch Normalization}) và hàm kích hoạt \textit{ReLU} giúp tăng tốc hội tụ và ổn định độ lệch gradient.
+    \item \textbf{Chống quá khớp (Regularization):} Tầng Fully Connected (128 units) tích hợp lớp \textit{Dropout} tỷ lệ $0.5$, ngăn ngừa hiện tượng học vẹt do tập dữ liệu có các font chữ số dày/mỏng đa dạng.
+    \item \textbf{Đầu ra:} Tầng Softmax gồm 10 lớp đầu ra tương ứng với các ký số từ 0 đến 9.
+\end{itemize}
+
+\subsubsection{Logic Nghiệp vụ và Luật Bánh Răng Cơ Học}
+
+\textbf{1. Định dạng giá trị đo và chuyển đổi $m^3$} \\
+Dãy số sau khi nhận diện được tổng hợp theo quy chuẩn đồng hồ: 4 ký số đầu (Index 0, 1, 2, 3 - Số đen) đại diện cho phần nguyên đơn vị mét khối ($m^3$), ký số thứ 5 (Index 4 - Số đỏ) đại diện cho hàng trăm lít ($0.1 m^3$).
+\begin{equation}
+    Total = (D_0 \times 1000) + (D_1 \times 100) + (D_2 \times 10) + D_3 + (D_4 \times 0.1)
+\end{equation}
+
+\textbf{2. Xử lý số lăn và Luật Bánh Răng Cơ Học (Mechanical Gear Logic)} \\
+Đồng hồ nước là hệ thống truyền động cơ khí bằng bánh răng bánh cóc, dẫn đến hai bài toán biên thực tế:
+\begin{itemize}
+    \item \textbf{Quy tắc phân vân lân cận:} Khi một ô số đang ở vị trí chuyển tiếp (nửa số này nửa số kia, khoảng cách xác suất giữa Top 1 và Top 2 nhỏ hơn ngưỡng $0.2$), nếu là 2 số liên tiếp $k$ và $k+1$, thuật toán chọn giá trị nhỏ hơn $\min(k, k+1)$. Đặc biệt, nếu cặp số là $\{9, 0\}$ (chu kỳ quay về 0), thuật toán quyết định chọn số \textbf{9} (do bánh răng chưa hoàn tất bước nhảy sang 0).
+    \item \textbf{Luật Bánh Răng Cơ Học liên ô:} Trong cơ cấu bánh răng đồng hồ, chữ số hàng trên (ví dụ: hàng chục) \textbf{chỉ có thể bắt đầu lăn khi chữ số hàng dưới liền kề nó đang ở trạng thái chuyển tiếp (số 9 hoặc số 0)}. Do đó, nếu AI nhận thấy một chữ số có độ tin cậy thấp nhưng chữ số bên phải nó không phải là 9 hoặc 0, sự phân vân này được xác định là do nhiễu quang học chứ không phải do lăn bánh răng. Thuật toán sẽ tự động khôi phục ký tự này về giá trị có xác suất cực đại ($argmax$).
+\end{itemize}
+
+\textbf{3. Cơ chế phát hiện dị vật che khuất (Obstruction Warning)} \\
+Nếu trên mặt kính xuất hiện lá cây, vết bùn đất hoặc dị vật che lấp hoàn toàn một chữ số, thuật toán trích xuất hình học sẽ từ chối xử lý và gán nhãn \textit{NaN}. API Server sẽ ngay lập tức kích hoạt phản hồi cảnh báo (\textit{Status: Warning}), yêu cầu hệ thống thông báo cho nhân viên kiểm tra, lau chùi mặt kính và chụp lại ảnh, thay vì đọc sai chỉ số dẫn đến khiếu nại cước phí.
+
+\subsubsection{Đóng gói Dịch vụ Microservice (FastAPI)}
+Phân hệ AI được cô lập thành một Microservice độc lập chạy trên nền Python/FastAPI (Uvicorn Server, Port 8000), cung cấp cổng kết nối RESTful API endpoint \texttt{POST /api/ai/ocr}. Phân hệ Backend (Java Spring Boot) truyền dữ liệu ảnh bằng định dạng \texttt{multipart/form-data}, và nhận về kết quả dạng chuẩn \texttt{application/json} chỉ sau vài chục mili-giây, cho phép dễ dàng mở rộng theo chiều ngang (Horizontal Scaling) khi số lượng đồng hồ tăng cao.

@@ -1,6 +1,24 @@
-datasets/
+# --- Python ---
 __pycache__/
+*.pyc
+*.log
+
+# --- Model weights (lớn, không commit ngoại trừ model chính) ---
 *.h5
 *.keras
-debug_*.jpg
-*.log
+!water_meter_modern.keras
+
+# --- Dữ liệu sinh tổng hợp (tự sinh lại được) ---
+data/datasets/
+
+# --- Ảnh debug (không cần thiết cho production) ---
+debug/
+debug_images/
+debug_real_test/
+*.jpg
+*.png
+!data/**
+!real_data_base/**
+
+# --- NaN simulation output ---
+data/test_images/nan_sim/

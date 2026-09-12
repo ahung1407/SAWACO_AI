@@ -102,7 +102,7 @@ def build_modern_cnn_model():
         layers.Activation('relu'),
         layers.Dropout(0.5), # Chống học vẹt (overfitting)
         
-        layers.Dense(10, activation='softmax')
+        layers.Dense(10, activation='softmax') # 10 classes: 0-9
     ])
     return model
 

@@ -1,81 +1,179 @@
-from fastapi import FastAPI, UploadFile, File
-import uvicorn
+import sys
+import os
+import shutil
+import json
+import logging
+from datetime import datetime
+from contextlib import asynccontextmanager
+
+try:
+    if sys.stdout and hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8', line_buffering=True)
+    if sys.stderr and hasattr(sys.stderr, 'reconfigure'):
+        sys.stderr.reconfigure(encoding='utf-8', line_buffering=True)
+except Exception:
+    pass
+
 import numpy as np
 import cv2
-import os
+import uvicorn
+from fastapi import FastAPI, UploadFile, File
 
 from segmentation import segment_meter_digits
 from inference_lib import WaterMeterReader
+from tunnel_manager import start_tunnel_manager, stop_tunnel_manager
 
-# ======================================================================
-# KHỞI TẠO MODEL AI Ở ĐÂY (Để model chỉ load 1 lần vào RAM khi bật Server)
+# Filter out periodic /health access logs to keep console clean
+class EndpointFilter(logging.Filter):
+    def filter(self, record: logging.LogRecord) -> bool:
+        return "/health" not in record.getMessage()
+
+logging.getLogger("uvicorn.access").addFilter(EndpointFilter())
+
+def save_debug_session(img, digits_images, sequence_results, final_number_str, ai_detected_number, original_filename=""):
+    try:
+        timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S_%f")[:19]
+        base_dir = "debug_images"
+        session_dir = os.path.join(base_dir, timestamp_str)
+        latest_dir = os.path.join(base_dir, "latest")
+        
+        os.makedirs(session_dir, exist_ok=True)
+        os.makedirs(latest_dir, exist_ok=True)
+        
+        # 1. Original image
+        cv2.imwrite(os.path.join(session_dir, "0_original.jpg"), img)
+        cv2.imwrite(os.path.join(latest_dir, "0_original.jpg"), img)
+        cv2.imwrite(os.path.join(base_dir, "0_original.jpg"), img)
+        
+        # 2. Box segmentation visual
+        if os.path.exists("debug_final_boxes.jpg"):
+            shutil.copy("debug_final_boxes.jpg", os.path.join(session_dir, "0_boxes.jpg"))
+            shutil.copy("debug_final_boxes.jpg", os.path.join(latest_dir, "0_boxes.jpg"))
+            
+        # 3. Individual cropped digit boxes
+        if digits_images:
+            for i, digit_img in enumerate(digits_images):
+                fname = f"1_digit_{i+1}.jpg"
+                cv2.imwrite(os.path.join(session_dir, fname), digit_img)
+                cv2.imwrite(os.path.join(latest_dir, fname), digit_img)
+                cv2.imwrite(os.path.join(base_dir, fname), digit_img)
+                
+        # 4. JSON summary
+        serializable_details = []
+        if sequence_results:
+            for r in sequence_results:
+                serializable_details.append({
+                    "digit": int(r['digit']) if str(r['digit']).isdigit() else str(r['digit']),
+                    "confidence": float(r.get('confidence', 0.0)),
+                    "all_probs": [round(float(p), 4) for p in r.get('all_probs', [])]
+                })
+
+        meta = {
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "session_folder": timestamp_str,
+            "filename": original_filename,
+            "raw_string": final_number_str,
+            "water_reading": ai_detected_number,
+            "details": serializable_details
+        }
+        with open(os.path.join(session_dir, "result.json"), "w", encoding="utf-8") as f:
+            json.dump(meta, f, ensure_ascii=False, indent=2)
+        with open(os.path.join(latest_dir, "result.json"), "w", encoding="utf-8") as f:
+            json.dump(meta, f, ensure_ascii=False, indent=2)
+            
+        # 5. Housekeeping: retain latest 50 sessions
+        all_dirs = sorted([
+            d for d in os.listdir(base_dir)
+            if os.path.isdir(os.path.join(base_dir, d)) and d != "latest"
+        ])
+        if len(all_dirs) > 50:
+            for old_dir in all_dirs[:-50]:
+                shutil.rmtree(os.path.join(base_dir, old_dir), ignore_errors=True)
+                
+        print(f"[DEBUG] Session saved to: {session_dir}", flush=True)
+    except Exception as e:
+        print(f"[ERROR] Failed to save debug session: {e}", flush=True)
+
 # ==========================================
 # 1. INIT AI MODEL
 # ==========================================
 model_path = 'water_meter_modern.keras'
 if os.path.exists(model_path):
     meter_reader = WaterMeterReader(model_path=model_path)
-    print("Khởi tạo AI Model thành công!")
+    print("AI Model loaded successfully.", flush=True)
 else:
-    print(f"LỖI: Không tìm thấy model tại {model_path}. Hãy train trước!")
+    print(f"[ERROR] Model file not found at {model_path}. Please train the model first.", flush=True)
     meter_reader = None
 
-app = FastAPI(title="Water Meter AI OCR Service")
+# ==========================================
+# 2. FASTAPI LIFESPAN & ROUTES
+# ==========================================
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Start auto-recovering tunnel
+    start_tunnel_manager(port=8000, subdomain="ai-sawaco")
+    yield
+    # Clean shutdown of tunnel processes
+    stop_tunnel_manager()
+
+app = FastAPI(title="Water Meter AI OCR Service", lifespan=lifespan)
+
+@app.get("/")
+@app.get("/health")
+def health_check():
+    return {
+        "status": "ok",
+        "service": "SAWACO Water Meter AI OCR",
+        "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    }
 
 @app.post("/api/ai/ocr")
 async def process_ocr(file: UploadFile = File(...)):
     try:
-        print(f"📥 BẮT ĐẦU NHẬN ẢNH TỪ BACKEND: {file.filename}")
+        print(f"[INFO] Received image from backend: {file.filename}", flush=True)
         
-        # 1. Đọc dữ liệu byte thô từ Spring Boot ném sang
+        # 1. Read raw bytes
         image_bytes = await file.read()
         
-        # CHUYỂN ĐỔI ẢNH CHO AI ĐỌC TRỰC TRỰC TIẾP TRÊN RAM
+        # 2. Decode image directly in memory
         np_arr = np.frombuffer(image_bytes, np.uint8)
         img = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
         
         if img is None:
-            return {"status": "error", "message": "File gửi sang không đọc được dạng ảnh"}
+            return {"status": "error", "message": "Uploaded file is not a valid image"}
 
-        print(f"✅ Đã giải mã ảnh thành công. Kích thước: {img.shape}")
-
-        # =================================================================
-        # [DEBUG] LƯU ẢNH ĐỂ QUAN SÁT BẰNG MẮT THƯỜNG
-        # =================================================================
-        debug_dir = "debug_images"
-        os.makedirs(debug_dir, exist_ok=True)
-        # Lưu ảnh gốc gửi từ Java sang
-        cv2.imwrite(os.path.join(debug_dir, "0_anh_goc_tu_java.jpg"), img)
+        print(f"[INFO] Image decoded successfully. Resolution: {img.shape}", flush=True)
 
         if meter_reader is None:
-            return {"status": "error", "message": "AI Model chưa được load!"}
-
-        # =================================================================
-        # 2. KHU VỰC CỦA NGƯỜI LÀM AI: CHÈN THUẬT TOÁN NHẬN DIỆN VÀO ĐÂY
-        # =================================================================
+            return {"status": "error", "message": "AI Model is not loaded"}
         
-        # Bước 2.1: Cắt ảnh thành 5 chữ số
+        # 3. Segment into 5 digit boxes
         try:
             digits_images = segment_meter_digits(img, num_digits=5, margin_ratio=0.22)
         except Exception as e:
-            return {"status": "error", "message": f"Lỗi lúc cắt ảnh: {str(e)}"}
+            return {"status": "error", "message": f"Image segmentation failed: {str(e)}"}
             
-        # Bước 2.2: Đọc từng chữ số
-        final_number_str = ""
-        for i, digit_img in enumerate(digits_images):
-            # [DEBUG] Lưu từng ảnh chữ số đã bị cắt ra
-            cv2.imwrite(os.path.join(debug_dir, f"1_chu_so_thu_{i+1}.jpg"), digit_img)
-            
-            result = meter_reader.predict(digit_img)
-            final_number_str += str(result['digit'])
-            
-        print(f"Chuỗi số thô đọc được: {final_number_str}")
+        # 4. Predict digits with mechanical wheel rules
+        sequence_results = meter_reader.predict_sequence(digits_images)
         
-        # Bước 2.3: Chuyển đổi thành số m3. 
-        # Đồng hồ thường có 4 số đen (khối) và 1 số đỏ (trăm lít = 0.1 m3)
-        # Ví dụ chuỗi "05580" -> 0558.0 m3
+        # Check if digits are obscured (leaf, mud, reflection)
+        if sequence_results is None:
+            print("[WARNING] Character obscured or contaminated (NaN detected).", flush=True)
+            save_debug_session(img, digits_images, None, "NaN", 0.0, file.filename)
+            return {
+                "status": "warning",
+                "message": "Digits obscured by dirt or foreign objects. Please clean and recapture.",
+                "water_reading": 0.0
+            }
+            
+        final_number_str = ""
+        for res in sequence_results:
+            final_number_str += str(res['digit'])
+            
+        print(f"[INFO] Raw digit sequence: {final_number_str}", flush=True)
+        
+        # 5. Convert to m3 reading (4 black digits, 1 red digit = 0.1 m3)
         try:
-            # Lấy 4 số đầu làm phần nguyên, số cuối làm phần thập phân
             if len(final_number_str) == 5:
                 integer_part = final_number_str[:4]
                 decimal_part = final_number_str[4:]
@@ -85,18 +183,21 @@ async def process_ocr(file: UploadFile = File(...)):
         except ValueError:
             ai_detected_number = 0.0
             
-        print(f"🎯 KẾT QUẢ AI ĐỌC ĐƯỢC: {ai_detected_number} m3")
+        print(f"[INFO] Meter reading: {ai_detected_number} m3", flush=True)
+
+        # 6. Save debug artifacts
+        save_debug_session(img, digits_images, sequence_results, final_number_str, ai_detected_number, file.filename)
         
-        # 3. TRẢ KẾT QUẢ VỀ CHO JAVA BACKEND
+        # 7. Return JSON response
         return {
             "status": "success",
             "water_reading": ai_detected_number,
-            "message": "Đã nhận diện thành công",
-            "raw_string": final_number_str # Gửi kèm chuỗi thô để dễ debug
+            "message": "Recognition successful",
+            "raw_string": final_number_str
         }
         
     except Exception as e:
-        print(f"❌ LỖI TRONG QUÁ TRÌNH XỬ LÝ AI: {str(e)}")
+        print(f"[ERROR] Inference exception: {str(e)}", flush=True)
         return {
             "status": "error",
             "message": str(e),
@@ -104,5 +205,4 @@ async def process_ocr(file: UploadFile = File(...)):
         }
 
 if __name__ == "__main__":
-    # Lắng nghe ở cổng 8000, khớp với http://localhost:8000/api/ai/ocr bên Java
-    uvicorn.run("api_server:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("api_server:app", host="0.0.0.0", port=8000, reload=False)
