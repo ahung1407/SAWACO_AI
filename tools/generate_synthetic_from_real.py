@@ -98,11 +98,11 @@ def get_meter_window_boxes(img):
     if best_grid_cxs is None:
         best_grid_cxs = [int(w * (i + 0.5) / 5.0) for i in range(5)]
         
-    box_w = int(est_spacing * 0.58)
+    box_w = int(est_spacing * 0.74)
     avg_y = float(np.median([r[1] for r in kept_rects])) if kept_rects else int(h * 0.22)
     avg_h = float(np.median([r[3] for r in kept_rects])) if kept_rects else int(h * 0.52)
-    y1_box = max(0, int(avg_y))
-    y2_box = min(h, int(avg_y + avg_h))
+    y1_box = max(0, int(avg_y - avg_h * 0.05))
+    y2_box = min(h, int(avg_y + avg_h * 1.05))
     
     boxes = []
     for cx in best_grid_cxs:
@@ -113,30 +113,37 @@ def get_meter_window_boxes(img):
 
 def inpaint_old_digit(roi, is_red=False):
     """
-    Xóa sạch hoàn toàn nét mực cũ trên bánh xe bằng Inpainting Navier-Stokes/Telea.
-    Bảo toàn 100% vân màu, ánh sáng, nhiễu ISO và độ cong thực tế của bánh xe.
+    Completely remove old digit strokes on the wheel face using Connected Components Inpainting.
+    Selectively targets only digit ink components while leaving window frame borders 100% intact.
     """
     rh, rw = roi.shape[:2]
     mask = np.zeros((rh, rw), dtype=np.uint8)
     
-    # Giới hạn vùng mực bên trong bánh xe
-    pad_y = 2
-    pad_x = 1
-    
     if not is_red:
         gray_roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
-        ink_roi = gray_roi[pad_y:rh-pad_y, pad_x:rw-pad_x]
-        _, bin_ink = cv2.threshold(ink_roi, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-        mask[pad_y:rh-pad_y, pad_x:rw-pad_x] = bin_ink
+        _, bin_ink = cv2.threshold(gray_roi, 145, 255, cv2.THRESH_BINARY_INV)
+        n, lbls, stats, _ = cv2.connectedComponentsWithStats(bin_ink)
+        for i in range(1, n):
+            x, y, w, h, area = stats[i]
+            is_left_frame = (x <= 2) and (x + w < rw * 0.20) and (h > rh * 0.3)
+            is_right_frame = (x + w >= rw - 2) and (x > rw * 0.80) and (h > rh * 0.3)
+            if not (is_left_frame or is_right_frame):
+                mask[lbls == i] = 255
     else:
-        central = roi[pad_y:rh-pad_y, pad_x:rw-pad_x]
+        central = roi
         b, g, r = cv2.split(central)
-        # Nét mực đỏ có r cao hơn b, g rõ rệt hoặc tối hẳn
-        is_red_ink = (r.astype(int) - np.maximum(b, g).astype(int) > 18) | (np.min(central, axis=2) < 130)
-        mask[pad_y:rh-pad_y, pad_x:rw-pad_x] = is_red_ink.astype(np.uint8) * 255
-        
-    mask = cv2.dilate(mask, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7)), iterations=2)
-    inpainted = cv2.inpaint(roi, mask, inpaintRadius=7, flags=cv2.INPAINT_TELEA)
+        is_red_ink = (r.astype(int) - np.maximum(b, g).astype(int) > 15) | (np.min(central, axis=2) < 135)
+        bin_ink = is_red_ink.astype(np.uint8) * 255
+        n, lbls, stats, _ = cv2.connectedComponentsWithStats(bin_ink)
+        for i in range(1, n):
+            x, y, w, h, area = stats[i]
+            is_left_frame = (x <= 2) and (x + w < rw * 0.20) and (h > rh * 0.3)
+            is_right_frame = (x + w >= rw - 2) and (x > rw * 0.80) and (h > rh * 0.3)
+            if not (is_left_frame or is_right_frame):
+                mask[lbls == i] = 255
+                
+    mask = cv2.dilate(mask, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5)), iterations=1)
+    inpainted = cv2.inpaint(roi, mask, inpaintRadius=5, flags=cv2.INPAINT_TELEA)
     return inpainted
 
 def render_stroke(digit_val, target_w, target_h, masks, next_val=None, roll_ratio=0.0):
@@ -182,7 +189,16 @@ def generate_photorealistic_meter(reading_str, masks, base_img_path, roll_digit_
     if base_img is None:
         raise ValueError(f"Không thể mở ảnh nền: {base_img_path}")
         
-    windows = get_meter_window_boxes(base_img)
+    base_name = os.path.basename(base_img_path)
+    calib_file = "data/real_window_boxes.json"
+    if os.path.exists(calib_file):
+        import json
+        with open(calib_file, "r", encoding="utf-8") as f:
+            calib = json.load(f)
+            windows = calib.get(base_name, get_meter_window_boxes(base_img))
+    else:
+        windows = get_meter_window_boxes(base_img)
+        
     result = base_img.copy()
     
     for i, ((bx, by, bw, bh), char) in enumerate(zip(windows, reading_str)):
@@ -192,8 +208,24 @@ def generate_photorealistic_meter(reading_str, masks, base_img_path, roll_digit_
         roi = result[by:by+bh, bx:bx+bw].copy()
         rh, rw = roi.shape[:2]
         
-        # 1. Inpaint xóa sạch số cũ
-        inpainted = inpaint_old_digit(roi, is_red=is_red)
+        # 1. Inpaint xóa sạch 100% nét cũ không để lại vết mờ hay cung tròn
+        mask = np.zeros((rh, rw), dtype=np.uint8)
+        pad_x = 2
+        pad_y = 2
+        if not is_red:
+            gray_roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
+            ink_zone = gray_roi[pad_y:rh-pad_y, pad_x:rw-pad_x]
+            _, bin_ink = cv2.threshold(ink_zone, 150, 255, cv2.THRESH_BINARY_INV)
+            mask[pad_y:rh-pad_y, pad_x:rw-pad_x] = bin_ink
+            mask = cv2.dilate(mask, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5)), iterations=1)
+        else:
+            central = roi[pad_y:rh-pad_y, pad_x:rw-pad_x]
+            b, g, r = cv2.split(central)
+            is_red_ink = (r.astype(int) - np.maximum(b, g).astype(int) > 10) | (np.min(central, axis=2) < 150)
+            mask[pad_y:rh-pad_y, pad_x:rw-pad_x] = is_red_ink.astype(np.uint8) * 255
+            mask = cv2.dilate(mask, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7)), iterations=2)
+            
+        inpainted = cv2.inpaint(roi, mask, inpaintRadius=5, flags=cv2.INPAINT_TELEA)
         
         # 2. Render nét chữ số mới
         target_h = int(rh * 0.70)
@@ -229,29 +261,31 @@ def generate_photorealistic_meter(reading_str, masks, base_img_path, roll_digit_
         
     return result
 
-def generate_dataset(num_samples=15, output_dir="data/generated_cases"):
-    """Sinh bộ dữ liệu kiểm thử chân thực 100% vào thư mục output_dir."""
+def generate_dataset(num_samples=100, output_dir="data/generated_cases"):
+    """Generate photorealistic test cases with balanced coverage into output_dir."""
     os.makedirs(output_dir, exist_ok=True)
     masks = load_clean_masks()
     base_images = sorted(glob.glob(os.path.join(REAL_IMAGES_DIR, "*.jpg")))
     
     if not base_images:
-        print(f"[LỖI] Không tìm thấy ảnh trong {REAL_IMAGES_DIR}!")
+        print(f"[ERROR] No base images found in {REAL_IMAGES_DIR}!", flush=True)
         return []
         
-    print(f"Bắt đầu sinh {num_samples} ảnh đồng hồ CHÂN THỰC 100% vào '{output_dir}'...")
+    print(f"[INFO] Generating {num_samples} diverse test images into '{output_dir}'...", flush=True)
     manifest = []
     
     for idx in range(1, num_samples + 1):
-        # 1. Chọn ngẫu nhiên 1 ảnh camera thật làm canvas
-        base_img_path = random.choice(base_images)
+        # 1. Random real background frame (cycling across all 23 real backgrounds)
+        base_img_path = base_images[(idx - 1) % len(base_images)]
         
-        # 2. Sinh 5 chữ số ngẫu nhiên (hoặc các case đặc biệt)
+        # 2. Generate balanced 5-digit number
+        # Ensure uniform digit distribution across 0-9
         val = f"{random.randint(0, 99999):05d}"
         
-        # 3. 20% khả năng có số lăn ở ô thứ 5
-        roll_idx = random.choice([None, None, None, None, 4])
-        roll_ratio = random.uniform(0.3, 0.7) if roll_idx is not None else 0.0
+        # 3. 35% chance of rolling digit on window 5 (ratio between 0.05 and 0.18)
+        is_rolling = (random.random() < 0.35)
+        roll_idx = 4 if is_rolling else None
+        roll_ratio = random.uniform(0.05, 0.18) if is_rolling else 0.0
         
         meter_img = generate_photorealistic_meter(val, masks, base_img_path, 
                                                  roll_digit_idx=roll_idx, 
@@ -261,21 +295,27 @@ def generate_dataset(num_samples=15, output_dir="data/generated_cases"):
         save_path = os.path.join(output_dir, fname)
         cv2.imwrite(save_path, meter_img)
         manifest.append((fname, val, roll_idx is not None))
-        status_str = f"(Số lăn ô 5: ratio={roll_ratio:.2f})" if roll_idx is not None else "(Số đứng yên)"
-        print(f"  [{idx:02d}/{num_samples:02d}] Sinh thành công: {fname} | Giá trị: {val} {status_str}")
         
-    print(f"\n Hoàn tất sinh {len(manifest)} ảnh đồng hồ CHÂN THỰC 100% vào '{output_dir}'!")
+        roll_str = f" [Rolling ô 5: {roll_ratio:.2f}]" if roll_idx is not None else ""
+        if idx % 10 == 0 or idx == num_samples:
+            print(f"  [{idx:03d}/{num_samples:03d}] Generated: {fname} (Value: {val}){roll_str}", flush=True)
+        
+    print(f"[INFO] Successfully generated {len(manifest)} test cases in '{output_dir}'.", flush=True)
     return manifest
 
 if __name__ == "__main__":
-    # Luôn sinh lại case 78207 người dùng vừa thắc mắc để đối chiếu chất lượng
-    masks = load_clean_masks()
-    base_images = sorted(glob.glob(os.path.join(REAL_IMAGES_DIR, "*.jpg")))
+    import argparse
+    parser = argparse.ArgumentParser(description="Generate photorealistic test cases based on real camera images.")
+    parser.add_argument("--samples", type=int, default=100, help="Number of test images to generate (default: 100)")
+    parser.add_argument("--output", type=str, default="data/generated_cases", help="Output directory")
+    args = parser.parse_args()
     
-    # 1. Sinh lại chính xác case 78207
-    img_78207 = generate_photorealistic_meter("78207", masks, base_images[0])
-    cv2.imwrite("data/generated_cases/gen_meter_0005_78207.jpg", img_78207)
-    print(" Đã tạo lại data/generated_cases/gen_meter_0005_78207.jpg đạt chuẩn Ultra-Photorealistic 100%!")
-    
-    # 2. Sinh thêm 14 case ngẫu nhiên khác
-    generate_dataset(num_samples=15)
+    # Clean previous generated cases
+    if os.path.exists(args.output):
+        for old_f in glob.glob(os.path.join(args.output, "*.jpg")):
+            try:
+                os.remove(old_f)
+            except Exception:
+                pass
+                
+    generate_dataset(num_samples=args.samples, output_dir=args.output)

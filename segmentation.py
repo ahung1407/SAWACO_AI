@@ -189,8 +189,8 @@ def segment_meter_digits(image_input, num_digits=5, margin_ratio=0.1):
                 if bw >= w * 0.05:
                     valid_rects.append((x, y, bw, bh))
                 
-    # Lọc bỏ các khung trùng lặp (Deduplicate: khoảng cách giữa 2 tâm < 110px thì chỉ giữ khung lớn hơn)
-    valid_rects = sorted(valid_rects, key=lambda r: r[2]*r[3], reverse=True) # Sắp xếp theo diện tích giảm dần
+    # Lọc bỏ các khung trùng lặp: Ưu tiên khung có tỷ lệ width/height gần tỷ lệ chữ số chuẩn (~0.58) thay vì lấy khung cao to của vỏ
+    valid_rects = sorted(valid_rects, key=lambda r: abs((r[2] / float(r[3])) - 0.58))
     kept_rects = []
     for r in valid_rects:
         rcx = r[0] + r[2]/2.0
@@ -219,7 +219,10 @@ def segment_meter_digits(image_input, num_digits=5, margin_ratio=0.1):
     # Khoảng cách chuẩn giữa 2 ô số trên camera ESP32-S3 Xiao luôn là ~192px
     est_spacing = float(np.median(valid_s)) if valid_s else (w * 0.178)
     
-    if len(kept_rects) == 1:
+    if len(kept_rects) == num_digits and all(140 < s < 260 for s in spacings):
+        best_grid_cxs = [r[0] + r[2]/2.0 for r in kept_rects]
+        print("[INFO] Successfully detected digit bounding boxes using contours.", flush=True)
+    elif len(kept_rects) == 1:
         # Tự động neo vị trí vật lý theo tọa độ X đã biết
         single_cx = cxs[0]
         # Ước lượng ô số thứ mấy dựa trên tọa độ X (mỗi ô cách nhau ~192px, ô 0 bắt đầu ~170px)
@@ -280,6 +283,12 @@ def segment_meter_digits(image_input, num_digits=5, margin_ratio=0.1):
         y2_box = int(h * 0.97)
         
     for i, cx in enumerate(best_grid_cxs):
+        # Snap to physical window contour if detected nearby (prevents clipping wide digits)
+        close_rects = [r for r in kept_rects if abs((r[0] + r[2]/2.0) - cx) < est_spacing * 0.20]
+        if close_rects:
+            best_r = min(close_rects, key=lambda r: abs((r[0] + r[2]/2.0) - cx))
+            cx = best_r[0] + best_r[2] / 2.0
+            
         x1 = int(cx - box_w/2)
         x2 = int(cx + box_w/2)
         y1 = y1_box

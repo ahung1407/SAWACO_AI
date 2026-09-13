@@ -1,0 +1,209 @@
+[
+  {
+    "file": "device_xiao_s3_20260909_094142.jpg",
+    "ground_truth_full": "00001",
+    "ground_truth_billing_m3": "0000",
+    "billing_m3_val": 0,
+    "fraction_digit": 1,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0000 m3 (chỉ số phụ 1)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_095354.jpg",
+    "ground_truth_full": "00002",
+    "ground_truth_billing_m3": "0000",
+    "billing_m3_val": 0,
+    "fraction_digit": 2,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0000 m3 (chỉ số phụ 2)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_100525.jpg",
+    "ground_truth_full": "00003",
+    "ground_truth_billing_m3": "0000",
+    "billing_m3_val": 0,
+    "fraction_digit": 3,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0000 m3 (chỉ số phụ 3)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_101854.jpg",
+    "ground_truth_full": "00004",
+    "ground_truth_billing_m3": "0000",
+    "billing_m3_val": 0,
+    "fraction_digit": 4,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0000 m3 (chỉ số phụ 4)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_102216.jpg",
+    "ground_truth_full": "00004",
+    "ground_truth_billing_m3": "0000",
+    "billing_m3_val": 0,
+    "fraction_digit": 4,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0000 m3 (chỉ số phụ 4)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_102432.jpg",
+    "ground_truth_full": "00005",
+    "ground_truth_billing_m3": "0000",
+    "billing_m3_val": 0,
+    "fraction_digit": 5,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0000 m3 (chỉ số phụ 5)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_102638.jpg",
+    "ground_truth_full": "00006",
+    "ground_truth_billing_m3": "0000",
+    "billing_m3_val": 0,
+    "fraction_digit": 6,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0000 m3 (chỉ số phụ 6)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_102856.jpg",
+    "ground_truth_full": "00007",
+    "ground_truth_billing_m3": "0000",
+    "billing_m3_val": 0,
+    "fraction_digit": 7,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0000 m3 (chỉ số phụ 7)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_103034.jpg",
+    "ground_truth_full": "00008",
+    "ground_truth_billing_m3": "0000",
+    "billing_m3_val": 0,
+    "fraction_digit": 8,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0000 m3 (chỉ số phụ 8)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_103222.jpg",
+    "ground_truth_full": "00009",
+    "ground_truth_billing_m3": "0000",
+    "billing_m3_val": 0,
+    "fraction_digit": 9,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0000 m3 (chỉ số phụ 9)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_103920.jpg",
+    "ground_truth_full": "00010",
+    "ground_truth_billing_m3": "0001",
+    "billing_m3_val": 1,
+    "fraction_digit": 0,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0001 m3 (chỉ số phụ 0)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_104204.jpg",
+    "ground_truth_full": "00011",
+    "ground_truth_billing_m3": "0001",
+    "billing_m3_val": 1,
+    "fraction_digit": 1,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0001 m3 (chỉ số phụ 1)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_104558.jpg",
+    "ground_truth_full": "00012",
+    "ground_truth_billing_m3": "0001",
+    "billing_m3_val": 1,
+    "fraction_digit": 2,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0001 m3 (chỉ số phụ 2)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_104858.jpg",
+    "ground_truth_full": "00021",
+    "ground_truth_billing_m3": "0002",
+    "billing_m3_val": 2,
+    "fraction_digit": 1,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0002 m3 (chỉ số phụ 1)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_105206.jpg",
+    "ground_truth_full": "00032",
+    "ground_truth_billing_m3": "0003",
+    "billing_m3_val": 3,
+    "fraction_digit": 2,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0003 m3 (chỉ số phụ 2)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_105530.jpg",
+    "ground_truth_full": "00046",
+    "ground_truth_billing_m3": "0004",
+    "billing_m3_val": 4,
+    "fraction_digit": 6,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0004 m3 (chỉ số phụ 6)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_105724.jpg",
+    "ground_truth_full": "00051",
+    "ground_truth_billing_m3": "0005",
+    "billing_m3_val": 5,
+    "fraction_digit": 1,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0005 m3 (chỉ số phụ 1)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_105930.jpg",
+    "ground_truth_full": "00063",
+    "ground_truth_billing_m3": "0006",
+    "billing_m3_val": 6,
+    "fraction_digit": 3,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0006 m3 (chỉ số phụ 3)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_110142.jpg",
+    "ground_truth_full": "00074",
+    "ground_truth_billing_m3": "0007",
+    "billing_m3_val": 7,
+    "fraction_digit": 4,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0007 m3 (chỉ số phụ 4)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_110538.jpg",
+    "ground_truth_full": "00089",
+    "ground_truth_billing_m3": "0008",
+    "billing_m3_val": 8,
+    "fraction_digit": 9,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0008 m3 (chỉ số phụ 9)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_111235.jpg",
+    "ground_truth_full": "00091",
+    "ground_truth_billing_m3": "0009",
+    "billing_m3_val": 9,
+    "fraction_digit": 1,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0009 m3 (chỉ số phụ 1)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_111515.jpg",
+    "ground_truth_full": "00124",
+    "ground_truth_billing_m3": "0012",
+    "billing_m3_val": 12,
+    "fraction_digit": 4,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0012 m3 (chỉ số phụ 4)"
+  },
+  {
+    "file": "device_xiao_s3_20260909_111955.jpg",
+    "ground_truth_full": "00281",
+    "ground_truth_billing_m3": "0028",
+    "billing_m3_val": 28,
+    "fraction_digit": 1,
+    "type": "real_camera",
+    "description": "Camera ESP32-S3 thực tế: 0028 m3 (chỉ số phụ 1)"
+  }
+]

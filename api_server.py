@@ -153,45 +153,38 @@ async def process_ocr(file: UploadFile = File(...)):
         except Exception as e:
             return {"status": "error", "message": f"Image segmentation failed: {str(e)}"}
             
-        # 4. Predict digits with mechanical wheel rules
-        sequence_results = meter_reader.predict_sequence(digits_images)
+        # 4. Predict digits with Sawaco billing rules and mechanical floor rule
+        billing_result = meter_reader.read_billing_meter(digits_images)
         
         # Check if digits are obscured (leaf, mud, reflection)
-        if sequence_results is None:
+        if billing_result is None:
             print("[WARNING] Character obscured or contaminated (NaN detected).", flush=True)
             save_debug_session(img, digits_images, None, "NaN", 0.0, file.filename)
             return {
                 "status": "warning",
                 "message": "Digits obscured by dirt or foreign objects. Please clean and recapture.",
-                "water_reading": 0.0
+                "water_reading": 0.0,
+                "billing_m3": 0
             }
             
-        final_number_str = ""
-        for res in sequence_results:
-            final_number_str += str(res['digit'])
+        final_number_str = billing_result["full_reading"]
+        ai_detected_number = float(f"{billing_result['billing_m3_str']}.{billing_result['fraction_digit']}")
+        billing_m3 = billing_result["billing_m3"]
+        sequence_results = billing_result["digits"]
             
-        print(f"[INFO] Raw digit sequence: {final_number_str}", flush=True)
-        
-        # 5. Convert to m3 reading (4 black digits, 1 red digit = 0.1 m3)
-        try:
-            if len(final_number_str) == 5:
-                integer_part = final_number_str[:4]
-                decimal_part = final_number_str[4:]
-                ai_detected_number = float(f"{integer_part}.{decimal_part}")
-            else:
-                ai_detected_number = float(final_number_str)
-        except ValueError:
-            ai_detected_number = 0.0
-            
-        print(f"[INFO] Meter reading: {ai_detected_number} m3", flush=True)
+        print(f"[INFO] Raw sequence: {final_number_str} | Billing m3: {billing_m3} | Display: {billing_result['formatted']}", flush=True)
 
-        # 6. Save debug artifacts
+        # 5. Save debug artifacts
         save_debug_session(img, digits_images, sequence_results, final_number_str, ai_detected_number, file.filename)
         
-        # 7. Return JSON response
+        # 6. Return JSON response (backward compatible + new Sawaco billing standard)
         return {
             "status": "success",
             "water_reading": ai_detected_number,
+            "billing_m3": billing_m3,
+            "billing_m3_str": billing_result["billing_m3_str"],
+            "fraction_liters": billing_result["fraction_liters"],
+            "formatted": billing_result["formatted"],
             "message": "Recognition successful",
             "raw_string": final_number_str
         }

@@ -50,16 +50,9 @@ class WaterMeterReader:
             gray = img
 
         # ----------------------------------------------------------------
-        # [FIX] Loai bo vien nhua truoc CLAHE:
-        # Tim vung cua so sang (> 160) va set tat ca vung toi ben ngoai thanh trang
-        # Ngan chan vien nhua tao ra net thua khien CNN nham 0->6, 0->8
+        # Chuẩn hoá độ tương phản cục bộ bằng CLAHE
+        # (Digit đã được extract_clean_digit_ink làm sạch viền nhựa trước đó)
         # ----------------------------------------------------------------
-        _, bright_mask = cv2.threshold(gray, 150, 255, cv2.THRESH_BINARY)
-        # Dilate de lap day khoang trong trong vung sang
-        dilate_k = cv2.getStructuringElement(cv2.MORPH_RECT, (7, 7))
-        bright_mask = cv2.dilate(bright_mask, dilate_k, iterations=3)
-        # Vung toi (vien nhua) -> trang (nền)
-        gray[bright_mask == 0] = 255
 
         # Chuẩn hoá độ tương phản cục bộ bằng CLAHE (giam clip xuong 2.0 de it nhieu hon)
         clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(4, 4))
@@ -159,3 +152,72 @@ class WaterMeterReader:
                     current_res['confidence'] = 0.99
                     
         return results
+
+    def read_billing_meter(self, image_input):
+        """
+        Nghiệp vụ đọc đồng hồ nước chuẩn Sawaco:
+        - Phân biệt rõ ràng:
+          + 4 ô màu đen đầu tiên: Chỉ số khối nước m3 chính thức dùng để tính hóa đơn tiền nước.
+          + Ô màu đỏ thứ 5: Chỉ số phụ (hàng 0.1 m3 = 100 lít), mang tính tham khảo kỹ thuật.
+        - Áp dụng nguyên tắc Làm tròn sàn (Floor Rule) bảo vệ người tiêu dùng khi bánh xe đen đang ở pha nhảy số dở dang.
+        """
+        if isinstance(image_input, (str, np.ndarray)) and not isinstance(image_input, list):
+            from segmentation import segment_meter_digits
+            digit_images = segment_meter_digits(image_input, num_digits=5, margin_ratio=0.22)
+        else:
+            digit_images = image_input
+
+        seq_results = self.predict_sequence(digit_images)
+        if seq_results is None:
+            return None
+
+        # 4 ô màu đen đầu tiên (indices 0, 1, 2, 3) là chỉ số m3
+        black_digits = [r['digit'] for r in seq_results[:4]]
+        red_digit = seq_results[4]['digit'] if len(seq_results) >= 5 else 0
+
+        # Ràng buộc cơ học làm tròn sàn (Floor Rule) bảo vệ người tiêu dùng:
+        # Chuỗi truyền động cơ học từ phải qua trái:
+        # - Ô 4 (Số đỏ) -> Ô 3 (Đen hàng đơn vị 1 m3)
+        # - Ô 3 (Đen đơn vị) -> Ô 2 (Đen hàng chục 10 m3)
+        # - Ô 2 (Đen hàng chục) -> Ô 1 (Đen hàng trăm 100 m3)
+        # - Ô 1 (Đen hàng trăm) -> Ô 0 (Đen hàng ngàn 1000 m3)
+        #
+        # Nguyên tắc: Nếu bánh xe bên phải đang ở số 9 (chưa hoàn tất bước nhảy qua 0),
+        # bánh xe bên trái kế bên nếu có dấu hiệu nhấp nhô phân vân (confidence < 0.75)
+        # BẮT BUỘC phải làm tròn xuống số nhỏ hơn (số cũ)!
+        
+        # 1. Ràng buộc từ số ĐỎ (ô 4) sang số ĐEN hàng đơn vị (ô 3):
+        if len(seq_results) >= 5:
+            red_res = seq_results[4]
+            unit_res = seq_results[3]
+            if red_res['digit'] == 9 and unit_res['confidence'] < 0.75:
+                probs = unit_res['all_probs']
+                top2 = np.argsort(probs)[-2:]
+                black_digits[3] = int(min(top2[0], top2[1]))
+
+        # 2. Ràng buộc liên tầng giữa các ô màu ĐEN (từ ô 3 về ô 0):
+        for i in range(2, -1, -1):
+            right_digit = black_digits[i+1]
+            left_res = seq_results[i]
+            if right_digit == 9 and left_res['confidence'] < 0.75:
+                probs = left_res['all_probs']
+                top2 = np.argsort(probs)[-2:]
+                black_digits[i] = int(min(top2[0], top2[1]))
+
+        billing_m3_str = "".join(str(d) for d in black_digits)
+        billing_m3_val = int(billing_m3_str) if billing_m3_str.isdigit() else 0
+        red_digit_str = str(red_digit)
+        full_reading = f"{billing_m3_str}{red_digit_str}"
+        formatted = f"{billing_m3_str}.{red_digit_str} m3"
+        avg_conf = float(np.mean([r['confidence'] for r in seq_results]))
+
+        return {
+            "billing_m3": billing_m3_val,
+            "billing_m3_str": billing_m3_str,
+            "fraction_liters": int(red_digit_str) * 100 if red_digit_str.isdigit() else 0,
+            "fraction_digit": red_digit,
+            "full_reading": full_reading,
+            "formatted": formatted,
+            "confidence": avg_conf,
+            "digits": seq_results
+        }

@@ -1,0 +1,902 @@
+[
+  {
+    "file": "meter_billing_bal_001_2796_6.jpg",
+    "ground_truth_full": "27966",
+    "ground_truth_billing_m3": "2796",
+    "billing_m3_val": 2796,
+    "fraction_digit": 6,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 2796 m3 (chữ số phụ: 6)"
+  },
+  {
+    "file": "meter_billing_bal_002_1679_3.jpg",
+    "ground_truth_full": "16793",
+    "ground_truth_billing_m3": "1679",
+    "billing_m3_val": 1679,
+    "fraction_digit": 3,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 1679 m3 (chữ số phụ: 3)"
+  },
+  {
+    "file": "meter_billing_bal_003_1577_7.jpg",
+    "ground_truth_full": "15777",
+    "ground_truth_billing_m3": "1577",
+    "billing_m3_val": 1577,
+    "fraction_digit": 7,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 1577 m3 (chữ số phụ: 7)"
+  },
+  {
+    "file": "meter_billing_bal_004_9397_5.jpg",
+    "ground_truth_full": "93975",
+    "ground_truth_billing_m3": "9397",
+    "billing_m3_val": 9397,
+    "fraction_digit": 5,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 9397 m3 (chữ số phụ: 5)"
+  },
+  {
+    "file": "meter_billing_bal_005_5181_8.jpg",
+    "ground_truth_full": "51818",
+    "ground_truth_billing_m3": "5181",
+    "billing_m3_val": 5181,
+    "fraction_digit": 8,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 5181 m3 (chữ số phụ: 8)"
+  },
+  {
+    "file": "meter_billing_bal_006_0492_7.jpg",
+    "ground_truth_full": "04927",
+    "ground_truth_billing_m3": "0492",
+    "billing_m3_val": 492,
+    "fraction_digit": 7,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 0492 m3 (chữ số phụ: 7)"
+  },
+  {
+    "file": "meter_billing_bal_007_1290_7.jpg",
+    "ground_truth_full": "12907",
+    "ground_truth_billing_m3": "1290",
+    "billing_m3_val": 1290,
+    "fraction_digit": 7,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 1290 m3 (chữ số phụ: 7)"
+  },
+  {
+    "file": "meter_billing_bal_008_0802_0.jpg",
+    "ground_truth_full": "08020",
+    "ground_truth_billing_m3": "0802",
+    "billing_m3_val": 802,
+    "fraction_digit": 0,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 0802 m3 (chữ số phụ: 0)"
+  },
+  {
+    "file": "meter_billing_bal_009_5525_3.jpg",
+    "ground_truth_full": "55253",
+    "ground_truth_billing_m3": "5525",
+    "billing_m3_val": 5525,
+    "fraction_digit": 3,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 5525 m3 (chữ số phụ: 3)"
+  },
+  {
+    "file": "meter_billing_bal_010_8276_1.jpg",
+    "ground_truth_full": "82761",
+    "ground_truth_billing_m3": "8276",
+    "billing_m3_val": 8276,
+    "fraction_digit": 1,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 8276 m3 (chữ số phụ: 1)"
+  },
+  {
+    "file": "meter_billing_bal_011_3534_0.jpg",
+    "ground_truth_full": "35340",
+    "ground_truth_billing_m3": "3534",
+    "billing_m3_val": 3534,
+    "fraction_digit": 0,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 3534 m3 (chữ số phụ: 0)"
+  },
+  {
+    "file": "meter_billing_bal_012_0731_6.jpg",
+    "ground_truth_full": "07316",
+    "ground_truth_billing_m3": "0731",
+    "billing_m3_val": 731,
+    "fraction_digit": 6,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 0731 m3 (chữ số phụ: 6)"
+  },
+  {
+    "file": "meter_billing_bal_013_5944_7.jpg",
+    "ground_truth_full": "59447",
+    "ground_truth_billing_m3": "5944",
+    "billing_m3_val": 5944,
+    "fraction_digit": 7,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 5944 m3 (chữ số phụ: 7)"
+  },
+  {
+    "file": "meter_billing_bal_014_6489_3.jpg",
+    "ground_truth_full": "64893",
+    "ground_truth_billing_m3": "6489",
+    "billing_m3_val": 6489,
+    "fraction_digit": 3,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 6489 m3 (chữ số phụ: 3)"
+  },
+  {
+    "file": "meter_billing_bal_015_2284_3.jpg",
+    "ground_truth_full": "22843",
+    "ground_truth_billing_m3": "2284",
+    "billing_m3_val": 2284,
+    "fraction_digit": 3,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 2284 m3 (chữ số phụ: 3)"
+  },
+  {
+    "file": "meter_billing_bal_016_5472_4.jpg",
+    "ground_truth_full": "54724",
+    "ground_truth_billing_m3": "5472",
+    "billing_m3_val": 5472,
+    "fraction_digit": 4,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 5472 m3 (chữ số phụ: 4)"
+  },
+  {
+    "file": "meter_billing_bal_017_8974_3.jpg",
+    "ground_truth_full": "89743",
+    "ground_truth_billing_m3": "8974",
+    "billing_m3_val": 8974,
+    "fraction_digit": 3,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 8974 m3 (chữ số phụ: 3)"
+  },
+  {
+    "file": "meter_billing_bal_018_2739_8.jpg",
+    "ground_truth_full": "27398",
+    "ground_truth_billing_m3": "2739",
+    "billing_m3_val": 2739,
+    "fraction_digit": 8,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 2739 m3 (chữ số phụ: 8)"
+  },
+  {
+    "file": "meter_billing_bal_019_6084_0.jpg",
+    "ground_truth_full": "60840",
+    "ground_truth_billing_m3": "6084",
+    "billing_m3_val": 6084,
+    "fraction_digit": 0,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 6084 m3 (chữ số phụ: 0)"
+  },
+  {
+    "file": "meter_billing_bal_020_7241_1.jpg",
+    "ground_truth_full": "72411",
+    "ground_truth_billing_m3": "7241",
+    "billing_m3_val": 7241,
+    "fraction_digit": 1,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 7241 m3 (chữ số phụ: 1)"
+  },
+  {
+    "file": "meter_billing_bal_021_0711_5.jpg",
+    "ground_truth_full": "07115",
+    "ground_truth_billing_m3": "0711",
+    "billing_m3_val": 711,
+    "fraction_digit": 5,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 0711 m3 (chữ số phụ: 5)"
+  },
+  {
+    "file": "meter_billing_bal_022_1437_3.jpg",
+    "ground_truth_full": "14373",
+    "ground_truth_billing_m3": "1437",
+    "billing_m3_val": 1437,
+    "fraction_digit": 3,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 1437 m3 (chữ số phụ: 3)"
+  },
+  {
+    "file": "meter_billing_bal_023_2155_8.jpg",
+    "ground_truth_full": "21558",
+    "ground_truth_billing_m3": "2155",
+    "billing_m3_val": 2155,
+    "fraction_digit": 8,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 2155 m3 (chữ số phụ: 8)"
+  },
+  {
+    "file": "meter_billing_bal_024_6329_1.jpg",
+    "ground_truth_full": "63291",
+    "ground_truth_billing_m3": "6329",
+    "billing_m3_val": 6329,
+    "fraction_digit": 1,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 6329 m3 (chữ số phụ: 1)"
+  },
+  {
+    "file": "meter_billing_bal_025_0469_7.jpg",
+    "ground_truth_full": "04697",
+    "ground_truth_billing_m3": "0469",
+    "billing_m3_val": 469,
+    "fraction_digit": 7,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 0469 m3 (chữ số phụ: 7)"
+  },
+  {
+    "file": "meter_billing_bal_026_9615_5.jpg",
+    "ground_truth_full": "96155",
+    "ground_truth_billing_m3": "9615",
+    "billing_m3_val": 9615,
+    "fraction_digit": 5,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 9615 m3 (chữ số phụ: 5)"
+  },
+  {
+    "file": "meter_billing_bal_027_3357_9.jpg",
+    "ground_truth_full": "33579",
+    "ground_truth_billing_m3": "3357",
+    "billing_m3_val": 3357,
+    "fraction_digit": 9,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 3357 m3 (chữ số phụ: 9)"
+  },
+  {
+    "file": "meter_billing_bal_028_6683_8.jpg",
+    "ground_truth_full": "66838",
+    "ground_truth_billing_m3": "6683",
+    "billing_m3_val": 6683,
+    "fraction_digit": 8,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 6683 m3 (chữ số phụ: 8)"
+  },
+  {
+    "file": "meter_billing_bal_029_7562_6.jpg",
+    "ground_truth_full": "75626",
+    "ground_truth_billing_m3": "7562",
+    "billing_m3_val": 7562,
+    "fraction_digit": 6,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 7562 m3 (chữ số phụ: 6)"
+  },
+  {
+    "file": "meter_billing_bal_030_3608_0.jpg",
+    "ground_truth_full": "36080",
+    "ground_truth_billing_m3": "3608",
+    "billing_m3_val": 3608,
+    "fraction_digit": 0,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 3608 m3 (chữ số phụ: 0)"
+  },
+  {
+    "file": "meter_billing_bal_031_8713_9.jpg",
+    "ground_truth_full": "87139",
+    "ground_truth_billing_m3": "8713",
+    "billing_m3_val": 8713,
+    "fraction_digit": 9,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 8713 m3 (chữ số phụ: 9)"
+  },
+  {
+    "file": "meter_billing_bal_032_7050_8.jpg",
+    "ground_truth_full": "70508",
+    "ground_truth_billing_m3": "7050",
+    "billing_m3_val": 7050,
+    "fraction_digit": 8,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 7050 m3 (chữ số phụ: 8)"
+  },
+  {
+    "file": "meter_billing_bal_033_9507_1.jpg",
+    "ground_truth_full": "95071",
+    "ground_truth_billing_m3": "9507",
+    "billing_m3_val": 9507,
+    "fraction_digit": 1,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 9507 m3 (chữ số phụ: 1)"
+  },
+  {
+    "file": "meter_billing_bal_034_3398_2.jpg",
+    "ground_truth_full": "33982",
+    "ground_truth_billing_m3": "3398",
+    "billing_m3_val": 3398,
+    "fraction_digit": 2,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 3398 m3 (chữ số phụ: 2)"
+  },
+  {
+    "file": "meter_billing_bal_035_4943_7.jpg",
+    "ground_truth_full": "49437",
+    "ground_truth_billing_m3": "4943",
+    "billing_m3_val": 4943,
+    "fraction_digit": 7,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 4943 m3 (chữ số phụ: 7)"
+  },
+  {
+    "file": "meter_billing_bal_036_4275_7.jpg",
+    "ground_truth_full": "42757",
+    "ground_truth_billing_m3": "4275",
+    "billing_m3_val": 4275,
+    "fraction_digit": 7,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 4275 m3 (chữ số phụ: 7)"
+  },
+  {
+    "file": "meter_billing_bal_037_8977_9.jpg",
+    "ground_truth_full": "89779",
+    "ground_truth_billing_m3": "8977",
+    "billing_m3_val": 8977,
+    "fraction_digit": 9,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 8977 m3 (chữ số phụ: 9)"
+  },
+  {
+    "file": "meter_billing_bal_038_2013_6.jpg",
+    "ground_truth_full": "20136",
+    "ground_truth_billing_m3": "2013",
+    "billing_m3_val": 2013,
+    "fraction_digit": 6,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 2013 m3 (chữ số phụ: 6)"
+  },
+  {
+    "file": "meter_billing_bal_039_5899_1.jpg",
+    "ground_truth_full": "58991",
+    "ground_truth_billing_m3": "5899",
+    "billing_m3_val": 5899,
+    "fraction_digit": 1,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 5899 m3 (chữ số phụ: 1)"
+  },
+  {
+    "file": "meter_billing_bal_040_2232_5.jpg",
+    "ground_truth_full": "22325",
+    "ground_truth_billing_m3": "2232",
+    "billing_m3_val": 2232,
+    "fraction_digit": 5,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 2232 m3 (chữ số phụ: 5)"
+  },
+  {
+    "file": "meter_billing_bal_041_6368_9.jpg",
+    "ground_truth_full": "63689",
+    "ground_truth_billing_m3": "6368",
+    "billing_m3_val": 6368,
+    "fraction_digit": 9,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 6368 m3 (chữ số phụ: 9)"
+  },
+  {
+    "file": "meter_billing_bal_042_3045_5.jpg",
+    "ground_truth_full": "30455",
+    "ground_truth_billing_m3": "3045",
+    "billing_m3_val": 3045,
+    "fraction_digit": 5,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 3045 m3 (chữ số phụ: 5)"
+  },
+  {
+    "file": "meter_billing_bal_043_9638_3.jpg",
+    "ground_truth_full": "96383",
+    "ground_truth_billing_m3": "9638",
+    "billing_m3_val": 9638,
+    "fraction_digit": 3,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 9638 m3 (chữ số phụ: 3)"
+  },
+  {
+    "file": "meter_billing_bal_044_0437_8.jpg",
+    "ground_truth_full": "04378",
+    "ground_truth_billing_m3": "0437",
+    "billing_m3_val": 437,
+    "fraction_digit": 8,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 0437 m3 (chữ số phụ: 8)"
+  },
+  {
+    "file": "meter_billing_bal_045_8961_3.jpg",
+    "ground_truth_full": "89613",
+    "ground_truth_billing_m3": "8961",
+    "billing_m3_val": 8961,
+    "fraction_digit": 3,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 8961 m3 (chữ số phụ: 3)"
+  },
+  {
+    "file": "meter_billing_bal_046_6002_5.jpg",
+    "ground_truth_full": "60025",
+    "ground_truth_billing_m3": "6002",
+    "billing_m3_val": 6002,
+    "fraction_digit": 5,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 6002 m3 (chữ số phụ: 5)"
+  },
+  {
+    "file": "meter_billing_bal_047_1512_9.jpg",
+    "ground_truth_full": "15129",
+    "ground_truth_billing_m3": "1512",
+    "billing_m3_val": 1512,
+    "fraction_digit": 9,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 1512 m3 (chữ số phụ: 9)"
+  },
+  {
+    "file": "meter_billing_bal_048_0994_2.jpg",
+    "ground_truth_full": "09942",
+    "ground_truth_billing_m3": "0994",
+    "billing_m3_val": 994,
+    "fraction_digit": 2,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 0994 m3 (chữ số phụ: 2)"
+  },
+  {
+    "file": "meter_billing_bal_049_7653_4.jpg",
+    "ground_truth_full": "76534",
+    "ground_truth_billing_m3": "7653",
+    "billing_m3_val": 7653,
+    "fraction_digit": 4,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 7653 m3 (chữ số phụ: 4)"
+  },
+  {
+    "file": "meter_billing_bal_050_4142_6.jpg",
+    "ground_truth_full": "41426",
+    "ground_truth_billing_m3": "4142",
+    "billing_m3_val": 4142,
+    "fraction_digit": 6,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 4142 m3 (chữ số phụ: 6)"
+  },
+  {
+    "file": "meter_billing_bal_051_9163_2.jpg",
+    "ground_truth_full": "91632",
+    "ground_truth_billing_m3": "9163",
+    "billing_m3_val": 9163,
+    "fraction_digit": 2,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 9163 m3 (chữ số phụ: 2)"
+  },
+  {
+    "file": "meter_billing_bal_052_6684_4.jpg",
+    "ground_truth_full": "66844",
+    "ground_truth_billing_m3": "6684",
+    "billing_m3_val": 6684,
+    "fraction_digit": 4,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 6684 m3 (chữ số phụ: 4)"
+  },
+  {
+    "file": "meter_billing_bal_053_2618_6.jpg",
+    "ground_truth_full": "26186",
+    "ground_truth_billing_m3": "2618",
+    "billing_m3_val": 2618,
+    "fraction_digit": 6,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 2618 m3 (chữ số phụ: 6)"
+  },
+  {
+    "file": "meter_billing_bal_054_1526_4.jpg",
+    "ground_truth_full": "15264",
+    "ground_truth_billing_m3": "1526",
+    "billing_m3_val": 1526,
+    "fraction_digit": 4,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 1526 m3 (chữ số phụ: 4)"
+  },
+  {
+    "file": "meter_billing_bal_055_6436_0.jpg",
+    "ground_truth_full": "64360",
+    "ground_truth_billing_m3": "6436",
+    "billing_m3_val": 6436,
+    "fraction_digit": 0,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 6436 m3 (chữ số phụ: 0)"
+  },
+  {
+    "file": "meter_billing_bal_056_8069_0.jpg",
+    "ground_truth_full": "80690",
+    "ground_truth_billing_m3": "8069",
+    "billing_m3_val": 8069,
+    "fraction_digit": 0,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 8069 m3 (chữ số phụ: 0)"
+  },
+  {
+    "file": "meter_billing_bal_057_8752_7.jpg",
+    "ground_truth_full": "87527",
+    "ground_truth_billing_m3": "8752",
+    "billing_m3_val": 8752,
+    "fraction_digit": 7,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 8752 m3 (chữ số phụ: 7)"
+  },
+  {
+    "file": "meter_billing_bal_058_8810_5.jpg",
+    "ground_truth_full": "88105",
+    "ground_truth_billing_m3": "8810",
+    "billing_m3_val": 8810,
+    "fraction_digit": 5,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 8810 m3 (chữ số phụ: 5)"
+  },
+  {
+    "file": "meter_billing_bal_059_2364_2.jpg",
+    "ground_truth_full": "23642",
+    "ground_truth_billing_m3": "2364",
+    "billing_m3_val": 2364,
+    "fraction_digit": 2,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 2364 m3 (chữ số phụ: 2)"
+  },
+  {
+    "file": "meter_billing_bal_060_2018_2.jpg",
+    "ground_truth_full": "20182",
+    "ground_truth_billing_m3": "2018",
+    "billing_m3_val": 2018,
+    "fraction_digit": 2,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 2018 m3 (chữ số phụ: 2)"
+  },
+  {
+    "file": "meter_billing_bal_061_4529_4.jpg",
+    "ground_truth_full": "45294",
+    "ground_truth_billing_m3": "4529",
+    "billing_m3_val": 4529,
+    "fraction_digit": 4,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 4529 m3 (chữ số phụ: 4)"
+  },
+  {
+    "file": "meter_billing_bal_062_5521_4.jpg",
+    "ground_truth_full": "55214",
+    "ground_truth_billing_m3": "5521",
+    "billing_m3_val": 5521,
+    "fraction_digit": 4,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 5521 m3 (chữ số phụ: 4)"
+  },
+  {
+    "file": "meter_billing_bal_063_6289_1.jpg",
+    "ground_truth_full": "62891",
+    "ground_truth_billing_m3": "6289",
+    "billing_m3_val": 6289,
+    "fraction_digit": 1,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 6289 m3 (chữ số phụ: 1)"
+  },
+  {
+    "file": "meter_billing_bal_064_7248_7.jpg",
+    "ground_truth_full": "72487",
+    "ground_truth_billing_m3": "7248",
+    "billing_m3_val": 7248,
+    "fraction_digit": 7,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 7248 m3 (chữ số phụ: 7)"
+  },
+  {
+    "file": "meter_billing_bal_065_2926_2.jpg",
+    "ground_truth_full": "29262",
+    "ground_truth_billing_m3": "2926",
+    "billing_m3_val": 2926,
+    "fraction_digit": 2,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 2926 m3 (chữ số phụ: 2)"
+  },
+  {
+    "file": "meter_billing_bal_066_9840_8.jpg",
+    "ground_truth_full": "98408",
+    "ground_truth_billing_m3": "9840",
+    "billing_m3_val": 9840,
+    "fraction_digit": 8,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 9840 m3 (chữ số phụ: 8)"
+  },
+  {
+    "file": "meter_billing_bal_067_9920_3.jpg",
+    "ground_truth_full": "99203",
+    "ground_truth_billing_m3": "9920",
+    "billing_m3_val": 9920,
+    "fraction_digit": 3,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 9920 m3 (chữ số phụ: 3)"
+  },
+  {
+    "file": "meter_billing_bal_068_3813_2.jpg",
+    "ground_truth_full": "38132",
+    "ground_truth_billing_m3": "3813",
+    "billing_m3_val": 3813,
+    "fraction_digit": 2,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 3813 m3 (chữ số phụ: 2)"
+  },
+  {
+    "file": "meter_billing_bal_069_0151_2.jpg",
+    "ground_truth_full": "01512",
+    "ground_truth_billing_m3": "0151",
+    "billing_m3_val": 151,
+    "fraction_digit": 2,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 0151 m3 (chữ số phụ: 2)"
+  },
+  {
+    "file": "meter_billing_bal_070_0006_0.jpg",
+    "ground_truth_full": "00060",
+    "ground_truth_billing_m3": "0006",
+    "billing_m3_val": 6,
+    "fraction_digit": 0,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 0006 m3 (chữ số phụ: 0)"
+  },
+  {
+    "file": "meter_billing_bal_071_0963_0.jpg",
+    "ground_truth_full": "09630",
+    "ground_truth_billing_m3": "0963",
+    "billing_m3_val": 963,
+    "fraction_digit": 0,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 0963 m3 (chữ số phụ: 0)"
+  },
+  {
+    "file": "meter_billing_bal_072_5498_1.jpg",
+    "ground_truth_full": "54981",
+    "ground_truth_billing_m3": "5498",
+    "billing_m3_val": 5498,
+    "fraction_digit": 1,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 5498 m3 (chữ số phụ: 1)"
+  },
+  {
+    "file": "meter_billing_bal_073_7676_2.jpg",
+    "ground_truth_full": "76762",
+    "ground_truth_billing_m3": "7676",
+    "billing_m3_val": 7676,
+    "fraction_digit": 2,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 7676 m3 (chữ số phụ: 2)"
+  },
+  {
+    "file": "meter_billing_bal_074_3120_6.jpg",
+    "ground_truth_full": "31206",
+    "ground_truth_billing_m3": "3120",
+    "billing_m3_val": 3120,
+    "fraction_digit": 6,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 3120 m3 (chữ số phụ: 6)"
+  },
+  {
+    "file": "meter_billing_bal_075_3353_8.jpg",
+    "ground_truth_full": "33538",
+    "ground_truth_billing_m3": "3353",
+    "billing_m3_val": 3353,
+    "fraction_digit": 8,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 3353 m3 (chữ số phụ: 8)"
+  },
+  {
+    "file": "meter_billing_bal_076_9508_3.jpg",
+    "ground_truth_full": "95083",
+    "ground_truth_billing_m3": "9508",
+    "billing_m3_val": 9508,
+    "fraction_digit": 3,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 9508 m3 (chữ số phụ: 3)"
+  },
+  {
+    "file": "meter_billing_bal_077_5755_1.jpg",
+    "ground_truth_full": "57551",
+    "ground_truth_billing_m3": "5755",
+    "billing_m3_val": 5755,
+    "fraction_digit": 1,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 5755 m3 (chữ số phụ: 1)"
+  },
+  {
+    "file": "meter_billing_bal_078_1845_6.jpg",
+    "ground_truth_full": "18456",
+    "ground_truth_billing_m3": "1845",
+    "billing_m3_val": 1845,
+    "fraction_digit": 6,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 1845 m3 (chữ số phụ: 6)"
+  },
+  {
+    "file": "meter_billing_bal_079_4629_5.jpg",
+    "ground_truth_full": "46295",
+    "ground_truth_billing_m3": "4629",
+    "billing_m3_val": 4629,
+    "fraction_digit": 5,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 4629 m3 (chữ số phụ: 5)"
+  },
+  {
+    "file": "meter_billing_bal_080_7141_2.jpg",
+    "ground_truth_full": "71412",
+    "ground_truth_billing_m3": "7141",
+    "billing_m3_val": 7141,
+    "fraction_digit": 2,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 7141 m3 (chữ số phụ: 2)"
+  },
+  {
+    "file": "meter_billing_bal_081_4732_6.jpg",
+    "ground_truth_full": "47326",
+    "ground_truth_billing_m3": "4732",
+    "billing_m3_val": 4732,
+    "fraction_digit": 6,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 4732 m3 (chữ số phụ: 6)"
+  },
+  {
+    "file": "meter_billing_bal_082_9485_9.jpg",
+    "ground_truth_full": "94859",
+    "ground_truth_billing_m3": "9485",
+    "billing_m3_val": 9485,
+    "fraction_digit": 9,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 9485 m3 (chữ số phụ: 9)"
+  },
+  {
+    "file": "meter_billing_bal_083_7471_5.jpg",
+    "ground_truth_full": "74715",
+    "ground_truth_billing_m3": "7471",
+    "billing_m3_val": 7471,
+    "fraction_digit": 5,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 7471 m3 (chữ số phụ: 5)"
+  },
+  {
+    "file": "meter_billing_bal_084_8800_6.jpg",
+    "ground_truth_full": "88006",
+    "ground_truth_billing_m3": "8800",
+    "billing_m3_val": 8800,
+    "fraction_digit": 6,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 8800 m3 (chữ số phụ: 6)"
+  },
+  {
+    "file": "meter_billing_bal_085_7896_5.jpg",
+    "ground_truth_full": "78965",
+    "ground_truth_billing_m3": "7896",
+    "billing_m3_val": 7896,
+    "fraction_digit": 5,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 7896 m3 (chữ số phụ: 5)"
+  },
+  {
+    "file": "meter_billing_bal_086_4106_8.jpg",
+    "ground_truth_full": "41068",
+    "ground_truth_billing_m3": "4106",
+    "billing_m3_val": 4106,
+    "fraction_digit": 8,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 4106 m3 (chữ số phụ: 8)"
+  },
+  {
+    "file": "meter_billing_bal_087_4148_9.jpg",
+    "ground_truth_full": "41489",
+    "ground_truth_billing_m3": "4148",
+    "billing_m3_val": 4148,
+    "fraction_digit": 9,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 4148 m3 (chữ số phụ: 9)"
+  },
+  {
+    "file": "meter_billing_bal_088_5703_4.jpg",
+    "ground_truth_full": "57034",
+    "ground_truth_billing_m3": "5703",
+    "billing_m3_val": 5703,
+    "fraction_digit": 4,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 5703 m3 (chữ số phụ: 4)"
+  },
+  {
+    "file": "meter_billing_bal_089_1390_7.jpg",
+    "ground_truth_full": "13907",
+    "ground_truth_billing_m3": "1390",
+    "billing_m3_val": 1390,
+    "fraction_digit": 7,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 1390 m3 (chữ số phụ: 7)"
+  },
+  {
+    "file": "meter_billing_bal_090_9805_4.jpg",
+    "ground_truth_full": "98054",
+    "ground_truth_billing_m3": "9805",
+    "billing_m3_val": 9805,
+    "fraction_digit": 4,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 9805 m3 (chữ số phụ: 4)"
+  },
+  {
+    "file": "meter_billing_bal_091_6857_9.jpg",
+    "ground_truth_full": "68579",
+    "ground_truth_billing_m3": "6857",
+    "billing_m3_val": 6857,
+    "fraction_digit": 9,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 6857 m3 (chữ số phụ: 9)"
+  },
+  {
+    "file": "meter_billing_bal_092_3220_9.jpg",
+    "ground_truth_full": "32209",
+    "ground_truth_billing_m3": "3220",
+    "billing_m3_val": 3220,
+    "fraction_digit": 9,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 3220 m3 (chữ số phụ: 9)"
+  },
+  {
+    "file": "meter_billing_bal_093_7037_8.jpg",
+    "ground_truth_full": "70378",
+    "ground_truth_billing_m3": "7037",
+    "billing_m3_val": 7037,
+    "fraction_digit": 8,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 7037 m3 (chữ số phụ: 8)"
+  },
+  {
+    "file": "meter_billing_bal_094_8384_9.jpg",
+    "ground_truth_full": "83849",
+    "ground_truth_billing_m3": "8384",
+    "billing_m3_val": 8384,
+    "fraction_digit": 9,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 8384 m3 (chữ số phụ: 9)"
+  },
+  {
+    "file": "meter_billing_bal_095_1381_4.jpg",
+    "ground_truth_full": "13814",
+    "ground_truth_billing_m3": "1381",
+    "billing_m3_val": 1381,
+    "fraction_digit": 4,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 1381 m3 (chữ số phụ: 4)"
+  },
+  {
+    "file": "meter_billing_bal_096_5914_1.jpg",
+    "ground_truth_full": "59141",
+    "ground_truth_billing_m3": "5914",
+    "billing_m3_val": 5914,
+    "fraction_digit": 1,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 5914 m3 (chữ số phụ: 1)"
+  },
+  {
+    "file": "meter_billing_bal_097_4056_1.jpg",
+    "ground_truth_full": "40561",
+    "ground_truth_billing_m3": "4056",
+    "billing_m3_val": 4056,
+    "fraction_digit": 1,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 4056 m3 (chữ số phụ: 1)"
+  },
+  {
+    "file": "meter_billing_bal_098_3177_4.jpg",
+    "ground_truth_full": "31774",
+    "ground_truth_billing_m3": "3177",
+    "billing_m3_val": 3177,
+    "fraction_digit": 4,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 3177 m3 (chữ số phụ: 4)"
+  },
+  {
+    "file": "meter_billing_bal_099_4260_0.jpg",
+    "ground_truth_full": "42600",
+    "ground_truth_billing_m3": "4260",
+    "billing_m3_val": 4260,
+    "fraction_digit": 0,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 4260 m3 (chữ số phụ: 0)"
+  },
+  {
+    "file": "meter_billing_bal_100_1765_0.jpg",
+    "ground_truth_full": "17650",
+    "ground_truth_billing_m3": "1765",
+    "billing_m3_val": 1765,
+    "fraction_digit": 0,
+    "type": "billing_balanced_static",
+    "description": "Chỉ số nước tính tiền: 1765 m3 (chữ số phụ: 0)"
+  }
+]
