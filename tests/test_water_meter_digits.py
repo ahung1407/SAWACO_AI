@@ -38,9 +38,11 @@ def create_water_meter_digit(digit, filename):
     img = cv2.add(img, noise)
     img = cv2.GaussianBlur(img, (3, 3), 0)
 
-    # Save
-    cv2.imwrite(filename, img)
-    return filename
+    out_dir = os.path.join(os.path.dirname(__file__), "output")
+    os.makedirs(out_dir, exist_ok=True)
+    save_path = os.path.join(out_dir, filename)
+    cv2.imwrite(save_path, img)
+    return save_path
 
 def run_pipeline_test():
     print("=== AUTOMATED TEST SUITE: Water Meter Digits 0-9 ===\n")
@@ -50,9 +52,9 @@ def run_pipeline_test():
     test_files = []
     for i in range(10):
         fname = f"wm_digit_{i}.jpg"
-        create_water_meter_digit(i, fname)
-        test_files.append((i, fname))
-    print(f"      Generated {len(test_files)} images.\n")
+        fpath = create_water_meter_digit(i, fname)
+        test_files.append((i, fpath))
+    print(f"      Generated {len(test_files)} images in tests/output/.\n")
 
     # 2. Ensure Model is Trained (Auto-Train)
     print("[2/3] Auto-Training Model (Running pipeline without args)...")
@@ -113,6 +115,11 @@ def run_pipeline_test():
     if correct_count < 5:
         print("\nNote: Accuracy might be low because MNIST (handwritten) is very different from Mechanical digits.")
         print("To improve, we would eventually need a real dataset of mechanical meter digits or use Transfer Learning.")
+        
+    # Tự động dọn dẹp ảnh tạm trong tests/output
+    for _, fpath in test_files:
+        if os.path.exists(fpath):
+            os.remove(fpath)
 
 if __name__ == "__main__":
     run_pipeline_test()

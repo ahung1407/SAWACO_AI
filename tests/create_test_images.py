@@ -21,9 +21,12 @@ def create_digit_image(digit, filename):
     # Put text (digit) on image
     cv2.putText(img, str(digit), (text_x, text_y), font, font_scale, color, thickness)
     
-    # Save
-    cv2.imwrite(filename, img)
-    print(f"Created {filename}")
+    # Save to tests/output/ directory
+    out_dir = os.path.join(os.path.dirname(__file__), "output")
+    os.makedirs(out_dir, exist_ok=True)
+    save_path = os.path.join(out_dir, filename)
+    cv2.imwrite(save_path, img)
+    print(f"Created {save_path}")
 
 if __name__ == "__main__":
     create_digit_image(3, "test_digit_3.jpg")

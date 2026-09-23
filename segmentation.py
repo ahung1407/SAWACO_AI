@@ -317,8 +317,9 @@ def segment_meter_digits(image_input, num_digits=5, margin_ratio=0.1):
         clean_digit = extract_clean_digit_ink(box_img)
         digits.append(clean_digit)
         
-    # Lưu ảnh debug 
-    cv2.imwrite("debug_final_boxes.jpg", debug_img)
+    # Lưu ảnh debug vào thư mục debug_images (nếu tồn tại) thay vì ghi bừa bãi ra root
+    if os.path.isdir("debug_images"):
+        cv2.imwrite(os.path.join("debug_images", "debug_final_boxes.jpg"), debug_img)
     return digits
 
 def _fallback_split(img, num_digits):
@@ -377,8 +378,9 @@ def _fallback_split(img, num_digits):
         clean_digit = extract_clean_digit_ink(box_img)
         digits.append(clean_digit)
         
-    # Lưu ảnh debug fallback
-    cv2.imwrite("debug_final_boxes.jpg", debug_img)
+    # Lưu ảnh debug fallback vào debug_images (nếu tồn tại)
+    if os.path.isdir("debug_images"):
+        cv2.imwrite(os.path.join("debug_images", "debug_final_boxes.jpg"), debug_img)
     return digits
 
 if __name__ == "__main__":

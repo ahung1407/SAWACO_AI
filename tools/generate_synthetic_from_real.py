@@ -169,7 +169,7 @@ def render_stroke(digit_val, target_w, target_h, masks, next_val=None, roll_rati
     m1_centered = scale_and_center_digit(m1, target_w, target_h)
     m2_centered = scale_and_center_digit(m2, target_w, target_h)
     
-    gap = int(target_h * 0.22)
+    gap = int(target_h * 0.16)
     cylinder_h = target_h * 2 + gap
     strip = np.zeros((cylinder_h, target_w, 4), dtype=np.uint8)
     strip[:target_h] = m1_centered

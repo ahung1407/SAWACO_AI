@@ -46,9 +46,10 @@ def save_debug_session(img, digits_images, sequence_results, final_number_str, a
         cv2.imwrite(os.path.join(base_dir, "0_original.jpg"), img)
         
         # 2. Box segmentation visual
-        if os.path.exists("debug_final_boxes.jpg"):
-            shutil.copy("debug_final_boxes.jpg", os.path.join(session_dir, "0_boxes.jpg"))
-            shutil.copy("debug_final_boxes.jpg", os.path.join(latest_dir, "0_boxes.jpg"))
+        boxes_path = os.path.join(base_dir, "debug_final_boxes.jpg")
+        if os.path.exists(boxes_path):
+            shutil.copy(boxes_path, os.path.join(session_dir, "0_boxes.jpg"))
+            shutil.copy(boxes_path, os.path.join(latest_dir, "0_boxes.jpg"))
             
         # 3. Individual cropped digit boxes
         if digits_images:

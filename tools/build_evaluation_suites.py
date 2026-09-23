@@ -218,44 +218,47 @@ def build_suite_3(masks, base_images):
     manifest = []
     random.seed(999)
     
+    roll_levels = [0.32, 0.46, 0.50, 0.54, 0.68]
+    
     for idx in range(1, 51):
         base_path = base_images[(idx - 1) % len(base_images)]
+        r_level = roll_levels[(idx - 1) % len(roll_levels)]
         
         if idx <= 20:
-            # Nhóm 1: Chuyển hàng chục đen (Bánh xe đen 3 đang là 9, bánh xe đen 2 đang chớm nhảy)
+            # Nhóm 1: Chuyển hàng chục đen (Bánh xe đen 3 đang là 8 hoặc 9, ô đen 2 lưng chừng giữa d_tens và d_tens+1 - giống image.png)
             prefix = f"{random.randint(0, 99):02d}"
             d_tens = random.randint(0, 8)
-            billing_true = f"{prefix}{d_tens}9"
-            red_digit = random.choice([8, 9, 0])
+            d_unit = random.choice([8, 9])
+            billing_true = f"{prefix}{d_tens}{d_unit}"
+            red_digit = random.choice([8, 9, 0, 1])
             full_str = f"{billing_true}{red_digit}"
             
-            # Ô đen 3 ở mức 9 (đang chớm cuộn nhẹ sang 0), ô đen 2 hơi nhấp nhô
-            # Quy tắc sàn: Ô đen 2 BẮT BUỘC phải đọc là d_tens, KHÔNG ĐƯỢC nhảy lên d_tens+1
-            roll_dict = {3: 0.12, 2: 0.08}
-            desc = f"Bước chuyển hàng chục đen: {billing_true} m3 (Ô 3 = 9, Ô 2 chớm nhấp nhô -> Tuân thủ Floor Rule đọc {d_tens})"
+            # Ô đen 2 đang cuộn ở mức r_level (có thể là 30%, 50% hoặc 70%)
+            roll_dict = {2: r_level}
+            desc = f"Chuyển hàng chục đen: {billing_true} m3 (Ô 2 quay {int(r_level*100)}% giữa {d_tens} và {d_tens+1}, Floor Rule chốt {d_tens})"
             
         elif idx <= 35:
-            # Nhóm 2: Chuyển hàng trăm đen (..d99 -> ..(d+1)00)
-            d_thousands = random.randint(0, 9)
+            # Nhóm 2: Chuyển từ số đỏ sang ô đen đơn vị (Số đỏ 4 là 9 chớm nhảy 0, kéo ô đen 3 nhấp nhô)
+            prefix = f"{random.randint(0, 999):03d}"
+            d_unit = random.randint(0, 8)
+            billing_true = f"{prefix}{d_unit}"
+            red_digit = 9
+            full_str = f"{billing_true}{red_digit}"
+            
+            # Ô đen 3 cuộn ở mức r_level, số đỏ chớm nhích 0.15
+            roll_dict = {3: r_level, 4: 0.15}
+            desc = f"Chuyển số đỏ sang đen: {billing_true} m3 (Số đỏ 9, Ô 3 quay {int(r_level*100)}% giữa {d_unit} và {d_unit+1}, Floor Rule chốt {d_unit})"
+            
+        else:
+            # Nhóm 3: Chuyển hàng trăm / hàng ngàn (..099 -> ..100 hoặc ..0999 -> ..1000)
+            d_thousands = random.randint(0, 8)
             d_hundreds = random.randint(0, 8)
             billing_true = f"{d_thousands}{d_hundreds}99"
             red_digit = random.choice([8, 9, 0])
             full_str = f"{billing_true}{red_digit}"
             
-            # Ô đen 3=9, ô đen 2=9, ô đen 1 đang chớm nhấp nhô
-            roll_dict = {3: 0.14, 2: 0.12, 1: 0.09}
-            desc = f"Bước chuyển hàng trăm đen: {billing_true} m3 (Ô 3,2 = 9, Ô 1 chớm nhấp nhô -> Tuân thủ Floor Rule đọc {d_hundreds})"
-            
-        else:
-            # Nhóm 3: Chuyển hàng ngàn đen (d999 -> (d+1)000)
-            d_thousands = random.randint(0, 8)
-            billing_true = f"{d_thousands}999"
-            red_digit = random.choice([8, 9, 0])
-            full_str = f"{billing_true}{red_digit}"
-            
-            # 3 ô đen 999, ô đầu chớm nhấp nhô
-            roll_dict = {3: 0.15, 2: 0.13, 1: 0.11, 0: 0.08}
-            desc = f"Bước chuyển hàng ngàn đen: {billing_true} m3 (3 ô đen 999, Ô 0 chớm nhấp nhô -> Tuân thủ Floor Rule đọc {d_thousands})"
+            roll_dict = {1: r_level, 2: 0.15}
+            desc = f"Chuyển hàng trăm đen: {billing_true} m3 (Ô 1 quay {int(r_level*100)}% giữa {d_hundreds} và {d_hundreds+1}, Floor Rule chốt {d_hundreds})"
             
         img = generate_multiroll_meter(full_str, masks, base_path, roll_dict=roll_dict)
         fname = f"meter_jump_{idx:03d}_{billing_true}_{red_digit}.jpg"

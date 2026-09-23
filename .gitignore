@@ -11,14 +11,20 @@ __pycache__/
 # --- Dữ liệu sinh tổng hợp (tự sinh lại được) ---
 data/datasets/
 
-# --- Ảnh debug (không cần thiết cho production) ---
+# --- Ảnh debug và kết quả test tạm ---
 debug/
 debug_images/
 debug_real_test/
+tests/output/
+test_images/
+
+# --- Chặn toàn bộ ảnh rác ở thư mục gốc, chỉ giữ lại tài nguyên cần thiết ---
 *.jpg
 *.png
+!image.png
 !data/**
 !real_data_base/**
+!docs/**
 
 # --- NaN simulation output ---
 data/test_images/nan_sim/
