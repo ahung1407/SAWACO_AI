@@ -49,6 +49,10 @@ class WaterMeterReader:
         else:
             gray = img
 
+        # Nếu ảnh đen hoàn toàn (do Geometry Gate phát hiện dị vật / che khuất)
+        if np.max(img) == 0:
+            return np.zeros((1, 28, 28, 1), dtype=np.float32)
+
         # ----------------------------------------------------------------
         # Chuẩn hoá độ tương phản cục bộ bằng CLAHE
         # (Digit đã được extract_clean_digit_ink làm sạch viền nhựa trước đó)
@@ -102,8 +106,8 @@ class WaterMeterReader:
         """
         tensor = self.preprocess(image_input)
         
-        # [NEW] Nếu ảnh truyền vào đen hoàn toàn (bị Geometry Gate từ chối)
-        if np.max(tensor) == 0.0:
+        # [NEW] Nếu ảnh truyền vào đen hoàn toàn (bị Geometry Gate từ chối do dị vật/che khuất)
+        if (isinstance(image_input, np.ndarray) and np.max(image_input) == 0) or np.max(tensor) == 0.0:
             return {
                 "digit": 'NaN',
                 "confidence": 1.0,
