@@ -26,6 +26,40 @@ from tools.generate_synthetic_from_real import load_clean_masks, get_meter_windo
 
 ROOT_TEST_SUITES = "data/test_suites"
 REAL_DATA_DIR = "real_data_base"
+
+# =========================================================================
+# QUY CHUẨN PHÂN CHIA DỮ LIỆU KHOA HỌC: HOLD-OUT TEST SET (70% TRAIN - 30% TEST)
+# 16 ảnh Train (để fine-tune) và 7 ảnh Test (cô lập 100%, chưa từng tham gia train)
+# =========================================================================
+TRAIN_REAL_FILES = [
+    "device_xiao_s3_20260909_094142.jpg",
+    "device_xiao_s3_20260909_095354.jpg",
+    "device_xiao_s3_20260909_100525.jpg",
+    "device_xiao_s3_20260909_101854.jpg",
+    "device_xiao_s3_20260909_102216.jpg",
+    "device_xiao_s3_20260909_102432.jpg",
+    "device_xiao_s3_20260909_102638.jpg",
+    "device_xiao_s3_20260909_102856.jpg",
+    "device_xiao_s3_20260909_103034.jpg",
+    "device_xiao_s3_20260909_103222.jpg",
+    "device_xiao_s3_20260909_103920.jpg",
+    "device_xiao_s3_20260909_104204.jpg",
+    "device_xiao_s3_20260909_104558.jpg",
+    "device_xiao_s3_20260909_104858.jpg",
+    "device_xiao_s3_20260909_105206.jpg",
+    "device_xiao_s3_20260909_105530.jpg"
+]
+
+TEST_REAL_FILES = [
+    "device_xiao_s3_20260909_105724.jpg",
+    "device_xiao_s3_20260909_105930.jpg",
+    "device_xiao_s3_20260909_110142.jpg",
+    "device_xiao_s3_20260909_110538.jpg",
+    "device_xiao_s3_20260909_111235.jpg",
+    "device_xiao_s3_20260909_111515.jpg",
+    "device_xiao_s3_20260909_111955.jpg"
+]
+
 REAL_GROUND_TRUTH = {
     "device_xiao_s3_20260909_094142.jpg": "00001",
     "device_xiao_s3_20260909_095354.jpg": "00002",
@@ -114,8 +148,11 @@ def generate_multiroll_meter(reading_str, masks, base_img_path, roll_dict=None):
         stroke_bgra = render_stroke(digit_val, target_w, target_h, masks, 
                                     next_val=next_val, roll_ratio=roll_ratio)
         
-        dx1 = (rw - target_w) // 2
-        dy1 = (rh - target_h) // 2
+        # Thêm độ rơ cơ khí thực tế (Mechanical Jitter / Misalignment: ±2 px)
+        jitter_x = random.randint(-2, 2)
+        jitter_y = random.randint(-2, 2)
+        dx1 = max(0, min(rw - target_w, (rw - target_w) // 2 + jitter_x))
+        dy1 = max(0, min(rh - target_h, (rh - target_h) // 2 + jitter_y))
         dx2 = dx1 + target_w
         dy2 = dy1 + target_h
         
@@ -133,14 +170,18 @@ def generate_multiroll_meter(reading_str, masks, base_img_path, roll_dict=None):
     return result
 
 def build_suite_1():
-    """Suite 1: Real Baseline (23 ảnh chụp thực tế ESP32-S3)"""
+    """
+    Suite 1: Real Baseline Hold-out (7 ảnh chụp thực tế ESP32-S3 HOÀN TOÀN ĐỘC LẬP).
+    Mô hình chưa từng nhìn thấy bất kỳ ô số nào của 7 ảnh này trong lúc train/fine-tune.
+    """
     out_dir = os.path.join(ROOT_TEST_SUITES, "suite_1_real_baseline")
     os.makedirs(out_dir, exist_ok=True)
     manifest = []
     
-    real_files = sorted(glob.glob(os.path.join(REAL_DATA_DIR, "*.jpg")))
-    for path in real_files:
-        fname = os.path.basename(path)
+    for fname in TEST_REAL_FILES:
+        path = os.path.join(REAL_DATA_DIR, fname)
+        if not os.path.exists(path):
+            continue
         dest_path = os.path.join(out_dir, fname)
         shutil.copy2(path, dest_path)
         gt_full = REAL_GROUND_TRUTH.get(fname, "00000")
@@ -151,23 +192,69 @@ def build_suite_1():
             "ground_truth_billing_m3": gt_billing,
             "billing_m3_val": int(gt_billing),
             "fraction_digit": int(gt_full[4]) if len(gt_full) >= 5 else 0,
-            "type": "real_camera",
-            "description": f"Camera ESP32-S3 thực tế: {gt_billing} m3 (chỉ số phụ {gt_full[4]})"
+            "type": "real_camera_unseen_holdout",
+            "description": f"Camera ESP32-S3 thực tế (Hold-out): {gt_billing} m3 (chỉ số phụ {gt_full[4]})"
         })
         
     with open(os.path.join(out_dir, "manifest.json"), "w", encoding="utf-8") as f:
         json.dump(manifest, f, indent=2, ensure_ascii=False)
-    print(f"[SUCCESS] Suite 1 (Real Baseline): {len(manifest)} ảnh.")
+    print(f"[SUCCESS] Suite 1 (Real Baseline Hold-out): {len(manifest)} ảnh (100% Unseen Data).")
+
+def apply_realistic_meter_environment(img, windows):
+    """
+    Mô phỏng chân thực các điều kiện bất lợi ngoài hiện trường thực tế của Sawaco:
+    1. Nhiễu hạt cảm biến CMOS OV2640 (ESP32-S3 sensor noise).
+    2. Đọng sương / mờ hơi nước trên mặt kính (Moisture / Condensation).
+    3. Vết lóa sáng phản quang từ đèn Flash / ánh nắng (Glare reflection).
+    4. Biến thiên ánh sáng / tương phản (Ambient lighting variation).
+    """
+    res = img.astype(np.float32)
+    h, w = img.shape[:2]
+    
+    # 1. Biến thiên tương phản & độ sáng nhẹ (ánh sáng môi trường thực tế)
+    contrast = random.uniform(0.90, 1.05)
+    brightness = random.uniform(-8.0, 8.0)
+    res = np.clip(res * contrast + brightness, 0, 255)
+    
+    # 2. Nhiễu hạt cảm biến CMOS ESP32-S3 (Gaussian noise)
+    noise_sigma = random.uniform(2.0, 5.0)
+    noise = np.random.normal(0, noise_sigma, res.shape).astype(np.float32)
+    res = np.clip(res + noise, 0, 255)
+    
+    res = res.astype(np.uint8)
+    
+    # 3. 25% tỷ lệ xuất hiện vết chói sáng phản quang trên mặt kính (Flash / Sun Glare)
+    if random.random() < 0.25 and windows:
+        target_win = random.choice(windows)
+        gx = target_win[0] + target_win[2] // 2 + random.randint(-10, 10)
+        gy = target_win[1] + target_win[3] // 2 + random.randint(-10, 10)
+        radius = random.randint(20, 40)
+        
+        glare_mask = np.zeros((h, w), dtype=np.float32)
+        cv2.circle(glare_mask, (gx, gy), radius, 1.0, -1)
+        glare_mask = cv2.GaussianBlur(glare_mask, (25, 25), 9)
+        
+        glare_intensity = random.uniform(30.0, 55.0)
+        for c in range(3):
+            res[:, :, c] = np.clip(res[:, :, c].astype(np.float32) + glare_mask * glare_intensity, 0, 255).astype(np.uint8)
+            
+    # 4. 20% tỷ lệ bị mờ sương / đọng ẩm (Mild Condensation / Defocus)
+    if random.random() < 0.20:
+        res = cv2.GaussianBlur(res, (3, 3), 0.7)
+        
+    return res
 
 def build_suite_2(masks, base_images):
     """
-    Suite 2: Billing Digits Balanced (100 ảnh)
-    Phân bố đồng đều các số 0-9 ở cả 4 ô đen (0000 - 9999 m3) dùng để tính tiền nước.
+    Suite 2: Billing Digits Balanced Under Field Stress (100 ảnh)
+    Phân bố đồng đều các số 0-9 ở cả 4 ô đen (0000 - 9999 m3) kết hợp các điều kiện
+    môi trường khắc nghiệt thực tế: nhiễu hạt cảm biến, chói lóa đèn flash, mờ hơi nước.
     """
     out_dir = os.path.join(ROOT_TEST_SUITES, "suite_2_billing_digits_balanced")
     os.makedirs(out_dir, exist_ok=True)
     manifest = []
     random.seed(42)
+    np.random.seed(42)
     
     # Tạo 100 số đảm bảo phân bố 0-9 đều trên từng cột trong 4 ô đen tính tiền
     digits_matrix = []
@@ -187,6 +274,19 @@ def build_suite_2(masks, base_images):
         
         base_path = base_images[i % len(base_images)]
         img = generate_multiroll_meter(full_str, masks, base_path, roll_dict={})
+        
+        # Áp dụng các điều kiện bất lợi thực tế ngoài hiện trường
+        base_name = os.path.basename(base_path)
+        calib_file = "data/real_window_boxes.json"
+        if os.path.exists(calib_file):
+            with open(calib_file, "r", encoding="utf-8") as f:
+                calib = json.load(f)
+                windows = calib.get(base_name, get_meter_window_boxes(img))
+        else:
+            windows = get_meter_window_boxes(img)
+            
+        img = apply_realistic_meter_environment(img, windows)
+        
         fname = f"meter_billing_bal_{idx:03d}_{billing_str}_{red_col[i]}.jpg"
         cv2.imwrite(os.path.join(out_dir, fname), img)
         
@@ -196,8 +296,8 @@ def build_suite_2(masks, base_images):
             "ground_truth_billing_m3": billing_str,
             "billing_m3_val": int(billing_str),
             "fraction_digit": red_col[i],
-            "type": "billing_balanced_static",
-            "description": f"Chỉ số nước tính tiền: {billing_str} m3 (chữ số phụ: {red_col[i]})"
+            "type": "billing_balanced_field_stress",
+            "description": f"Chỉ số nước tính tiền: {billing_str} m3 (chữ số phụ: {red_col[i]}) - Môi trường thực địa (nhiễu/chói/sương)"
         })
         
     with open(os.path.join(out_dir, "manifest.json"), "w", encoding="utf-8") as f:
@@ -207,58 +307,81 @@ def build_suite_2(masks, base_images):
 def build_suite_3(masks, base_images):
     """
     Suite 3: Billing Jump Transitions & Floor Rule (50 ảnh)
-    Kiểm tra cơ chế bước nhảy cơ học 9 -> 0 trên các bánh xe đen và
-    nguyên tắc Làm tròn sàn (Floor Rule) bảo vệ quyền lợi người tiêu dùng:
-    - Nhóm 1 (20 ảnh): Bước chuyển hàng chục đen (..19 -> ..20, ..49 -> ..50)
-    - Nhóm 2 (15 ảnh): Bước chuyển hàng trăm đen (..099 -> ..100, ..599 -> ..600)
-    - Nhóm 3 (15 ảnh): Bước chuyển hàng ngàn đen (..0999 -> ..1000, ..1999 -> ..2000)
+    Tuân thủ 100% nguyên lý động lực học liên kết bánh răng (Geneva / Pinion Mechanism):
+    - Một bánh xe bậc cao CHỈ CÓ THỂ quay lơ lửng khi TẤT CẢ các bánh xe bên phải nó
+      đang ở chữ số 9 và trong tiến trình chuyển tiếp 9 -> 0!
+    - Nhóm 1 (25 ảnh): Chuyển hàng đơn vị m3 (Ô 3 lơ lửng d -> d+1, ô đỏ 4 ở mốc 9 -> 0)
+    - Nhóm 2 (15 ảnh): Chuyển hàng chục m3 (Ô 2 lơ lửng d -> d+1, ô 3 là 9 lăn 9->0, ô đỏ 4 lăn 9->0)
+    - Nhóm 3 (10 ảnh): Chuyển hàng trăm / hàng ngàn m3 (Ô 1 hoặc 0 lơ lửng, toàn bộ bên phải là 9 lăn 9->0)
     """
     out_dir = os.path.join(ROOT_TEST_SUITES, "suite_3_billing_jump_transitions")
     os.makedirs(out_dir, exist_ok=True)
     manifest = []
     random.seed(999)
     
-    roll_levels = [0.32, 0.46, 0.50, 0.54, 0.68]
+    roll_levels = [0.28, 0.38, 0.48, 0.58, 0.68]
     
     for idx in range(1, 51):
         base_path = base_images[(idx - 1) % len(base_images)]
         r_level = roll_levels[(idx - 1) % len(roll_levels)]
         
-        if idx <= 20:
-            # Nhóm 1: Chuyển hàng chục đen (Bánh xe đen 3 đang là 8 hoặc 9, ô đen 2 lưng chừng giữa d_tens và d_tens+1 - giống image.png)
-            prefix = f"{random.randint(0, 99):02d}"
-            d_tens = random.randint(0, 8)
-            d_unit = random.choice([8, 9])
-            billing_true = f"{prefix}{d_tens}{d_unit}"
-            red_digit = random.choice([8, 9, 0, 1])
+        if idx <= 25:
+            # Nhóm 1 (25 ảnh): Chuyển hàng đơn vị đen (m3).
+            # Ô 0, 1, 2 đứng yên.
+            # Ô 3 lơ lửng giữa d_unit và d_unit+1.
+            # Ô đỏ 4 BẮT BUỘC là số 9 đang chuyển tiếp sang 0 (kéo theo ô 3 nhích lên).
+            d_thou = random.randint(0, 9)
+            d_hund = random.randint(0, 9)
+            d_tens = random.randint(0, 9)
+            d_unit = random.randint(0, 8)  # chuyển từ d_unit -> d_unit + 1
+            
+            billing_true = f"{d_thou}{d_hund}{d_tens}{d_unit}"
+            red_digit = 9  # Số đỏ đang ở 9 chuẩn bị qua 0
             full_str = f"{billing_true}{red_digit}"
             
-            # Ô đen 2 đang cuộn ở mức r_level (có thể là 30%, 50% hoặc 70%)
-            roll_dict = {2: r_level}
-            desc = f"Chuyển hàng chục đen: {billing_true} m3 (Ô 2 quay {int(r_level*100)}% giữa {d_tens} và {d_tens+1}, Floor Rule chốt {d_tens})"
+            # Ô 3 quay r_level, ô đỏ 4 quay tỉ lệ cao 0.70 - 0.90 (gần chạm 0)
+            red_roll = min(0.92, 0.65 + 0.35 * r_level)
+            roll_dict = {3: r_level, 4: red_roll}
+            desc = (f"Chuyển hàng đơn vị m3: {billing_true} m3 (Ô 3 quay {int(r_level*100)}% "
+                    f"giữa {d_unit} và {d_unit+1}; Ô đỏ kế bên đang là 9 lăn {int(red_roll*100)}% sang 0)")
             
-        elif idx <= 35:
-            # Nhóm 2: Chuyển từ số đỏ sang ô đen đơn vị (Số đỏ 4 là 9 chớm nhảy 0, kéo ô đen 3 nhấp nhô)
-            prefix = f"{random.randint(0, 999):03d}"
-            d_unit = random.randint(0, 8)
-            billing_true = f"{prefix}{d_unit}"
+        elif idx <= 40:
+            # Nhóm 2 (15 ảnh): Chuyển hàng chục đen (10 m3).
+            # Ô 0, 1 đứng yên.
+            # Ô 2 lơ lửng giữa d_tens và d_tens+1.
+            # Ô 3 BẮT BUỘC là số 9 (đang lăn 9 -> 0).
+            # Ô đỏ 4 BẮT BUỘC là số 9 (đang lăn 9 -> 0).
+            d_thou = random.randint(0, 9)
+            d_hund = random.randint(0, 9)
+            d_tens = random.randint(0, 8)  # chuyển từ d_tens -> d_tens + 1
+            d_unit = 9
+            
+            billing_true = f"{d_thou}{d_hund}{d_tens}{d_unit}"
             red_digit = 9
             full_str = f"{billing_true}{red_digit}"
             
-            # Ô đen 3 cuộn ở mức r_level, số đỏ chớm nhích 0.15
-            roll_dict = {3: r_level, 4: 0.15}
-            desc = f"Chuyển số đỏ sang đen: {billing_true} m3 (Số đỏ 9, Ô 3 quay {int(r_level*100)}% giữa {d_unit} và {d_unit+1}, Floor Rule chốt {d_unit})"
+            unit_roll = min(0.85, 0.40 + 0.50 * r_level)
+            red_roll = min(0.95, 0.75 + 0.20 * r_level)
+            roll_dict = {2: r_level, 3: unit_roll, 4: red_roll}
+            desc = (f"Chuyển hàng chục m3: {billing_true} m3 (Ô 2 quay {int(r_level*100)}% giữa {d_tens} và {d_tens+1}; "
+                    f"CÁC Ô BÊN PHẢI BẮT BUỘC: Ô 3 là 9 lăn sang 0, Ô đỏ 4 là 9 lăn sang 0)")
             
         else:
-            # Nhóm 3: Chuyển hàng trăm / hàng ngàn (..099 -> ..100 hoặc ..0999 -> ..1000)
-            d_thousands = random.randint(0, 8)
-            d_hundreds = random.randint(0, 8)
-            billing_true = f"{d_thousands}{d_hundreds}99"
-            red_digit = random.choice([8, 9, 0])
+            # Nhóm 3 (10 ảnh): Chuyển hàng trăm đen (100 m3) hoặc hàng ngàn (1000 m3).
+            # Ô 1 lơ lửng giữa d_hund và d_hund+1.
+            # TẤT CẢ các ô bên phải (ô 2, ô 3, ô 4) BẮT BUỘC đều là 9 và đang cùng cascade sang 0!
+            d_thou = random.randint(0, 8)
+            d_hund = random.randint(0, 8)
+            billing_true = f"{d_thou}{d_hund}99"
+            red_digit = 9
             full_str = f"{billing_true}{red_digit}"
             
-            roll_dict = {1: r_level, 2: 0.15}
-            desc = f"Chuyển hàng trăm đen: {billing_true} m3 (Ô 1 quay {int(r_level*100)}% giữa {d_hundreds} và {d_hundreds+1}, Floor Rule chốt {d_hundreds})"
+            tens_roll = min(0.75, 0.35 + 0.45 * r_level)
+            unit_roll = min(0.88, 0.55 + 0.35 * r_level)
+            red_roll = min(0.96, 0.80 + 0.16 * r_level)
+            roll_dict = {1: r_level, 2: tens_roll, 3: unit_roll, 4: red_roll}
+            desc = (f"Chuyển hàng trăm m3: {billing_true} m3 (Ô 1 quay {int(r_level*100)}% giữa {d_hund} và {d_hund+1}; "
+                    f"TOÀN BỘ CÁC Ô BÊN PHẢI ĐỀU LÀ 9 ĐANG CHUYỂN SANG 0: Ô 2, Ô 3, Ô đỏ 4)")
             
         img = generate_multiroll_meter(full_str, masks, base_path, roll_dict=roll_dict)
         fname = f"meter_jump_{idx:03d}_{billing_true}_{red_digit}.jpg"
@@ -277,21 +400,14 @@ def build_suite_3(masks, base_images):
         
     with open(os.path.join(out_dir, "manifest.json"), "w", encoding="utf-8") as f:
         json.dump(manifest, f, indent=2, ensure_ascii=False)
-    print(f"[SUCCESS] Suite 3 (Billing Jump Transitions & Floor Rule): {len(manifest)} ảnh.")
+    print(f"[SUCCESS] Suite 3 (Billing Jump Transitions & Floor Rule - Cơ học chuẩn 100%): {len(manifest)} ảnh.")
 
 def clean_old_suites():
-    """Dọn dẹp các thư mục test cũ không thực tế để hệ sinh thái gọn gàng, rõ ràng."""
-    old_folders = [
-        "suite_2_balanced_digits",
-        "suite_3_single_rolling_unit",
-        "suite_4_cascade_rolling",
-        "suite_5_environmental_stress"
-    ]
-    for folder in old_folders:
-        p = os.path.join(ROOT_TEST_SUITES, folder)
-        if os.path.exists(p):
-            shutil.rmtree(p)
-            print(f"[CLEANUP] Đã loại bỏ thư mục cũ: {p}")
+    """Xóa sạch hoàn toàn toàn bộ thư mục test suites cũ để sinh lại từ đầu 100% sạch sẽ."""
+    if os.path.exists(ROOT_TEST_SUITES):
+        shutil.rmtree(ROOT_TEST_SUITES)
+        print(f"[CLEANUP] Đã xóa sạch toàn bộ thư mục kiểm thử cũ: {ROOT_TEST_SUITES}")
+    os.makedirs(ROOT_TEST_SUITES, exist_ok=True)
 
 def main():
     print("=" * 80)
@@ -302,23 +418,24 @@ def main():
     
     os.makedirs(ROOT_TEST_SUITES, exist_ok=True)
     masks = load_clean_masks()
-    base_images = sorted(glob.glob(os.path.join(REAL_DATA_DIR, "*.jpg")))
+    # CHỈ DÙNG 7 ẢNH THUỘC TẬP TEST ĐỘC LẬP LÀM CANVAS (CẤM DÙNG 16 ẢNH TRAIN)
+    test_base_images = [os.path.join(REAL_DATA_DIR, f) for f in TEST_REAL_FILES if os.path.exists(os.path.join(REAL_DATA_DIR, f))]
     
-    if not base_images:
-        print("[ERROR] Không tìm thấy ảnh nền trong 'real_data_base'.")
+    if not test_base_images:
+        print("[ERROR] Không tìm thấy ảnh nền test trong 'real_data_base'.")
         return
         
-    print(f"[INFO] Tải thành công {len(masks)} mặt nạ chuẩn và {len(base_images)} ảnh canvas thực tế.")
+    print(f"[INFO] Tải thành công {len(masks)} mặt nạ chuẩn và {len(test_base_images)} ảnh canvas TEST ĐỘC LẬP (Hold-out).")
     
     build_suite_1()
-    build_suite_2(masks, base_images)
-    build_suite_3(masks, base_images)
+    build_suite_2(masks, test_base_images)
+    build_suite_3(masks, test_base_images)
     
     print("\n" + "=" * 80)
     print("HOÀN TẤT! 3 TẬP KIỂM THỬ ĐÃ SẴN SÀNG TẠI 'data/test_suites/':")
-    print("1. suite_1_real_baseline (23 ảnh thực địa)")
-    print("2. suite_2_billing_digits_balanced (100 ảnh phủ đều 0000 - 9999 m3)")
-    print("3. suite_3_billing_jump_transitions (50 ảnh bước nhảy 9->0 và làm tròn sàn Floor Rule)")
+    print(f"1. suite_1_real_baseline ({len(TEST_REAL_FILES)} ảnh thực địa Hold-out chưa từng thấy)")
+    print("2. suite_2_billing_digits_balanced (100 ảnh sinh trên nền TEST độc lập)")
+    print("3. suite_3_billing_jump_transitions (50 ảnh số lơ lửng sinh trên nền TEST độc lập)")
     print("=" * 80)
 
 if __name__ == "__main__":

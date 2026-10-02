@@ -95,9 +95,14 @@ def evaluate_single_suite(reader, suite_name, suite_dir, manifest, global_cm=Non
         inf_latencies.append(inf_ms)
         total_latencies.append(tot_ms)
         
-        pred_billing = billing_res["billing_m3_str"]
-        pred_full = billing_res["full_reading"]
-        avg_conf = billing_res["confidence"] * 100.0
+        if billing_res is not None:
+            pred_billing = billing_res["billing_m3_str"]
+            pred_full = billing_res["full_reading"]
+            avg_conf = billing_res["confidence"] * 100.0
+        else:
+            pred_billing = "ERR"
+            pred_full = "ERR"
+            avg_conf = 0.0
         confidences.append(avg_conf)
         
         is_billing_match = (pred_billing == exp_billing)

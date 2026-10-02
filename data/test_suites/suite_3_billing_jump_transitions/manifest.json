@@ -1,632 +1,687 @@
 [
   {
-    "file": "meter_jump_001_8619_1.jpg",
-    "ground_truth_full": "86191",
-    "ground_truth_billing_m3": "8619",
-    "billing_m3_val": 8619,
-    "fraction_digit": 1,
-    "roll_dict": {
-      "2": 0.32
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 8619 m3 (Ô 2 quay 32% giữa 1 và 2, Floor Rule chốt 1)"
-  },
-  {
-    "file": "meter_jump_002_1658_9.jpg",
-    "ground_truth_full": "16589",
-    "ground_truth_billing_m3": "1658",
-    "billing_m3_val": 1658,
+    "file": "meter_jump_001_1998_9.jpg",
+    "ground_truth_full": "19989",
+    "ground_truth_billing_m3": "1998",
+    "billing_m3_val": 1998,
     "fraction_digit": 9,
     "roll_dict": {
-      "2": 0.46
+      "3": 0.28,
+      "4": 0.748
     },
     "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 1658 m3 (Ô 2 quay 46% giữa 5 và 6, Floor Rule chốt 5)"
+    "description": "Chuyển hàng đơn vị m3: 1998 m3 (Ô 3 quay 28% giữa 8 và 9; Ô đỏ kế bên đang là 9 lăn 74% sang 0)"
   },
   {
-    "file": "meter_jump_003_1948_0.jpg",
-    "ground_truth_full": "19480",
-    "ground_truth_billing_m3": "1948",
-    "billing_m3_val": 1948,
-    "fraction_digit": 0,
-    "roll_dict": {
-      "2": 0.5
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 1948 m3 (Ô 2 quay 50% giữa 4 và 5, Floor Rule chốt 4)"
-  },
-  {
-    "file": "meter_jump_004_5039_8.jpg",
-    "ground_truth_full": "50398",
-    "ground_truth_billing_m3": "5039",
-    "billing_m3_val": 5039,
-    "fraction_digit": 8,
-    "roll_dict": {
-      "2": 0.54
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 5039 m3 (Ô 2 quay 54% giữa 3 và 4, Floor Rule chốt 3)"
-  },
-  {
-    "file": "meter_jump_005_3408_9.jpg",
-    "ground_truth_full": "34089",
-    "ground_truth_billing_m3": "3408",
-    "billing_m3_val": 3408,
+    "file": "meter_jump_002_4636_9.jpg",
+    "ground_truth_full": "46369",
+    "ground_truth_billing_m3": "4636",
+    "billing_m3_val": 4636,
     "fraction_digit": 9,
     "roll_dict": {
-      "2": 0.68
+      "3": 0.38,
+      "4": 0.783
     },
     "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 3408 m3 (Ô 2 quay 68% giữa 0 và 1, Floor Rule chốt 0)"
+    "description": "Chuyển hàng đơn vị m3: 4636 m3 (Ô 3 quay 38% giữa 6 và 7; Ô đỏ kế bên đang là 9 lăn 78% sang 0)"
   },
   {
-    "file": "meter_jump_006_2358_8.jpg",
-    "ground_truth_full": "23588",
-    "ground_truth_billing_m3": "2358",
-    "billing_m3_val": 2358,
-    "fraction_digit": 8,
-    "roll_dict": {
-      "2": 0.32
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 2358 m3 (Ô 2 quay 32% giữa 5 và 6, Floor Rule chốt 5)"
-  },
-  {
-    "file": "meter_jump_007_7079_9.jpg",
-    "ground_truth_full": "70799",
-    "ground_truth_billing_m3": "7079",
-    "billing_m3_val": 7079,
+    "file": "meter_jump_003_8975_9.jpg",
+    "ground_truth_full": "89759",
+    "ground_truth_billing_m3": "8975",
+    "billing_m3_val": 8975,
     "fraction_digit": 9,
     "roll_dict": {
-      "2": 0.46
+      "3": 0.48,
+      "4": 0.8180000000000001
     },
     "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 7079 m3 (Ô 2 quay 46% giữa 7 và 8, Floor Rule chốt 7)"
+    "description": "Chuyển hàng đơn vị m3: 8975 m3 (Ô 3 quay 48% giữa 5 và 6; Ô đỏ kế bên đang là 9 lăn 81% sang 0)"
   },
   {
-    "file": "meter_jump_008_8479_8.jpg",
-    "ground_truth_full": "84798",
-    "ground_truth_billing_m3": "8479",
-    "billing_m3_val": 8479,
-    "fraction_digit": 8,
-    "roll_dict": {
-      "2": 0.5
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 8479 m3 (Ô 2 quay 50% giữa 7 và 8, Floor Rule chốt 7)"
-  },
-  {
-    "file": "meter_jump_009_9508_8.jpg",
-    "ground_truth_full": "95088",
-    "ground_truth_billing_m3": "9508",
-    "billing_m3_val": 9508,
-    "fraction_digit": 8,
-    "roll_dict": {
-      "2": 0.54
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 9508 m3 (Ô 2 quay 54% giữa 0 và 1, Floor Rule chốt 0)"
-  },
-  {
-    "file": "meter_jump_010_9239_0.jpg",
-    "ground_truth_full": "92390",
-    "ground_truth_billing_m3": "9239",
-    "billing_m3_val": 9239,
-    "fraction_digit": 0,
-    "roll_dict": {
-      "2": 0.68
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 9239 m3 (Ô 2 quay 68% giữa 3 và 4, Floor Rule chốt 3)"
-  },
-  {
-    "file": "meter_jump_011_6458_9.jpg",
-    "ground_truth_full": "64589",
-    "ground_truth_billing_m3": "6458",
-    "billing_m3_val": 6458,
+    "file": "meter_jump_004_8502_9.jpg",
+    "ground_truth_full": "85029",
+    "ground_truth_billing_m3": "8502",
+    "billing_m3_val": 8502,
     "fraction_digit": 9,
     "roll_dict": {
-      "2": 0.32
+      "3": 0.58,
+      "4": 0.853
     },
     "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 6458 m3 (Ô 2 quay 32% giữa 5 và 6, Floor Rule chốt 5)"
+    "description": "Chuyển hàng đơn vị m3: 8502 m3 (Ô 3 quay 57% giữa 2 và 3; Ô đỏ kế bên đang là 9 lăn 85% sang 0)"
   },
   {
-    "file": "meter_jump_012_5819_9.jpg",
-    "ground_truth_full": "58199",
-    "ground_truth_billing_m3": "5819",
-    "billing_m3_val": 5819,
-    "fraction_digit": 9,
-    "roll_dict": {
-      "2": 0.46
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 5819 m3 (Ô 2 quay 46% giữa 1 và 2, Floor Rule chốt 1)"
-  },
-  {
-    "file": "meter_jump_013_2638_8.jpg",
-    "ground_truth_full": "26388",
-    "ground_truth_billing_m3": "2638",
-    "billing_m3_val": 2638,
-    "fraction_digit": 8,
-    "roll_dict": {
-      "2": 0.5
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 2638 m3 (Ô 2 quay 50% giữa 3 và 4, Floor Rule chốt 3)"
-  },
-  {
-    "file": "meter_jump_014_2609_9.jpg",
-    "ground_truth_full": "26099",
-    "ground_truth_billing_m3": "2609",
-    "billing_m3_val": 2609,
-    "fraction_digit": 9,
-    "roll_dict": {
-      "2": 0.54
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 2609 m3 (Ô 2 quay 54% giữa 0 và 1, Floor Rule chốt 0)"
-  },
-  {
-    "file": "meter_jump_015_3179_1.jpg",
-    "ground_truth_full": "31791",
-    "ground_truth_billing_m3": "3179",
-    "billing_m3_val": 3179,
-    "fraction_digit": 1,
-    "roll_dict": {
-      "2": 0.68
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 3179 m3 (Ô 2 quay 68% giữa 7 và 8, Floor Rule chốt 7)"
-  },
-  {
-    "file": "meter_jump_016_1209_8.jpg",
-    "ground_truth_full": "12098",
-    "ground_truth_billing_m3": "1209",
-    "billing_m3_val": 1209,
-    "fraction_digit": 8,
-    "roll_dict": {
-      "2": 0.32
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 1209 m3 (Ô 2 quay 32% giữa 0 và 1, Floor Rule chốt 0)"
-  },
-  {
-    "file": "meter_jump_017_9868_8.jpg",
-    "ground_truth_full": "98688",
-    "ground_truth_billing_m3": "9868",
-    "billing_m3_val": 9868,
-    "fraction_digit": 8,
-    "roll_dict": {
-      "2": 0.46
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 9868 m3 (Ô 2 quay 46% giữa 6 và 7, Floor Rule chốt 6)"
-  },
-  {
-    "file": "meter_jump_018_3569_1.jpg",
-    "ground_truth_full": "35691",
-    "ground_truth_billing_m3": "3569",
-    "billing_m3_val": 3569,
-    "fraction_digit": 1,
-    "roll_dict": {
-      "2": 0.5
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 3569 m3 (Ô 2 quay 50% giữa 6 và 7, Floor Rule chốt 6)"
-  },
-  {
-    "file": "meter_jump_019_0678_8.jpg",
-    "ground_truth_full": "06788",
-    "ground_truth_billing_m3": "0678",
-    "billing_m3_val": 678,
-    "fraction_digit": 8,
-    "roll_dict": {
-      "2": 0.54
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 0678 m3 (Ô 2 quay 54% giữa 7 và 8, Floor Rule chốt 7)"
-  },
-  {
-    "file": "meter_jump_020_5818_0.jpg",
-    "ground_truth_full": "58180",
-    "ground_truth_billing_m3": "5818",
-    "billing_m3_val": 5818,
-    "fraction_digit": 0,
-    "roll_dict": {
-      "2": 0.68
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng chục đen: 5818 m3 (Ô 2 quay 68% giữa 1 và 2, Floor Rule chốt 1)"
-  },
-  {
-    "file": "meter_jump_021_8551_9.jpg",
-    "ground_truth_full": "85519",
-    "ground_truth_billing_m3": "8551",
-    "billing_m3_val": 8551,
-    "fraction_digit": 9,
-    "roll_dict": {
-      "3": 0.32,
-      "4": 0.15
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển số đỏ sang đen: 8551 m3 (Số đỏ 9, Ô 3 quay 32% giữa 1 và 2, Floor Rule chốt 1)"
-  },
-  {
-    "file": "meter_jump_022_9131_9.jpg",
-    "ground_truth_full": "91319",
-    "ground_truth_billing_m3": "9131",
-    "billing_m3_val": 9131,
-    "fraction_digit": 9,
-    "roll_dict": {
-      "3": 0.46,
-      "4": 0.15
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển số đỏ sang đen: 9131 m3 (Số đỏ 9, Ô 3 quay 46% giữa 1 và 2, Floor Rule chốt 1)"
-  },
-  {
-    "file": "meter_jump_023_5757_9.jpg",
-    "ground_truth_full": "57579",
-    "ground_truth_billing_m3": "5757",
-    "billing_m3_val": 5757,
-    "fraction_digit": 9,
-    "roll_dict": {
-      "3": 0.5,
-      "4": 0.15
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển số đỏ sang đen: 5757 m3 (Số đỏ 9, Ô 3 quay 50% giữa 7 và 8, Floor Rule chốt 7)"
-  },
-  {
-    "file": "meter_jump_024_3202_9.jpg",
-    "ground_truth_full": "32029",
-    "ground_truth_billing_m3": "3202",
-    "billing_m3_val": 3202,
-    "fraction_digit": 9,
-    "roll_dict": {
-      "3": 0.54,
-      "4": 0.15
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển số đỏ sang đen: 3202 m3 (Số đỏ 9, Ô 3 quay 54% giữa 2 và 3, Floor Rule chốt 2)"
-  },
-  {
-    "file": "meter_jump_025_4446_9.jpg",
-    "ground_truth_full": "44469",
-    "ground_truth_billing_m3": "4446",
-    "billing_m3_val": 4446,
+    "file": "meter_jump_005_3084_9.jpg",
+    "ground_truth_full": "30849",
+    "ground_truth_billing_m3": "3084",
+    "billing_m3_val": 3084,
     "fraction_digit": 9,
     "roll_dict": {
       "3": 0.68,
-      "4": 0.15
+      "4": 0.888
     },
     "type": "billing_jump_transition",
-    "description": "Chuyển số đỏ sang đen: 4446 m3 (Số đỏ 9, Ô 3 quay 68% giữa 6 và 7, Floor Rule chốt 6)"
+    "description": "Chuyển hàng đơn vị m3: 3084 m3 (Ô 3 quay 68% giữa 4 và 5; Ô đỏ kế bên đang là 9 lăn 88% sang 0)"
   },
   {
-    "file": "meter_jump_026_1717_9.jpg",
-    "ground_truth_full": "17179",
-    "ground_truth_billing_m3": "1717",
-    "billing_m3_val": 1717,
+    "file": "meter_jump_006_1691_9.jpg",
+    "ground_truth_full": "16919",
+    "ground_truth_billing_m3": "1691",
+    "billing_m3_val": 1691,
     "fraction_digit": 9,
     "roll_dict": {
-      "3": 0.32,
-      "4": 0.15
+      "3": 0.28,
+      "4": 0.748
     },
     "type": "billing_jump_transition",
-    "description": "Chuyển số đỏ sang đen: 1717 m3 (Số đỏ 9, Ô 3 quay 32% giữa 7 và 8, Floor Rule chốt 7)"
+    "description": "Chuyển hàng đơn vị m3: 1691 m3 (Ô 3 quay 28% giữa 1 và 2; Ô đỏ kế bên đang là 9 lăn 74% sang 0)"
   },
   {
-    "file": "meter_jump_027_5500_9.jpg",
-    "ground_truth_full": "55009",
-    "ground_truth_billing_m3": "5500",
-    "billing_m3_val": 5500,
+    "file": "meter_jump_007_0711_9.jpg",
+    "ground_truth_full": "07119",
+    "ground_truth_billing_m3": "0711",
+    "billing_m3_val": 711,
     "fraction_digit": 9,
     "roll_dict": {
-      "3": 0.46,
-      "4": 0.15
+      "3": 0.38,
+      "4": 0.783
     },
     "type": "billing_jump_transition",
-    "description": "Chuyển số đỏ sang đen: 5500 m3 (Số đỏ 9, Ô 3 quay 46% giữa 0 và 1, Floor Rule chốt 0)"
+    "description": "Chuyển hàng đơn vị m3: 0711 m3 (Ô 3 quay 38% giữa 1 và 2; Ô đỏ kế bên đang là 9 lăn 78% sang 0)"
   },
   {
-    "file": "meter_jump_028_5144_9.jpg",
-    "ground_truth_full": "51449",
-    "ground_truth_billing_m3": "5144",
-    "billing_m3_val": 5144,
+    "file": "meter_jump_008_7808_9.jpg",
+    "ground_truth_full": "78089",
+    "ground_truth_billing_m3": "7808",
+    "billing_m3_val": 7808,
     "fraction_digit": 9,
     "roll_dict": {
-      "3": 0.5,
-      "4": 0.15
+      "3": 0.48,
+      "4": 0.8180000000000001
     },
     "type": "billing_jump_transition",
-    "description": "Chuyển số đỏ sang đen: 5144 m3 (Số đỏ 9, Ô 3 quay 50% giữa 4 và 5, Floor Rule chốt 4)"
+    "description": "Chuyển hàng đơn vị m3: 7808 m3 (Ô 3 quay 48% giữa 8 và 9; Ô đỏ kế bên đang là 9 lăn 81% sang 0)"
   },
   {
-    "file": "meter_jump_029_6298_9.jpg",
-    "ground_truth_full": "62989",
-    "ground_truth_billing_m3": "6298",
-    "billing_m3_val": 6298,
+    "file": "meter_jump_009_4935_9.jpg",
+    "ground_truth_full": "49359",
+    "ground_truth_billing_m3": "4935",
+    "billing_m3_val": 4935,
     "fraction_digit": 9,
     "roll_dict": {
-      "3": 0.54,
-      "4": 0.15
+      "3": 0.58,
+      "4": 0.853
     },
     "type": "billing_jump_transition",
-    "description": "Chuyển số đỏ sang đen: 6298 m3 (Số đỏ 9, Ô 3 quay 54% giữa 8 và 9, Floor Rule chốt 8)"
+    "description": "Chuyển hàng đơn vị m3: 4935 m3 (Ô 3 quay 57% giữa 5 và 6; Ô đỏ kế bên đang là 9 lăn 85% sang 0)"
   },
   {
-    "file": "meter_jump_030_1094_9.jpg",
-    "ground_truth_full": "10949",
-    "ground_truth_billing_m3": "1094",
-    "billing_m3_val": 1094,
-    "fraction_digit": 9,
-    "roll_dict": {
-      "3": 0.68,
-      "4": 0.15
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển số đỏ sang đen: 1094 m3 (Số đỏ 9, Ô 3 quay 68% giữa 4 và 5, Floor Rule chốt 4)"
-  },
-  {
-    "file": "meter_jump_031_9777_9.jpg",
-    "ground_truth_full": "97779",
-    "ground_truth_billing_m3": "9777",
-    "billing_m3_val": 9777,
-    "fraction_digit": 9,
-    "roll_dict": {
-      "3": 0.32,
-      "4": 0.15
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển số đỏ sang đen: 9777 m3 (Số đỏ 9, Ô 3 quay 32% giữa 7 và 8, Floor Rule chốt 7)"
-  },
-  {
-    "file": "meter_jump_032_0492_9.jpg",
-    "ground_truth_full": "04929",
-    "ground_truth_billing_m3": "0492",
-    "billing_m3_val": 492,
-    "fraction_digit": 9,
-    "roll_dict": {
-      "3": 0.46,
-      "4": 0.15
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển số đỏ sang đen: 0492 m3 (Số đỏ 9, Ô 3 quay 46% giữa 2 và 3, Floor Rule chốt 2)"
-  },
-  {
-    "file": "meter_jump_033_8777_9.jpg",
-    "ground_truth_full": "87779",
-    "ground_truth_billing_m3": "8777",
-    "billing_m3_val": 8777,
-    "fraction_digit": 9,
-    "roll_dict": {
-      "3": 0.5,
-      "4": 0.15
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển số đỏ sang đen: 8777 m3 (Số đỏ 9, Ô 3 quay 50% giữa 7 và 8, Floor Rule chốt 7)"
-  },
-  {
-    "file": "meter_jump_034_5944_9.jpg",
-    "ground_truth_full": "59449",
-    "ground_truth_billing_m3": "5944",
-    "billing_m3_val": 5944,
-    "fraction_digit": 9,
-    "roll_dict": {
-      "3": 0.54,
-      "4": 0.15
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển số đỏ sang đen: 5944 m3 (Số đỏ 9, Ô 3 quay 54% giữa 4 và 5, Floor Rule chốt 4)"
-  },
-  {
-    "file": "meter_jump_035_9903_9.jpg",
-    "ground_truth_full": "99039",
-    "ground_truth_billing_m3": "9903",
-    "billing_m3_val": 9903,
+    "file": "meter_jump_010_9250_9.jpg",
+    "ground_truth_full": "92509",
+    "ground_truth_billing_m3": "9250",
+    "billing_m3_val": 9250,
     "fraction_digit": 9,
     "roll_dict": {
       "3": 0.68,
-      "4": 0.15
+      "4": 0.888
     },
     "type": "billing_jump_transition",
-    "description": "Chuyển số đỏ sang đen: 9903 m3 (Số đỏ 9, Ô 3 quay 68% giữa 3 và 4, Floor Rule chốt 3)"
+    "description": "Chuyển hàng đơn vị m3: 9250 m3 (Ô 3 quay 68% giữa 0 và 1; Ô đỏ kế bên đang là 9 lăn 88% sang 0)"
   },
   {
-    "file": "meter_jump_036_5099_0.jpg",
-    "ground_truth_full": "50990",
-    "ground_truth_billing_m3": "5099",
-    "billing_m3_val": 5099,
-    "fraction_digit": 0,
-    "roll_dict": {
-      "1": 0.32,
-      "2": 0.15
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng trăm đen: 5099 m3 (Ô 1 quay 32% giữa 0 và 1, Floor Rule chốt 0)"
-  },
-  {
-    "file": "meter_jump_037_7899_8.jpg",
-    "ground_truth_full": "78998",
-    "ground_truth_billing_m3": "7899",
-    "billing_m3_val": 7899,
-    "fraction_digit": 8,
-    "roll_dict": {
-      "1": 0.46,
-      "2": 0.15
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng trăm đen: 7899 m3 (Ô 1 quay 46% giữa 8 và 9, Floor Rule chốt 8)"
-  },
-  {
-    "file": "meter_jump_038_6699_9.jpg",
-    "ground_truth_full": "66999",
-    "ground_truth_billing_m3": "6699",
-    "billing_m3_val": 6699,
+    "file": "meter_jump_011_5446_9.jpg",
+    "ground_truth_full": "54469",
+    "ground_truth_billing_m3": "5446",
+    "billing_m3_val": 5446,
     "fraction_digit": 9,
     "roll_dict": {
-      "1": 0.5,
-      "2": 0.15
+      "3": 0.28,
+      "4": 0.748
     },
     "type": "billing_jump_transition",
-    "description": "Chuyển hàng trăm đen: 6699 m3 (Ô 1 quay 50% giữa 6 và 7, Floor Rule chốt 6)"
+    "description": "Chuyển hàng đơn vị m3: 5446 m3 (Ô 3 quay 28% giữa 6 và 7; Ô đỏ kế bên đang là 9 lăn 74% sang 0)"
   },
   {
-    "file": "meter_jump_039_8599_0.jpg",
-    "ground_truth_full": "85990",
-    "ground_truth_billing_m3": "8599",
-    "billing_m3_val": 8599,
-    "fraction_digit": 0,
+    "file": "meter_jump_012_2030_9.jpg",
+    "ground_truth_full": "20309",
+    "ground_truth_billing_m3": "2030",
+    "billing_m3_val": 2030,
+    "fraction_digit": 9,
     "roll_dict": {
-      "1": 0.54,
-      "2": 0.15
+      "3": 0.38,
+      "4": 0.783
     },
     "type": "billing_jump_transition",
-    "description": "Chuyển hàng trăm đen: 8599 m3 (Ô 1 quay 54% giữa 5 và 6, Floor Rule chốt 5)"
+    "description": "Chuyển hàng đơn vị m3: 2030 m3 (Ô 3 quay 38% giữa 0 và 1; Ô đỏ kế bên đang là 9 lăn 78% sang 0)"
   },
   {
-    "file": "meter_jump_040_2599_8.jpg",
-    "ground_truth_full": "25998",
-    "ground_truth_billing_m3": "2599",
-    "billing_m3_val": 2599,
-    "fraction_digit": 8,
+    "file": "meter_jump_013_5391_9.jpg",
+    "ground_truth_full": "53919",
+    "ground_truth_billing_m3": "5391",
+    "billing_m3_val": 5391,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "3": 0.48,
+      "4": 0.8180000000000001
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng đơn vị m3: 5391 m3 (Ô 3 quay 48% giữa 1 và 2; Ô đỏ kế bên đang là 9 lăn 81% sang 0)"
+  },
+  {
+    "file": "meter_jump_014_7992_9.jpg",
+    "ground_truth_full": "79929",
+    "ground_truth_billing_m3": "7992",
+    "billing_m3_val": 7992,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "3": 0.58,
+      "4": 0.853
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng đơn vị m3: 7992 m3 (Ô 3 quay 57% giữa 2 và 3; Ô đỏ kế bên đang là 9 lăn 85% sang 0)"
+  },
+  {
+    "file": "meter_jump_015_9461_9.jpg",
+    "ground_truth_full": "94619",
+    "ground_truth_billing_m3": "9461",
+    "billing_m3_val": 9461,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "3": 0.68,
+      "4": 0.888
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng đơn vị m3: 9461 m3 (Ô 3 quay 68% giữa 1 và 2; Ô đỏ kế bên đang là 9 lăn 88% sang 0)"
+  },
+  {
+    "file": "meter_jump_016_0572_9.jpg",
+    "ground_truth_full": "05729",
+    "ground_truth_billing_m3": "0572",
+    "billing_m3_val": 572,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "3": 0.28,
+      "4": 0.748
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng đơn vị m3: 0572 m3 (Ô 3 quay 28% giữa 2 và 3; Ô đỏ kế bên đang là 9 lăn 74% sang 0)"
+  },
+  {
+    "file": "meter_jump_017_6485_9.jpg",
+    "ground_truth_full": "64859",
+    "ground_truth_billing_m3": "6485",
+    "billing_m3_val": 6485,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "3": 0.38,
+      "4": 0.783
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng đơn vị m3: 6485 m3 (Ô 3 quay 38% giữa 5 và 6; Ô đỏ kế bên đang là 9 lăn 78% sang 0)"
+  },
+  {
+    "file": "meter_jump_018_7272_9.jpg",
+    "ground_truth_full": "72729",
+    "ground_truth_billing_m3": "7272",
+    "billing_m3_val": 7272,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "3": 0.48,
+      "4": 0.8180000000000001
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng đơn vị m3: 7272 m3 (Ô 3 quay 48% giữa 2 và 3; Ô đỏ kế bên đang là 9 lăn 81% sang 0)"
+  },
+  {
+    "file": "meter_jump_019_1481_9.jpg",
+    "ground_truth_full": "14819",
+    "ground_truth_billing_m3": "1481",
+    "billing_m3_val": 1481,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "3": 0.58,
+      "4": 0.853
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng đơn vị m3: 1481 m3 (Ô 3 quay 57% giữa 1 và 2; Ô đỏ kế bên đang là 9 lăn 85% sang 0)"
+  },
+  {
+    "file": "meter_jump_020_5473_9.jpg",
+    "ground_truth_full": "54739",
+    "ground_truth_billing_m3": "5473",
+    "billing_m3_val": 5473,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "3": 0.68,
+      "4": 0.888
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng đơn vị m3: 5473 m3 (Ô 3 quay 68% giữa 3 và 4; Ô đỏ kế bên đang là 9 lăn 88% sang 0)"
+  },
+  {
+    "file": "meter_jump_021_9370_9.jpg",
+    "ground_truth_full": "93709",
+    "ground_truth_billing_m3": "9370",
+    "billing_m3_val": 9370,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "3": 0.28,
+      "4": 0.748
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng đơn vị m3: 9370 m3 (Ô 3 quay 28% giữa 0 và 1; Ô đỏ kế bên đang là 9 lăn 74% sang 0)"
+  },
+  {
+    "file": "meter_jump_022_4431_9.jpg",
+    "ground_truth_full": "44319",
+    "ground_truth_billing_m3": "4431",
+    "billing_m3_val": 4431,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "3": 0.38,
+      "4": 0.783
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng đơn vị m3: 4431 m3 (Ô 3 quay 38% giữa 1 và 2; Ô đỏ kế bên đang là 9 lăn 78% sang 0)"
+  },
+  {
+    "file": "meter_jump_023_9447_9.jpg",
+    "ground_truth_full": "94479",
+    "ground_truth_billing_m3": "9447",
+    "billing_m3_val": 9447,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "3": 0.48,
+      "4": 0.8180000000000001
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng đơn vị m3: 9447 m3 (Ô 3 quay 48% giữa 7 và 8; Ô đỏ kế bên đang là 9 lăn 81% sang 0)"
+  },
+  {
+    "file": "meter_jump_024_1568_9.jpg",
+    "ground_truth_full": "15689",
+    "ground_truth_billing_m3": "1568",
+    "billing_m3_val": 1568,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "3": 0.58,
+      "4": 0.853
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng đơn vị m3: 1568 m3 (Ô 3 quay 57% giữa 8 và 9; Ô đỏ kế bên đang là 9 lăn 85% sang 0)"
+  },
+  {
+    "file": "meter_jump_025_9914_9.jpg",
+    "ground_truth_full": "99149",
+    "ground_truth_billing_m3": "9914",
+    "billing_m3_val": 9914,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "3": 0.68,
+      "4": 0.888
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng đơn vị m3: 9914 m3 (Ô 3 quay 68% giữa 4 và 5; Ô đỏ kế bên đang là 9 lăn 88% sang 0)"
+  },
+  {
+    "file": "meter_jump_026_3459_9.jpg",
+    "ground_truth_full": "34599",
+    "ground_truth_billing_m3": "3459",
+    "billing_m3_val": 3459,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "2": 0.28,
+      "3": 0.54,
+      "4": 0.806
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng chục m3: 3459 m3 (Ô 2 quay 28% giữa 5 và 6; CÁC Ô BÊN PHẢI BẮT BUỘC: Ô 3 là 9 lăn sang 0, Ô đỏ 4 là 9 lăn sang 0)"
+  },
+  {
+    "file": "meter_jump_027_2909_9.jpg",
+    "ground_truth_full": "29099",
+    "ground_truth_billing_m3": "2909",
+    "billing_m3_val": 2909,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "2": 0.38,
+      "3": 0.5900000000000001,
+      "4": 0.8260000000000001
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng chục m3: 2909 m3 (Ô 2 quay 38% giữa 0 và 1; CÁC Ô BÊN PHẢI BẮT BUỘC: Ô 3 là 9 lăn sang 0, Ô đỏ 4 là 9 lăn sang 0)"
+  },
+  {
+    "file": "meter_jump_028_7729_9.jpg",
+    "ground_truth_full": "77299",
+    "ground_truth_billing_m3": "7729",
+    "billing_m3_val": 7729,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "2": 0.48,
+      "3": 0.64,
+      "4": 0.846
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng chục m3: 7729 m3 (Ô 2 quay 48% giữa 2 và 3; CÁC Ô BÊN PHẢI BẮT BUỘC: Ô 3 là 9 lăn sang 0, Ô đỏ 4 là 9 lăn sang 0)"
+  },
+  {
+    "file": "meter_jump_029_7029_9.jpg",
+    "ground_truth_full": "70299",
+    "ground_truth_billing_m3": "7029",
+    "billing_m3_val": 7029,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "2": 0.58,
+      "3": 0.69,
+      "4": 0.866
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng chục m3: 7029 m3 (Ô 2 quay 57% giữa 2 và 3; CÁC Ô BÊN PHẢI BẮT BUỘC: Ô 3 là 9 lăn sang 0, Ô đỏ 4 là 9 lăn sang 0)"
+  },
+  {
+    "file": "meter_jump_030_6619_9.jpg",
+    "ground_truth_full": "66199",
+    "ground_truth_billing_m3": "6619",
+    "billing_m3_val": 6619,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "2": 0.68,
+      "3": 0.74,
+      "4": 0.886
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng chục m3: 6619 m3 (Ô 2 quay 68% giữa 1 và 2; CÁC Ô BÊN PHẢI BẮT BUỘC: Ô 3 là 9 lăn sang 0, Ô đỏ 4 là 9 lăn sang 0)"
+  },
+  {
+    "file": "meter_jump_031_3289_9.jpg",
+    "ground_truth_full": "32899",
+    "ground_truth_billing_m3": "3289",
+    "billing_m3_val": 3289,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "2": 0.28,
+      "3": 0.54,
+      "4": 0.806
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng chục m3: 3289 m3 (Ô 2 quay 28% giữa 8 và 9; CÁC Ô BÊN PHẢI BẮT BUỘC: Ô 3 là 9 lăn sang 0, Ô đỏ 4 là 9 lăn sang 0)"
+  },
+  {
+    "file": "meter_jump_032_7429_9.jpg",
+    "ground_truth_full": "74299",
+    "ground_truth_billing_m3": "7429",
+    "billing_m3_val": 7429,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "2": 0.38,
+      "3": 0.5900000000000001,
+      "4": 0.8260000000000001
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng chục m3: 7429 m3 (Ô 2 quay 38% giữa 2 và 3; CÁC Ô BÊN PHẢI BẮT BUỘC: Ô 3 là 9 lăn sang 0, Ô đỏ 4 là 9 lăn sang 0)"
+  },
+  {
+    "file": "meter_jump_033_0279_9.jpg",
+    "ground_truth_full": "02799",
+    "ground_truth_billing_m3": "0279",
+    "billing_m3_val": 279,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "2": 0.48,
+      "3": 0.64,
+      "4": 0.846
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng chục m3: 0279 m3 (Ô 2 quay 48% giữa 7 và 8; CÁC Ô BÊN PHẢI BẮT BUỘC: Ô 3 là 9 lăn sang 0, Ô đỏ 4 là 9 lăn sang 0)"
+  },
+  {
+    "file": "meter_jump_034_6039_9.jpg",
+    "ground_truth_full": "60399",
+    "ground_truth_billing_m3": "6039",
+    "billing_m3_val": 6039,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "2": 0.58,
+      "3": 0.69,
+      "4": 0.866
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng chục m3: 6039 m3 (Ô 2 quay 57% giữa 3 và 4; CÁC Ô BÊN PHẢI BẮT BUỘC: Ô 3 là 9 lăn sang 0, Ô đỏ 4 là 9 lăn sang 0)"
+  },
+  {
+    "file": "meter_jump_035_1039_9.jpg",
+    "ground_truth_full": "10399",
+    "ground_truth_billing_m3": "1039",
+    "billing_m3_val": 1039,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "2": 0.68,
+      "3": 0.74,
+      "4": 0.886
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng chục m3: 1039 m3 (Ô 2 quay 68% giữa 3 và 4; CÁC Ô BÊN PHẢI BẮT BUỘC: Ô 3 là 9 lăn sang 0, Ô đỏ 4 là 9 lăn sang 0)"
+  },
+  {
+    "file": "meter_jump_036_8209_9.jpg",
+    "ground_truth_full": "82099",
+    "ground_truth_billing_m3": "8209",
+    "billing_m3_val": 8209,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "2": 0.28,
+      "3": 0.54,
+      "4": 0.806
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng chục m3: 8209 m3 (Ô 2 quay 28% giữa 0 và 1; CÁC Ô BÊN PHẢI BẮT BUỘC: Ô 3 là 9 lăn sang 0, Ô đỏ 4 là 9 lăn sang 0)"
+  },
+  {
+    "file": "meter_jump_037_7569_9.jpg",
+    "ground_truth_full": "75699",
+    "ground_truth_billing_m3": "7569",
+    "billing_m3_val": 7569,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "2": 0.38,
+      "3": 0.5900000000000001,
+      "4": 0.8260000000000001
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng chục m3: 7569 m3 (Ô 2 quay 38% giữa 6 và 7; CÁC Ô BÊN PHẢI BẮT BUỘC: Ô 3 là 9 lăn sang 0, Ô đỏ 4 là 9 lăn sang 0)"
+  },
+  {
+    "file": "meter_jump_038_2629_9.jpg",
+    "ground_truth_full": "26299",
+    "ground_truth_billing_m3": "2629",
+    "billing_m3_val": 2629,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "2": 0.48,
+      "3": 0.64,
+      "4": 0.846
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng chục m3: 2629 m3 (Ô 2 quay 48% giữa 2 và 3; CÁC Ô BÊN PHẢI BẮT BUỘC: Ô 3 là 9 lăn sang 0, Ô đỏ 4 là 9 lăn sang 0)"
+  },
+  {
+    "file": "meter_jump_039_4469_9.jpg",
+    "ground_truth_full": "44699",
+    "ground_truth_billing_m3": "4469",
+    "billing_m3_val": 4469,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "2": 0.58,
+      "3": 0.69,
+      "4": 0.866
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng chục m3: 4469 m3 (Ô 2 quay 57% giữa 6 và 7; CÁC Ô BÊN PHẢI BẮT BUỘC: Ô 3 là 9 lăn sang 0, Ô đỏ 4 là 9 lăn sang 0)"
+  },
+  {
+    "file": "meter_jump_040_6979_9.jpg",
+    "ground_truth_full": "69799",
+    "ground_truth_billing_m3": "6979",
+    "billing_m3_val": 6979,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "2": 0.68,
+      "3": 0.74,
+      "4": 0.886
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng chục m3: 6979 m3 (Ô 2 quay 68% giữa 7 và 8; CÁC Ô BÊN PHẢI BẮT BUỘC: Ô 3 là 9 lăn sang 0, Ô đỏ 4 là 9 lăn sang 0)"
+  },
+  {
+    "file": "meter_jump_041_0599_9.jpg",
+    "ground_truth_full": "05999",
+    "ground_truth_billing_m3": "0599",
+    "billing_m3_val": 599,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "1": 0.28,
+      "2": 0.476,
+      "3": 0.648,
+      "4": 0.8448
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng trăm m3: 0599 m3 (Ô 1 quay 28% giữa 5 và 6; TOÀN BỘ CÁC Ô BÊN PHẢI ĐỀU LÀ 9 ĐANG CHUYỂN SANG 0: Ô 2, Ô 3, Ô đỏ 4)"
+  },
+  {
+    "file": "meter_jump_042_6799_9.jpg",
+    "ground_truth_full": "67999",
+    "ground_truth_billing_m3": "6799",
+    "billing_m3_val": 6799,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "1": 0.38,
+      "2": 0.521,
+      "3": 0.683,
+      "4": 0.8608
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng trăm m3: 6799 m3 (Ô 1 quay 38% giữa 7 và 8; TOÀN BỘ CÁC Ô BÊN PHẢI ĐỀU LÀ 9 ĐANG CHUYỂN SANG 0: Ô 2, Ô 3, Ô đỏ 4)"
+  },
+  {
+    "file": "meter_jump_043_6899_9.jpg",
+    "ground_truth_full": "68999",
+    "ground_truth_billing_m3": "6899",
+    "billing_m3_val": 6899,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "1": 0.48,
+      "2": 0.566,
+      "3": 0.718,
+      "4": 0.8768
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng trăm m3: 6899 m3 (Ô 1 quay 48% giữa 8 và 9; TOÀN BỘ CÁC Ô BÊN PHẢI ĐỀU LÀ 9 ĐANG CHUYỂN SANG 0: Ô 2, Ô 3, Ô đỏ 4)"
+  },
+  {
+    "file": "meter_jump_044_2099_9.jpg",
+    "ground_truth_full": "20999",
+    "ground_truth_billing_m3": "2099",
+    "billing_m3_val": 2099,
+    "fraction_digit": 9,
+    "roll_dict": {
+      "1": 0.58,
+      "2": 0.611,
+      "3": 0.753,
+      "4": 0.8928
+    },
+    "type": "billing_jump_transition",
+    "description": "Chuyển hàng trăm m3: 2099 m3 (Ô 1 quay 57% giữa 0 và 1; TOÀN BỘ CÁC Ô BÊN PHẢI ĐỀU LÀ 9 ĐANG CHUYỂN SANG 0: Ô 2, Ô 3, Ô đỏ 4)"
+  },
+  {
+    "file": "meter_jump_045_1799_9.jpg",
+    "ground_truth_full": "17999",
+    "ground_truth_billing_m3": "1799",
+    "billing_m3_val": 1799,
+    "fraction_digit": 9,
     "roll_dict": {
       "1": 0.68,
-      "2": 0.15
+      "2": 0.656,
+      "3": 0.788,
+      "4": 0.9088
     },
     "type": "billing_jump_transition",
-    "description": "Chuyển hàng trăm đen: 2599 m3 (Ô 1 quay 68% giữa 5 và 6, Floor Rule chốt 5)"
+    "description": "Chuyển hàng trăm m3: 1799 m3 (Ô 1 quay 68% giữa 7 và 8; TOÀN BỘ CÁC Ô BÊN PHẢI ĐỀU LÀ 9 ĐANG CHUYỂN SANG 0: Ô 2, Ô 3, Ô đỏ 4)"
   },
   {
-    "file": "meter_jump_041_3799_9.jpg",
-    "ground_truth_full": "37999",
-    "ground_truth_billing_m3": "3799",
-    "billing_m3_val": 3799,
+    "file": "meter_jump_046_6399_9.jpg",
+    "ground_truth_full": "63999",
+    "ground_truth_billing_m3": "6399",
+    "billing_m3_val": 6399,
     "fraction_digit": 9,
     "roll_dict": {
-      "1": 0.32,
-      "2": 0.15
+      "1": 0.28,
+      "2": 0.476,
+      "3": 0.648,
+      "4": 0.8448
     },
     "type": "billing_jump_transition",
-    "description": "Chuyển hàng trăm đen: 3799 m3 (Ô 1 quay 32% giữa 7 và 8, Floor Rule chốt 7)"
+    "description": "Chuyển hàng trăm m3: 6399 m3 (Ô 1 quay 28% giữa 3 và 4; TOÀN BỘ CÁC Ô BÊN PHẢI ĐỀU LÀ 9 ĐANG CHUYỂN SANG 0: Ô 2, Ô 3, Ô đỏ 4)"
   },
   {
-    "file": "meter_jump_042_5399_8.jpg",
-    "ground_truth_full": "53998",
-    "ground_truth_billing_m3": "5399",
-    "billing_m3_val": 5399,
-    "fraction_digit": 8,
+    "file": "meter_jump_047_4399_9.jpg",
+    "ground_truth_full": "43999",
+    "ground_truth_billing_m3": "4399",
+    "billing_m3_val": 4399,
+    "fraction_digit": 9,
     "roll_dict": {
-      "1": 0.46,
-      "2": 0.15
+      "1": 0.38,
+      "2": 0.521,
+      "3": 0.683,
+      "4": 0.8608
     },
     "type": "billing_jump_transition",
-    "description": "Chuyển hàng trăm đen: 5399 m3 (Ô 1 quay 46% giữa 3 và 4, Floor Rule chốt 3)"
+    "description": "Chuyển hàng trăm m3: 4399 m3 (Ô 1 quay 38% giữa 3 và 4; TOÀN BỘ CÁC Ô BÊN PHẢI ĐỀU LÀ 9 ĐANG CHUYỂN SANG 0: Ô 2, Ô 3, Ô đỏ 4)"
   },
   {
-    "file": "meter_jump_043_8599_0.jpg",
-    "ground_truth_full": "85990",
-    "ground_truth_billing_m3": "8599",
-    "billing_m3_val": 8599,
-    "fraction_digit": 0,
+    "file": "meter_jump_048_1499_9.jpg",
+    "ground_truth_full": "14999",
+    "ground_truth_billing_m3": "1499",
+    "billing_m3_val": 1499,
+    "fraction_digit": 9,
     "roll_dict": {
-      "1": 0.5,
-      "2": 0.15
+      "1": 0.48,
+      "2": 0.566,
+      "3": 0.718,
+      "4": 0.8768
     },
     "type": "billing_jump_transition",
-    "description": "Chuyển hàng trăm đen: 8599 m3 (Ô 1 quay 50% giữa 5 và 6, Floor Rule chốt 5)"
+    "description": "Chuyển hàng trăm m3: 1499 m3 (Ô 1 quay 48% giữa 4 và 5; TOÀN BỘ CÁC Ô BÊN PHẢI ĐỀU LÀ 9 ĐANG CHUYỂN SANG 0: Ô 2, Ô 3, Ô đỏ 4)"
   },
   {
-    "file": "meter_jump_044_7099_0.jpg",
-    "ground_truth_full": "70990",
-    "ground_truth_billing_m3": "7099",
-    "billing_m3_val": 7099,
-    "fraction_digit": 0,
+    "file": "meter_jump_049_3399_9.jpg",
+    "ground_truth_full": "33999",
+    "ground_truth_billing_m3": "3399",
+    "billing_m3_val": 3399,
+    "fraction_digit": 9,
     "roll_dict": {
-      "1": 0.54,
-      "2": 0.15
+      "1": 0.58,
+      "2": 0.611,
+      "3": 0.753,
+      "4": 0.8928
     },
     "type": "billing_jump_transition",
-    "description": "Chuyển hàng trăm đen: 7099 m3 (Ô 1 quay 54% giữa 0 và 1, Floor Rule chốt 0)"
+    "description": "Chuyển hàng trăm m3: 3399 m3 (Ô 1 quay 57% giữa 3 và 4; TOÀN BỘ CÁC Ô BÊN PHẢI ĐỀU LÀ 9 ĐANG CHUYỂN SANG 0: Ô 2, Ô 3, Ô đỏ 4)"
   },
   {
-    "file": "meter_jump_045_5499_9.jpg",
-    "ground_truth_full": "54999",
-    "ground_truth_billing_m3": "5499",
-    "billing_m3_val": 5499,
+    "file": "meter_jump_050_1799_9.jpg",
+    "ground_truth_full": "17999",
+    "ground_truth_billing_m3": "1799",
+    "billing_m3_val": 1799,
     "fraction_digit": 9,
     "roll_dict": {
       "1": 0.68,
-      "2": 0.15
+      "2": 0.656,
+      "3": 0.788,
+      "4": 0.9088
     },
     "type": "billing_jump_transition",
-    "description": "Chuyển hàng trăm đen: 5499 m3 (Ô 1 quay 68% giữa 4 và 5, Floor Rule chốt 4)"
-  },
-  {
-    "file": "meter_jump_046_6199_9.jpg",
-    "ground_truth_full": "61999",
-    "ground_truth_billing_m3": "6199",
-    "billing_m3_val": 6199,
-    "fraction_digit": 9,
-    "roll_dict": {
-      "1": 0.32,
-      "2": 0.15
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng trăm đen: 6199 m3 (Ô 1 quay 32% giữa 1 và 2, Floor Rule chốt 1)"
-  },
-  {
-    "file": "meter_jump_047_6099_9.jpg",
-    "ground_truth_full": "60999",
-    "ground_truth_billing_m3": "6099",
-    "billing_m3_val": 6099,
-    "fraction_digit": 9,
-    "roll_dict": {
-      "1": 0.46,
-      "2": 0.15
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng trăm đen: 6099 m3 (Ô 1 quay 46% giữa 0 và 1, Floor Rule chốt 0)"
-  },
-  {
-    "file": "meter_jump_048_6499_9.jpg",
-    "ground_truth_full": "64999",
-    "ground_truth_billing_m3": "6499",
-    "billing_m3_val": 6499,
-    "fraction_digit": 9,
-    "roll_dict": {
-      "1": 0.5,
-      "2": 0.15
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng trăm đen: 6499 m3 (Ô 1 quay 50% giữa 4 và 5, Floor Rule chốt 4)"
-  },
-  {
-    "file": "meter_jump_049_5299_8.jpg",
-    "ground_truth_full": "52998",
-    "ground_truth_billing_m3": "5299",
-    "billing_m3_val": 5299,
-    "fraction_digit": 8,
-    "roll_dict": {
-      "1": 0.54,
-      "2": 0.15
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng trăm đen: 5299 m3 (Ô 1 quay 54% giữa 2 và 3, Floor Rule chốt 2)"
-  },
-  {
-    "file": "meter_jump_050_3099_0.jpg",
-    "ground_truth_full": "30990",
-    "ground_truth_billing_m3": "3099",
-    "billing_m3_val": 3099,
-    "fraction_digit": 0,
-    "roll_dict": {
-      "1": 0.68,
-      "2": 0.15
-    },
-    "type": "billing_jump_transition",
-    "description": "Chuyển hàng trăm đen: 3099 m3 (Ô 1 quay 68% giữa 0 và 1, Floor Rule chốt 0)"
+    "description": "Chuyển hàng trăm m3: 1799 m3 (Ô 1 quay 68% giữa 7 và 8; TOÀN BỘ CÁC Ô BÊN PHẢI ĐỀU LÀ 9 ĐANG CHUYỂN SANG 0: Ô 2, Ô 3, Ô đỏ 4)"
   }
 ]
